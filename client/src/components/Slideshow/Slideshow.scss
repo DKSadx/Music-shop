@@ -1,0 +1,8 @@
+.slideshow {
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  transition-duration: 1000ms;
+  transition-property: background;
+  transition-timing-function: ease-in;
+}
