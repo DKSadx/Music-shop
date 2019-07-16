@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend for shop",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Darko Kojovic",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
