@@ -1,61 +1,42 @@
 import React, { Component, lazy, Suspense } from 'react';
 import { Controller, Scene } from 'react-scrollmagic';
+import { Tween } from 'react-gsap';
 
-import NavBar from './components/NavBar/NavBar';
 import './App.scss';
-// const Slideshow = React.lazy(() =>
-//   import('./components/Slideshow/Slideshow.js')
-// );
+import NavBar from './components/NavBar/NavBar';
+import TrendingMenu from './components/TrendingMenu/TrendingMenu';
 import Slideshow from './components/Slideshow/Slideshow';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      height: 0,
+      width: 0
+    };
+    window.addEventListener('resize', this.update);
   }
-  componentDidMount() {}
+  componentDidMount() {
+    this.update();
+  }
+  update = () => {
+    this.setState({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
+  };
   render() {
     return (
       <div className="App">
         {/* <Suspense fallback={<div>loading</div>}> */}
         <Slideshow navbar={<NavBar />} />
-        {/* </Suspense> */}
-        {/* <Controller>
-          <Scene
-            duration={1500}
-            offset={-500}
-            triggerElement="#test1"
-            reverse={true}
-            indicators={{
-              colorStart: '#fff',
-              colorEnd: 'blue'
-            }}
-          >
-            <Tween
-              from={{
-                x: -500,
-                y: 200,
-                visibility: 'hidden',
-                opacity: 0,
-                color: 'red',
-
-                'font-size': 0
-              }}
-              to={{
-                x: 0,
-                y: 200,
-                visibility: 'visible',
-                opacity: 1,
-                color: 'green',
-                'font-size': 30
-              }}
-              stagger={1}
-            >
-           </Tween>
-          </Scene>
-        </Controller> */}
+        <TrendingMenu className="trendingMenu" />
       </div>
     );
   }
 }
 
 export default App;
+// const Slideshow = React.lazy(() =>
+//   import('./components/Slideshow/Slideshow.js')
+// );

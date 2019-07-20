@@ -42,7 +42,6 @@ export default class Slideshow extends Component {
         style={{ backgroundImage: `url("${currentSlide.image}")` }}
       >
         {this.props.navbar}
-        {console.log(currentSlide)}
         {textAnimation(slideshowText, currentSlide.imageNumber - 1)}
       </div>
     );
