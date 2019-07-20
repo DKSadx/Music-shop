@@ -2,7 +2,13 @@
   background-size: cover;
   height: 100vh;
   width: 100%;
-  transition-duration: 1000ms;
+  // -webkit-backface-visibility: hidden;
+  transition-duration: 400ms;
   transition-property: background;
   transition-timing-function: ease-in;
+}
+.slideshowText {
+  width: 30vw;
+  font-size: 30px;
+  color: black;
 }
