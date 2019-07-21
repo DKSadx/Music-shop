@@ -21,6 +21,8 @@
 /client/yarn-error.log*
 
 /client/public/resources
+/client/public/needsPS
+/client/public/done
 
 # server
 /server/node_modules/

@@ -12,8 +12,8 @@ export default function TrendingMenu(props) {
       <p id="trendingText">Trending now:</p>
       <Controller>
         <Scene
-          duration={600}
-          offset={-100}
+          duration={400}
+          offset={-150}
           triggerElement="#trendingImage"
           reverse={true}
           indicators={{
@@ -23,20 +23,26 @@ export default function TrendingMenu(props) {
         >
           <Tween
             from={{
-              // y: -document.body.scrollHeight / 25,
               visibility: 'hidden',
+              y: 100,
               opacity: 0
             }}
             to={{
-              // y: -document.body.scrollHeight / 20,
               visibility: 'visible',
+              y: 0,
               opacity: 1
             }}
           >
             <ul className="trendingMenuItems">
-              <li id="trendingItem-1" />
-              <li id="trendingItem-2" />
-              <li id="trendingItem-3" />
+              <li id="trendingItem-1">
+                <button>Buy now</button>
+              </li>
+              <li id="trendingItem-2">
+                <button>Buy now</button>
+              </li>
+              <li id="trendingItem-3">
+                <button>Buy now</button>
+              </li>
             </ul>
           </Tween>
         </Scene>
