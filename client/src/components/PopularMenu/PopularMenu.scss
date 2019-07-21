@@ -1,0 +1,39 @@
+.popularMenu {
+  position: relative;
+  top: 60vh;
+  height: 100vh;
+  width: 100%;
+  .PI-grid {
+    display: grid;
+    margin: 10%;
+    grid-row-gap: 15vh;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto auto;
+    li {
+      position: relative;
+      text-align: center;
+      list-style: none;
+      height: 40vh;
+      width: 15vw;
+      // background-image: url('../../assets/images/trending-1.png');
+      background-color: #ccc;
+      background-size: contain;
+      background-repeat: no-repeat;
+      a {
+        position: absolute;
+        bottom: -20%;
+        transform: translate(-50%);
+        text-decoration: none;
+        color: red;
+        font-size: 2rem;
+        word-wrap: break-word;
+      }
+      &:hover {
+        background-color: #999;
+        a {
+          // empty
+        }
+      }
+    }
+  }
+}

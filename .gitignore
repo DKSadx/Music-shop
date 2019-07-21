@@ -23,6 +23,7 @@
 /client/public/resources
 /client/public/needsPS
 /client/public/done
+/client/public/fonts
 
 # server
 /server/node_modules/
