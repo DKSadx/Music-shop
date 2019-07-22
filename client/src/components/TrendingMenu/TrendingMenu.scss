@@ -1,3 +1,15 @@
+@mixin add-to-cart-button {
+  display: block;
+      position: absolute;
+      background-color: #cccc;
+      border-radius: 5%;
+      font-size: 1.2rem;
+      padding: 4% 8%;
+      bottom: 5vh;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+}
 @mixin trending-items {
   position: relative;
   list-style: none;
@@ -14,16 +26,7 @@
     background-size: 100% 100%;
     transition-duration: 300ms;
     button {
-      display: block;
-      position: absolute;
-      background-color: #cccc;
-      border-radius: 5%;
-      font-size: 1.2rem;
-      padding: 4% 8%;
-      bottom: 5vh;
-      left: 50%;
-      -webkit-transform: translateX(-50%);
-      transform: translateX(-50%);
+      @include add-to-cart-button();
     }
   }
 }

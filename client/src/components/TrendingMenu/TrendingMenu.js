@@ -13,7 +13,7 @@ export default function TrendingMenu(props) {
       <Controller>
         <Scene
           duration={400}
-          offset={-150}
+          offset={-250}
           triggerElement="#trendingImage"
           reverse={true}
           indicators={{

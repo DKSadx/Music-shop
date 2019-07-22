@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Gravity';
+  src: url('/fonts/Gravity/Gravity-Book.otf');
+}
+@font-face {
+  font-family: 'Florence-sans';
+  src: url('/fonts/Madeleina-Sans.otf');
+}
 * {
   margin: 0;
   padding: 0;
@@ -5,11 +13,6 @@
 }
 body {
   height: 1000vh;
-  background-color: #333;
-  p {
-    height: 10vh;
-    color: red;
-    font-size: 30px;
-    background-color: #444;
-  }
+  background-color: #fff;
+
 }

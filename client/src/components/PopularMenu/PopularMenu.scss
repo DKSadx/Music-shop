@@ -1,11 +1,21 @@
+@import '../TrendingMenu/TrendingMenu.scss';
 .popularMenu {
   position: relative;
   top: 60vh;
   height: 100vh;
   width: 100%;
+  h3 {
+    position: absolute;
+    top: 5%;
+    left: 2%;
+    font-size: 4vmin;
+    font-family: Gravity;
+    font-weight: 200;
+  }
   .PI-grid {
     display: grid;
-    margin: 10%;
+    margin: 0 10%;
+    padding: 10% 0;
     grid-row-gap: 15vh;
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto auto auto;
@@ -15,23 +25,45 @@
       list-style: none;
       height: 40vh;
       width: 15vw;
-      // background-image: url('../../assets/images/trending-1.png');
-      background-color: #ccc;
-      background-size: contain;
       background-repeat: no-repeat;
+      background-size: 100% 80%;
+      button {
+        visibility: hidden;
+      }
       a {
         position: absolute;
-        bottom: -20%;
-        transform: translate(-50%);
+        background-color: #fff;
+        bottom: -10%;
+        left: 0;
         text-decoration: none;
-        color: red;
-        font-size: 2rem;
+        color: black;
+        font-size: 2.5vmin;
+        text-align: left;
+        font-family: 'Florence-sans','Sans-serif';
         word-wrap: break-word;
       }
       &:hover {
-        background-color: #999;
-        a {
-          // empty
+        button {
+          visibility: visible;
+          @include add-to-cart-button();
+          font-size: 2vmin;
+          bottom: 25%;
+          min-width: 40%;
+          &:hover {
+            background-color: #000;
+            color: white;
+          }
+        }
+        .popularDetailsBtn {
+          bottom: 10%;
+        }
+        .onHoverDiv {
+          background-color: #000;
+          opacity: 0.5;
+          height: 100%;
+          width: 100%;
+          transition-property: background;
+          transition-duration: 400ms;
         }
       }
     }

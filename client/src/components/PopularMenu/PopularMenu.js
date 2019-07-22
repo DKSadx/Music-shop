@@ -9,13 +9,17 @@ import data from './popularMenuData.json';
 export default function PopularMenu(props) {
   const createItems = () => {
     return data.map((x, i) => (
-      <li key={i}>
-        <a href={x.url}>{x.name}</a>
+      <li key={i} style={{ backgroundImage: `url("${x.url}")` }}>
+        <div className="onHoverDiv" />
+        <button className="popularBuyBtn">Buy now</button>
+        <button className="popularDetailsBtn">Details</button>
+        <a>{x.name}</a>
       </li>
     ));
   };
   return (
     <div className={props.className}>
+      <h3>POPULAR</h3>
       <Controller>
         <Scene
           duration={1000}
@@ -34,10 +38,10 @@ export default function PopularMenu(props) {
               opacity: 0,
               cycle: {
                 x: i => -(i + 1) * 50
-              },
-              ease: Back.easeOut
+              }
+              // ease: Back.easeOut
             }}
-            stagger={0.1}
+            stagger={0.3}
           >
             {/* Generating <li> items */}
             {createItems()}
