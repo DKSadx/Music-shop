@@ -21,7 +21,9 @@ const NavBar = props => {
           <a href="#">SIGN IN</a>
         </li>
         <li>
-          <a href="#">SIGN UP</a>
+          <a href="#">
+            <button className="signup-btn">SIGN UP</button>
+          </a>
         </li>
       </ul>
     </ul>

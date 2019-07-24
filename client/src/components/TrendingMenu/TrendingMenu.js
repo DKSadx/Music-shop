@@ -8,7 +8,7 @@ import trendingBg from '../../assets/images/trending-bg.jpg';
 export default function TrendingMenu(props) {
   return (
     <div className={props.className}>
-      <img src={trendingBg} id="trendingImage" alt="" />
+      <img src={trendingBg} id="trendingImage" alt="trending-image" />
       <p id="trendingText">Trending now:</p>
       <Controller>
         <Scene
@@ -16,10 +16,10 @@ export default function TrendingMenu(props) {
           offset={-250}
           triggerElement="#trendingImage"
           reverse={true}
-          indicators={{
-            colorStart: '#fff',
-            colorEnd: 'blue'
-          }}
+          // indicators={{
+          //   colorStart: '#fff',
+          //   colorEnd: 'blue'
+          // }}
         >
           <Tween
             from={{

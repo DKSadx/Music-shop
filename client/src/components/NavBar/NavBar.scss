@@ -1,8 +1,10 @@
 .main-nav-bar {
   background-color: #0004;
   display: flex;
+  font-size: 2vmin;
+  font-family: Quarca;
   position: relative;
-  height: 8vh;
+  height: 6vh;
   // Forces text to be in one line
   overflow: hidden;
   white-space: nowrap;
@@ -19,7 +21,8 @@
     margin: 0 auto;
     li {
       list-style: none;
-      padding: 0 10%;
+      // padding: 0 10%;
+      margin: 0 10%;
       a {
         display: block;
         color: white;
@@ -37,14 +40,28 @@
     right: 5vw;
     display: flex;
     align-self: center;
+    align-items: center;
     li {
       list-style: none;
-      padding: 0 10%;
+      margin: 0 10%;
       a {
         display: block;
         color: white;
         width: 100%;
         text-decoration: none;
+        font-size: 1.8vmin;
+        .signup-btn {
+          padding: 1vmin 2vmin;
+          background-color: #fff;
+          // Added so the items don't move on click
+          box-sizing: border-box;
+          border-radius: 3%;
+          &:hover {
+            color: red;
+            background-color: #000;
+            color: #fff;
+          }
+        }
         &:hover {
           color: red;
         }

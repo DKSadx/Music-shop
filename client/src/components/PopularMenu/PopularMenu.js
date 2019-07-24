@@ -7,6 +7,7 @@ import './PopularMenu.scss';
 import data from './popularMenuData.json';
 
 export default function PopularMenu(props) {
+  // Generating <li> items
   const createItems = () => {
     return data.map((x, i) => (
       <li key={i} style={{ backgroundImage: `url("${x.url}")` }}>
@@ -26,10 +27,10 @@ export default function PopularMenu(props) {
           offset={-100}
           triggerElement={`.${props.className}`}
           reverse={true}
-          indicators={{
-            colorStart: 'red',
-            colorEnd: 'green'
-          }}
+          // indicators={{
+          //   colorStart: 'red',
+          //   colorEnd: 'green'
+          // }}
         >
           <Tween
             // Wraps all <li> tags that are dynamically created
@@ -43,7 +44,6 @@ export default function PopularMenu(props) {
             }}
             stagger={0.3}
           >
-            {/* Generating <li> items */}
             {createItems()}
           </Tween>
         </Scene>

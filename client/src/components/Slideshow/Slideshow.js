@@ -47,27 +47,3 @@ export default class Slideshow extends Component {
     );
   }
 }
-
-// this.animation = (
-//   <Tween
-//     from={{
-//       x: -500,
-//       y: 200,
-//       opacity: 0
-//     }}
-//     to={{
-//       x: 200,
-//       y: 200,
-//       opacity: 1,
-//       repeat: -1,
-//       // repeatDelay: 4,
-//       yoyo: true
-//       // 'font-size': 30
-//     }}
-//     yoyo={true}
-//     stagger={1}
-//     repeatDelay={3}
-//   >
-//     {currentSlide.animatedText[currentSlide.imageNumber - 1]}
-//   </Tween>
-// );
