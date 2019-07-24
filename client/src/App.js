@@ -5,6 +5,7 @@ import NavBar from './components/NavBar/NavBar';
 import Slideshow from './components/Slideshow/Slideshow';
 import TrendingMenu from './components/TrendingMenu/TrendingMenu';
 import PopularMenu from './components/PopularMenu/PopularMenu';
+import Footer from './components/Footer/Footer';
 
 // const Slideshow = React.lazy(() =>
 //   import('./components/Slideshow/Slideshow.js')
@@ -26,6 +27,7 @@ class App extends Component {
         <Slideshow navbar={<NavBar />} />
         <TrendingMenu className="trendingMenu" />
         <PopularMenu className="popularMenu" />
+        <Footer />
       </div>
     );
   }
