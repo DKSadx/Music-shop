@@ -20,7 +20,7 @@ export default function PopularMenu(props) {
   };
   return (
     <div className={props.className}>
-      <h3>POPULAR</h3>
+      <h3>Popular products:</h3>
       <Controller>
         <Scene
           duration={1000}
