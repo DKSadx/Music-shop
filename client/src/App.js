@@ -1,12 +1,9 @@
 import React, { lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import './App.scss';
-import NavBar from './components/NavBar/NavBar';
-import Slideshow from './components/Slideshow/Slideshow';
-import TrendingMenu from './components/TrendingMenu/TrendingMenu';
-import PopularMenu from './components/PopularMenu/PopularMenu';
-import Footer from './components/Footer/Footer';
-
+import HomePage from './components/HomePage/HomePage';
+import Store from './components/Store/Store';
 // !!! Lazy needs to be implemented
 
 // const Slideshow = React.lazy(() =>
@@ -15,10 +12,12 @@ import Footer from './components/Footer/Footer';
 const App = () => {
   return (
     <div className="App">
-      <Slideshow navbar={<NavBar />} />
-      <TrendingMenu className="trendingMenu" />
-      <PopularMenu className="popularMenu" />
-      <Footer />
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/store" component={Store} />
+        {/* <Route path="/about" component={About} /> */}
+      </Switch>
+      {/* <HomePage /> */}
     </div>
   );
 };

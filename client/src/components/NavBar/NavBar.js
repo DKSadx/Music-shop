@@ -1,29 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './NavBar.scss';
 
 const NavBar = props => {
   return (
     <ul className="main-nav-bar">
-      <li id="logo">Logo</li>
+      <li id="logo">
+        <Link to="/">Logo</Link>
+      </li>
       <ul className="center-main-nav-bar">
         <li>
-          <a href="#">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="#">Store</a>
+          <Link to="/store">Store</Link>
         </li>
         <li>
-          <a href="#">About us</a>
+          <Link to="/about">About us</Link>
         </li>
       </ul>
       <ul className="end-main-nav-bar">
         <li>
-          <a href="#">SIGN IN</a>
+          <Link to="/sign-in">SIGN IN</Link>
         </li>
         <li>
-          <a href="#">
+          <Link to="/sign-up">
             <button className="signup-btn">SIGN UP</button>
-          </a>
+          </Link>
         </li>
       </ul>
     </ul>
