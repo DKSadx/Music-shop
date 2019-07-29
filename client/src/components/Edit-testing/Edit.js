@@ -9,7 +9,8 @@ export default class Edit extends Component {
       name: '',
       price: '',
       description: '',
-      imageUrl: ''
+      imageUrl: '',
+      categoryName: ''
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -18,7 +19,7 @@ export default class Edit extends Component {
       [e.target.name]: e.target.value
     });
   }
-  add() {
+  addProduct() {
     const { name, price, description, imageUrl } = this.state;
     axios
       .post('http://localhost:8080/add-product', {
@@ -35,7 +36,7 @@ export default class Edit extends Component {
       });
   }
 
-  delete() {
+  deleteProduct() {
     axios
       .delete('http://localhost:8080/delete-product', {
         data: {
@@ -50,7 +51,7 @@ export default class Edit extends Component {
         console.log(err);
       });
   }
-  deleteAll() {
+  deleteAllProducts() {
     axios
       .delete('http://localhost:8080/delete-product', {
         data: {
@@ -65,18 +66,68 @@ export default class Edit extends Component {
         console.log(err);
       });
   }
-  fill() {
+  fillProduct() {
     this.setState({
-      name: 'guitar',
-      price: '34.99',
-      description: 'Really good guitar',
-      imageUrl: '#'
+      name: 'Audio Technica LP120',
+      price: '134.99',
+      description: 'Audio Technica LP120',
+      imageUrl: '/AT-LP120.jpg'
+    });
+  }
+  addCategory() {
+    const name = this.state.categoryName;
+    axios
+      .post('http://localhost:8080/add-category', {
+        name
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  deleteCategory() {
+    axios
+      .delete('http://localhost:8080/delete-category', {
+        data: {
+          name: this.state.categoryName,
+          deleteAll: false
+        }
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  deleteAllCategories() {
+    axios
+      .delete('http://localhost:8080/delete-category', {
+        data: {
+          name: this.state.categoryName,
+          deleteAll: true
+        }
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  fillCategory() {
+    this.setState({
+      categoryName: 'Drums'
     });
   }
   render() {
     return (
       <form className="edit-form">
-        <div>
+        <div className="product-edit">
+          <h1>Product:</h1>
           <h4>Name:</h4>
           <input type="text" name="name" onChange={this.handleChange} value={this.state.name} />
           <h4>Price:</h4>
@@ -85,16 +136,34 @@ export default class Edit extends Component {
           <input type="text" name="description" onChange={this.handleChange} value={this.state.description} />
           <h4>ImageUrl:</h4>
           <input type="text" name="imageUrl" onChange={this.handleChange} value={this.state.imageUrl} />
-          <button type="button" onClick={() => this.add()}>
+          <button type="button" onClick={() => this.addProduct()}>
             Add
           </button>
-          <button type="button" onClick={() => this.fill()}>
+          <button type="button" onClick={() => this.fillProduct()}>
             Fill
           </button>
-          <button type="button" className="edit-delete-btn" onClick={() => this.delete()}>
+          <button type="button" className="edit-delete-btn" onClick={() => this.deleteProduct()}>
             Delete
           </button>
-          <button type="button" className="edit-delete-btn" onClick={() => this.deleteAll()}>
+          <button type="button" className="edit-delete-btn" onClick={() => this.deleteAllProducts()}>
+            Delete All
+          </button>
+        </div>
+        {/* CATEGORY */}
+        <div className="category-edit">
+          <h1>Catrgory:</h1>
+          <h4>Name:</h4>
+          <input type="text" name="categoryName" onChange={this.handleChange} value={this.state.categoryName} />
+          <button type="button" onClick={() => this.addCategory()}>
+            Add
+          </button>
+          <button type="button" onClick={() => this.fillCategory()}>
+            Fill
+          </button>
+          <button type="button" className="edit-delete-btn" onClick={() => this.deleteCategory()}>
+            Delete
+          </button>
+          <button type="button" className="edit-delete-btn" onClick={() => this.deleteAllCategories()}>
             Delete All
           </button>
         </div>
