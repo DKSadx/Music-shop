@@ -1,0 +1,32 @@
+.edit-form {
+  position: relative;
+  background-color: #999;
+  height: 100vh;
+  div {
+    position: absolute;
+    width: 60vw;
+    left: 25%;
+    top: 10%;
+    h4 {
+      font-size: 3vmin;
+      padding: 1vh 0;
+    }
+    input {
+      height: 5vh;
+      font-size: 3vmin;
+      display: block;
+      width: 43vw;
+    }
+    button {
+      margin-top: 5%;
+      margin-right: 5%;
+      padding: 5%;
+      width: 20vw;
+      background-color: teal;
+      font-size: 3vmin;
+    }
+        .edit-delete-btn {
+          background-color: red;
+        }
+  }
+}
