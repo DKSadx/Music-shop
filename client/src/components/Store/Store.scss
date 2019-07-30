@@ -18,7 +18,7 @@
     }
   }
   .store-grid-container {
-    height: 200vh;
+    // height: 200vh;
     display: grid;
     grid-template-columns: 20% 80%;
     .store-grid-categories {
@@ -59,10 +59,8 @@
       }
     }
     .store-grid-products {
-      margin: 5% 10% 0 5%;
-      height: 100%;
+      margin: 5% 10% 10% 5%;
       width: auto;
-      height: 100vh;
       font-family: 'Madeleina-sans', Arial, Helvetica, sans-serif;
       ul {
         display: grid;
@@ -124,7 +122,7 @@
                   }
                 }
               }
-              // store-grid-products-info-text
+              // store-grid-products-info-text overlay container
               &:hover {
                 color: red;
                 .store-grid-products-info-onHover {

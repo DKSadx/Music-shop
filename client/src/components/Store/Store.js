@@ -51,13 +51,11 @@ export default class Store extends Component {
 
   componentDidMount() {
     axios.get('http://localhost:8080/get-categories').then(res => {
-      // console.log(res);
       this.setState({
         categories: res.data
       });
     });
     axios.get('http://localhost:8080/get-products').then(res => {
-      // console.log(res);
       this.setState({
         products: res.data
       });
@@ -78,7 +76,7 @@ export default class Store extends Component {
             </>
           )}
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }
