@@ -10,6 +10,8 @@ export default class Edit extends Component {
       price: '',
       description: '',
       imageUrl: '',
+      category: '',
+      objectId: '',
       categoryName: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -20,13 +22,14 @@ export default class Edit extends Component {
     });
   }
   addProduct() {
-    const { name, price, description, imageUrl } = this.state;
+    const { name, price, description, imageUrl, category } = this.state;
     axios
       .post('http://localhost:8080/add-product', {
         name,
         price,
         description,
-        imageUrl
+        imageUrl,
+        category
       })
       .then(response => {
         console.log(response);
@@ -36,42 +39,67 @@ export default class Edit extends Component {
       });
   }
 
-  deleteProduct() {
-    axios
-      .delete('http://localhost:8080/delete-product', {
-        data: {
-          name: this.state.name,
-          deleteAll: false
-        }
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  deleteProduct(objectId) {
+    if (objectId) {
+      axios
+        .delete('http://localhost:8080/delete-product-by-id', {
+          data: {
+            objectId: this.state.objectId,
+            deleteAll: false
+          }
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .delete('http://localhost:8080/delete-product-by-name', {
+          data: {
+            name: this.state.name,
+            deleteAll: false
+          }
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
   deleteAllProducts() {
-    axios
-      .delete('http://localhost:8080/delete-product', {
-        data: {
-          name: this.state.name,
-          deleteAll: true
-        }
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axios
+    //   .delete('http://localhost:8080/delete-all-products', {
+    //     data: {
+    //       deleteAll: true
+    //     }
+    //   })
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
   fillProduct() {
     this.setState({
       name: 'Audio Technica LP120',
       price: '134.99',
       description: 'Audio Technica LP120',
-      imageUrl: '/AT-LP120.jpg'
+      imageUrl: '/AT-LP120.jpg',
+      category: 'Other'
+    });
+  }
+  clearProduct() {
+    this.setState({
+      name: '',
+      price: '',
+      description: '',
+      imageUrl: '',
+      category: ''
     });
   }
   addCategory() {
@@ -104,23 +132,22 @@ export default class Edit extends Component {
       });
   }
   deleteAllCategories() {
-    axios
-      .delete('http://localhost:8080/delete-category', {
-        data: {
-          name: this.state.categoryName,
-          deleteAll: true
-        }
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axios
+    //   .delete('http://localhost:8080/delete-all-categories', {
+    //     data: {
+    //       deleteAll: true
+    //     }
+    //   })
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
   fillCategory() {
     this.setState({
-      categoryName: 'Drums'
+      categoryName: 'Other'
     });
   }
   render() {
@@ -136,14 +163,24 @@ export default class Edit extends Component {
           <input type="text" name="description" onChange={this.handleChange} value={this.state.description} />
           <h4>ImageUrl:</h4>
           <input type="text" name="imageUrl" onChange={this.handleChange} value={this.state.imageUrl} />
+          <h4>Category:</h4>
+          <input type="text" name="category" onChange={this.handleChange} value={this.state.category} />
+          <h4>ObjectId:</h4>
+          <input type="text" name="objectId" onChange={this.handleChange} value={this.state.objectId} />
           <button type="button" onClick={() => this.addProduct()}>
             Add
           </button>
           <button type="button" onClick={() => this.fillProduct()}>
             Fill
           </button>
+          <button type="button" onClick={() => this.clearProduct()}>
+            Clear
+          </button>
           <button type="button" className="edit-delete-btn" onClick={() => this.deleteProduct()}>
             Delete
+          </button>
+          <button type="button" className="edit-delete-btn" onClick={() => this.deleteProduct(true)}>
+            Delete by Id
           </button>
           <button type="button" className="edit-delete-btn" onClick={() => this.deleteAllProducts()}>
             Delete All
@@ -151,7 +188,7 @@ export default class Edit extends Component {
         </div>
         {/* CATEGORY */}
         <div className="category-edit">
-          <h1>Catrgory:</h1>
+          <h1>Category:</h1>
           <h4>Name:</h4>
           <input type="text" name="categoryName" onChange={this.handleChange} value={this.state.categoryName} />
           <button type="button" onClick={() => this.addCategory()}>

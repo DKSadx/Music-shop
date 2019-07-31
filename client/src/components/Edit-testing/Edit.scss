@@ -1,13 +1,14 @@
 @mixin form-styling {
   position: absolute;
   width: 50%;
-  top: 5%;
+  // top: 5%;
+  color: white;
   h4 {
     font-size: 2.5vmin;
     padding: 1vh 0;
   }
   input {
-    height: 5vh;
+    height: 4vh;
     font-size: 3vmin;
     display: block;
     width: 43vw;
@@ -17,16 +18,22 @@
     margin-right: 5%;
     padding: 5%;
     width: 20vw;
-    background-color: teal;
+    background-color: #008080;
     font-size: 3vmin;
+    &:hover {
+      background-color: cyan;
+    }
   }
   .edit-delete-btn {
     background-color: red;
+    &:hover {
+      background-color: rgb(255, 66, 66);
+    }
   }
 }
 .edit-form {
   position: relative;
-  background-color: #999;
+  background-color: rgb(16, 54, 59);
   height: 100vh;
   .product-edit {
     padding-left: 3%;

@@ -14,9 +14,17 @@ export default class Store extends Component {
     return (
       <ul>
         <li className="store-grid-categories-first-li">Categories:</li>
+        <li className="category-list-items" onClick={() => this.fetchProducts()}>
+          All products
+        </li>
         {this.state.categories.map((item, i) => {
           return (
-            <li className="category-list-items" key={i}>
+            // prettier-ignore
+            <li
+              key={i}
+              className="category-list-items"
+              onClick={() => this.fetchProducts(this.state.categories[i].name)}
+            >
               {this.state.categories[i].name}
             </li>
           );
@@ -25,15 +33,15 @@ export default class Store extends Component {
     );
   }
   generateProducts() {
-    const { products } = this.state;
+    const products = this.state.products;
     return (
       <ul>
         {products.map((item, i) => {
           return (
             <li key={i}>
-              <a href={products[i].imageUrl}>
+              <a>
                 <div className="store-grid-products-info">
-                  <div className="store-grid-products-info-onHover" />
+                  <div className="store-grid-products-info-onHover">{products[i]._id}</div>
                   <img src={products[i].imageUrl} alt="img" />
                   <div className="store-grid-products-info-text">
                     <p>{products[i].name}</p>
@@ -48,14 +56,30 @@ export default class Store extends Component {
       </ul>
     );
   }
-
+  fetchProducts(category) {
+    if (category) {
+      // Fetch one category of products
+      axios.post('http://localhost:8080/get-category', { name: category }).then(result => {
+        this.setState({
+          products: result.data[0].products
+        });
+      });
+    } else {
+      // Fetch all products
+      axios.get('http://localhost:8080/get-all-products').then(res => {
+        this.setState({
+          products: res.data
+        });
+      });
+    }
+  }
   componentDidMount() {
     axios.get('http://localhost:8080/get-categories').then(res => {
       this.setState({
         categories: res.data
       });
     });
-    axios.get('http://localhost:8080/get-products').then(res => {
+    axios.get('http://localhost:8080/get-all-products').then(res => {
       this.setState({
         products: res.data
       });

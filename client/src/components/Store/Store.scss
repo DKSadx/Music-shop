@@ -77,6 +77,9 @@
               position: relative;
               margin: auto;
               width: 15vw;
+              .store-grid-products-info-onHover {
+                display: none;
+              }
               img {
                 display: block;
                 margin: auto;
@@ -126,13 +129,15 @@
               &:hover {
                 color: red;
                 .store-grid-products-info-onHover {
-                  background-color: #000;
-                  opacity: 0.1;
+                  display: block;
+                  background-color: #4444;
                   position: absolute;
                   height: 30vh;
                   width: 100%;
                   transition-property: background;
                   transition-duration: 400ms;
+                  font-size: 2vmin;
+                  word-wrap: break-word;
                 }
               }
             }

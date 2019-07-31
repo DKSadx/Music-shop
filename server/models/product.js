@@ -18,6 +18,10 @@ const productShema = new Schema({
   imageUrl: {
     type: String,
     require: true
+  },
+  category: {
+    type: String,
+    require: true
   }
 });
 
