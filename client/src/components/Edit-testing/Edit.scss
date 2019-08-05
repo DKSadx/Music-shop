@@ -1,7 +1,7 @@
 @mixin form-styling {
   position: absolute;
   width: 50%;
-  // top: 5%;
+  top: 2%;
   color: white;
   h4 {
     font-size: 2.5vmin;
@@ -14,10 +14,9 @@
     width: 43vw;
   }
   button {
-    margin-top: 5%;
-    margin-right: 5%;
-    padding: 5%;
+    margin: 1.5%;
     width: 20vw;
+    height: 8vh;
     background-color: #008080;
     font-size: 3vmin;
     &:hover {
@@ -34,7 +33,7 @@
 .edit-form {
   position: relative;
   background-color: rgb(16, 54, 59);
-  height: 100vh;
+  height: 150vh;
   .product-edit {
     padding-left: 3%;
     @include form-styling();

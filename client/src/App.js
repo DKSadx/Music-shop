@@ -5,7 +5,7 @@ import './App.scss';
 import HomePage from './components/HomePage/HomePage';
 import Store from './components/Store/Store';
 import Edit from './components/Edit-testing/Edit';
-// !!! Lazy needs to be implemented
+// ! Lazy loading needs to be implemented
 
 // const Slideshow = React.lazy(() =>
 //   import('./components/Slideshow/Slideshow.js')
@@ -19,7 +19,6 @@ const App = () => {
         <Route path="/edit" component={Edit} />
         {/* <Route path="/about" component={About} /> */}
       </Switch>
-      {/* <HomePage /> */}
     </div>
   );
 };

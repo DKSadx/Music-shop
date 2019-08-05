@@ -5,6 +5,7 @@ import './Edit.scss';
 export default class Edit extends Component {
   constructor(props) {
     super(props);
+    document.title = 'Edit';
     this.state = {
       name: '',
       price: '',
@@ -24,7 +25,7 @@ export default class Edit extends Component {
   addProduct() {
     const { name, price, description, imageUrl, category } = this.state;
     axios
-      .post('http://localhost:8080/add-product', {
+      .post('http://localhost:8080/product', {
         name,
         price,
         description,
@@ -40,50 +41,29 @@ export default class Edit extends Component {
   }
 
   deleteProduct(objectId) {
+    let data;
     if (objectId) {
-      axios
-        .delete('http://localhost:8080/delete-product-by-id', {
-          data: {
-            objectId: this.state.objectId,
-            deleteAll: false
-          }
-        })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      data = {
+        objectId: this.state.objectId
+      };
     } else {
-      axios
-        .delete('http://localhost:8080/delete-product-by-name', {
-          data: {
-            name: this.state.name,
-            deleteAll: false
-          }
-        })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      data = {
+        name: this.state.name
+      };
     }
+
+    axios
+      .delete('http://localhost:8080/product', {
+        data
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
-  deleteAllProducts() {
-    // axios
-    //   .delete('http://localhost:8080/delete-all-products', {
-    //     data: {
-    //       deleteAll: true
-    //     }
-    //   })
-    //   .then(response => {
-    //     console.log(response);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-  }
+
   fillProduct() {
     this.setState({
       name: 'Audio Technica LP120',
@@ -105,7 +85,7 @@ export default class Edit extends Component {
   addCategory() {
     const name = this.state.categoryName;
     axios
-      .post('http://localhost:8080/add-category', {
+      .post('http://localhost:8080/category', {
         name
       })
       .then(response => {
@@ -118,10 +98,9 @@ export default class Edit extends Component {
 
   deleteCategory() {
     axios
-      .delete('http://localhost:8080/delete-category', {
+      .delete('http://localhost:8080/category/delete', {
         data: {
-          name: this.state.categoryName,
-          deleteAll: false
+          name: this.state.categoryName
         }
       })
       .then(response => {
@@ -131,25 +110,13 @@ export default class Edit extends Component {
         console.log(err);
       });
   }
-  deleteAllCategories() {
-    // axios
-    //   .delete('http://localhost:8080/delete-all-categories', {
-    //     data: {
-    //       deleteAll: true
-    //     }
-    //   })
-    //   .then(response => {
-    //     console.log(response);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-  }
+
   fillCategory() {
     this.setState({
       categoryName: 'Other'
     });
   }
+
   render() {
     return (
       <form className="edit-form">
@@ -182,9 +149,6 @@ export default class Edit extends Component {
           <button type="button" className="edit-delete-btn" onClick={() => this.deleteProduct(true)}>
             Delete by Id
           </button>
-          <button type="button" className="edit-delete-btn" onClick={() => this.deleteAllProducts()}>
-            Delete All
-          </button>
         </div>
         {/* CATEGORY */}
         <div className="category-edit">
@@ -199,9 +163,6 @@ export default class Edit extends Component {
           </button>
           <button type="button" className="edit-delete-btn" onClick={() => this.deleteCategory()}>
             Delete
-          </button>
-          <button type="button" className="edit-delete-btn" onClick={() => this.deleteAllCategories()}>
-            Delete All
           </button>
         </div>
       </form>

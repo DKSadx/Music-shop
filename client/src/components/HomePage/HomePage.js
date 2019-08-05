@@ -7,6 +7,7 @@ import PopularMenu from '../PopularMenu/PopularMenu';
 import Footer from '../Footer/Footer';
 
 export default function HomePage() {
+  document.title = 'Home';
   return (
     <>
       <Slideshow navbar={<NavBar />} />

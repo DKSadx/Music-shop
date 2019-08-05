@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 export default class Store extends Component {
   constructor(props) {
     super(props);
+    document.title = 'Store';
     this.state = {};
   }
 
@@ -59,14 +60,17 @@ export default class Store extends Component {
   fetchProducts(category) {
     if (category) {
       // Fetch one category of products
-      axios.post('http://localhost:8080/get-category', { name: category }).then(result => {
-        this.setState({
-          products: result.data[0].products
-        });
-      });
+      axios
+        .get(`http://localhost:8080/category/${category}`)
+        .then(result => {
+          this.setState({
+            products: result.data[0].products
+          });
+        })
+        .catch(err => console.log(err));
     } else {
       // Fetch all products
-      axios.get('http://localhost:8080/get-all-products').then(res => {
+      axios.get('http://localhost:8080/product').then(res => {
         this.setState({
           products: res.data
         });
@@ -74,16 +78,15 @@ export default class Store extends Component {
     }
   }
   componentDidMount() {
-    axios.get('http://localhost:8080/get-categories').then(res => {
-      this.setState({
-        categories: res.data
-      });
-    });
-    axios.get('http://localhost:8080/get-all-products').then(res => {
-      this.setState({
-        products: res.data
-      });
-    });
+    axios
+      .get('http://localhost:8080/category')
+      .then(res => {
+        this.setState({
+          categories: res.data
+        });
+      })
+      .catch(err => console.log(err));
+    this.fetchProducts();
   }
   render() {
     return (
