@@ -54,12 +54,10 @@ export default function Footer() {
         </li>
       </ul>
       <div className="footer-important">
-        <h3>IMPORTANT!</h3>
+        <h3>Lorem ipsum!</h3>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam,
-          atque earum quidem mollitia explicabo iure dolore, fuga temporibus
-          quam labore nemo! Sunt officiis cupiditate saepe inventore? Voluptates
-          hic nulla tenetur!
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, atque earum quidem mollitia explicabo iure dolore, fuga temporibus quam
+          labore nemo! Sunt officiis cupiditate saepe inventore? Voluptates hic nulla tenetur!
         </p>
       </div>
     </footer>

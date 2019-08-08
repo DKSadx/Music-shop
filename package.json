@@ -1,0 +1,26 @@
+{
+  "name": "music-shop",
+  "version": "1.0.0",
+  "description": "<hr />",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install; cd client && npm install; cd ../server && npm install",
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DKSadx/Music-shop.git"
+  },
+  "author": "DKSadx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DKSadx/Music-shop/issues"
+  },
+  "homepage": "https://github.com/DKSadx/Music-shop#readme",
+  "dependencies": {
+    "concurrently": "^4.1.1"
+  }
+}

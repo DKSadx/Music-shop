@@ -66,11 +66,11 @@ export default class Edit extends Component {
 
   fillProduct() {
     this.setState({
-      name: 'Audio Technica LP120',
-      price: '134.99',
-      description: 'Audio Technica LP120',
-      imageUrl: '/AT-LP120.jpg',
-      category: 'Other'
+      name: 'CORT Z CUSTOM BS',
+      price: '759.99',
+      description: "Equipped with Seymour Duncan JB and '59 pickup set",
+      imageUrl: '/Cort-z-custom-bs.jpg',
+      category: 'Guitars & Bass'
     });
   }
   clearProduct() {

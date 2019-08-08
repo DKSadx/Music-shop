@@ -78,7 +78,8 @@
               margin: auto;
               width: 15vw;
               .store-grid-products-info-onHover {
-                display: none;
+                // display: none;
+                visibility: hidden;
               }
               img {
                 display: block;
@@ -129,7 +130,8 @@
               &:hover {
                 color: red;
                 .store-grid-products-info-onHover {
-                  display: block;
+                  // display: block;
+                  visibility: visible;
                   background-color: #4444;
                   position: absolute;
                   height: 30vh;

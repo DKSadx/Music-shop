@@ -42,7 +42,7 @@ export default class Store extends Component {
             <li key={i}>
               <a>
                 <div className="store-grid-products-info">
-                  <div className="store-grid-products-info-onHover">{products[i]._id}</div>
+                  <div className="store-grid-products-info-onHover">{/* <p>{products[i]._id}</p> */}</div>
                   <img src={products[i].imageUrl} alt="img" />
                   <div className="store-grid-products-info-text">
                     <p>{products[i].name}</p>

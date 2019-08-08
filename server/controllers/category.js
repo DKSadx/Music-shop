@@ -4,7 +4,6 @@ const Product = require('../models/product');
 // Returns all categories(list)
 exports.getAllCategories = async (req, res, next) => {
   const result = await Category.find();
-  // .then(result => res.send(result))
   res.send(result);
 };
 // Returns category

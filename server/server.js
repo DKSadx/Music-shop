@@ -18,9 +18,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// TODO I - 1.fill products, 2.pagination, 3.refactor code, 4.edit product, 5.upload images...
-// TODO II - 1.optimize images, 2.auth, 3.cart, 4.validation, 5.webtokens...
-
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
 
