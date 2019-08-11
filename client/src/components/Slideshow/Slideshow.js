@@ -21,8 +21,7 @@ export default class Slideshow extends Component {
 
   changeImage() {
     this.interval = setInterval(() => {
-      currentSlide.imageNumber =
-        currentSlide.imageNumber !== 3 ? currentSlide.imageNumber + 1 : 1;
+      currentSlide.imageNumber = currentSlide.imageNumber !== 3 ? currentSlide.imageNumber + 1 : 1;
       currentSlide.image = images[`image${currentSlide.imageNumber}`];
       this.forceUpdate();
     }, 5000);
@@ -37,10 +36,7 @@ export default class Slideshow extends Component {
   }
   render() {
     return (
-      <div
-        className="slideshow"
-        style={{ backgroundImage: `url("${currentSlide.image}")` }}
-      >
+      <div className="slideshow" style={{ backgroundImage: `url("${currentSlide.image}")` }}>
         {this.props.navbar}
         {textAnimation(slideshowText, currentSlide.imageNumber - 1)}
       </div>

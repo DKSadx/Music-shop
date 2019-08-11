@@ -1,69 +1,71 @@
 @import '../TrendingMenu/TrendingMenu.scss';
-.popularMenu {
+
+.popular-menu {
   position: relative;
   h3 {
-    position: absolute;
-    top: 2%;
-    left: 2%;
-    font-size: 4vmin;
     font-family: Gravity;
+    font-size: 4vmin;
     font-weight: 200;
+    left: 2%;
+    top: 2%;
+    position: absolute;
   }
-  .PI-grid {
-    display: grid;
-    margin: 0 10%;
-    padding: 10% 0;
-    grid-row-gap: 15vh;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto auto auto auto;
-    justify-items: center;
-    li {
-      position: relative;
-      text-align: center;
-      list-style: none;
-      height: 40vh;
-      width: 15vw;
-      background-repeat: no-repeat;
-      background-size: 100% 80%;
-      button {
-        visibility: hidden;
-      }
-      a {
-        position: absolute;
-        background-color: #fff;
-        bottom: -10%;
-        left: 0;
-        text-decoration: none;
-        color: black;
-        font-size: 2.5vmin;
-        text-align: left;
-        font-family: 'Madeleina-sans', 'Sans-serif';
-        word-wrap: break-word;
-      }
+}
+
+.product-grid {
+  display: grid;
+  grid-row-gap: 15vh;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto auto auto auto;
+  justify-items: center;
+  margin: 0 10%;
+  padding: 10% 0;
+}
+
+.popular-grid-item {
+  background-repeat: no-repeat;
+  background-size: 100% 80%;
+  height: 40vh;
+  list-style: none;
+  text-align: center;
+  width: 15vw;
+  position: relative;
+  button {
+    visibility: hidden;
+  }
+  a {
+    background-color: #fff;
+    bottom: -10%;
+    color: #000;
+    font-family: 'Madeleina-sans', 'Sans-serif';
+    font-size: 2.5vmin;
+    left: 0;
+    text-align: left;
+    text-decoration: none;
+    position: absolute;
+    word-wrap: break-word;
+  }
+  &:hover {
+    button {
+      @include buy-button();
+      bottom: 25%;
+      min-width: 40%;
+      visibility: visible;
       &:hover {
-        button {
-          visibility: visible;
-          @include add-to-cart-button();
-          font-size: 2vmin;
-          bottom: 25%;
-          min-width: 40%;
-          &:hover {
-            background-color: #000;
-            color: white;
-          }
-        }
-        .popularDetailsBtn {
-          bottom: 10%;
-        }
-        .onHoverDiv {
-          background-color: #000;
-          opacity: 0.5;
-          height: 100%;
-          width: 100%;
-          transition-property: background;
-          transition-duration: 400ms;
-        }
+        background-color: #000;
+        color: #fff;
       }
+    }
+    .popular-details-btn {
+      bottom: 10%;
+    }
+    .popular-item-hover {
+      background-color: #000;
+      height: 100%;
+      opacity: 0.5;
+      transition-property: background;
+      transition-duration: 400ms;
+      width: 100%;
     }
   }
 }

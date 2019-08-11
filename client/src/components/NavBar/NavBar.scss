@@ -1,80 +1,75 @@
+#logo {
+  align-self: center;
+  left: 3vw;
+  list-style: none;
+  position: absolute;
+}
 .main-nav-bar {
   background-color: #0004;
   display: flex;
   font-size: 2vmin;
   font-family: Quarca;
-  position: relative;
   height: 6vh;
-  // Forces text to be in one line
   overflow: hidden;
+  position: relative;
   white-space: nowrap;
-  #logo {
-    position: absolute;
-    left: 3vw;
-    align-self: center;
+}
+.main-nav-bar-center {
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
+  li {
     list-style: none;
-  }
-  .center-main-nav-bar {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    li {
-      list-style: none;
-      margin: 0 10%;
+    margin: 0 10%;
+    a {
+      color: #fff;
+      display: block;
+      text-decoration: none;
+      width: 100%;
+    }
+    &:hover {
+      border-style: solid;
+      border-width: 1px;
+      border-left: 0;
+      border-right: 0;
+      border-top: 0;
+      border-color: #f00;
+      padding-bottom: 0.8vh;
+      transition: all 0.5s;
       a {
-        display: block;
-        color: white;
-        width: 100%;
-        text-decoration: none;
-
+        color: #f00;
       }
+    }
+  }
+}
+.main-nav-bar-end {
+  align-items: center;
+  align-self: center;
+  display: flex;
+  right: 5vw;
+  position: absolute;
+  li {
+    list-style: none;
+    margin: 0 10%;
+    a {
+      color: #fff;
+      display: block;
+      font-size: 1.8vmin;
+      text-decoration: none;
+      width: 100%;
       &:hover {
-        border-style: solid;
-        border-width: 1px;
-        border-left: 0;
-        border-right: 0;
-        border-top: 0;
-        border-color: red;
-        padding-bottom: 0.8vh;
-        transition: all 0.5s;
-        a {
-          color: red;
-        }
+        color: #f00;
       }
     }
   }
-
-  .end-main-nav-bar {
-    position: absolute;
-    right: 5vw;
-    display: flex;
-    align-self: center;
-    align-items: center;
-    li {
-      list-style: none;
-      margin: 0 10%;
-      a {
-        display: block;
-        color: white;
-        width: 100%;
-        text-decoration: none;
-        font-size: 1.8vmin;
-        .signup-btn {
-          padding: 1vmin 2vmin;
-          background-color: #fff;
-          // Added so the items don't move on click
-          box-sizing: border-box;
-          border-radius: 3%;
-          &:hover {
-            color: red;
-            background-color: #000;
-            color: #fff;
-          }
-        }
-        &:hover {
-          color: red;
-        }
-      }
-    }
+}
+.signup-btn {
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 3%;
+  padding: 1vmin 2vmin;
+  &:hover {
+    background-color: #000;
+    color: #fff;
   }
 }

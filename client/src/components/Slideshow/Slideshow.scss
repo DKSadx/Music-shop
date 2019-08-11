@@ -1,14 +1,14 @@
 .slideshow {
   background-size: cover;
   height: 100vh;
-  width: 100%;
   transition-duration: 400ms;
   transition-property: background;
   transition-timing-function: ease-in;
+  width: 100%;
 }
-.slideshowText {
-  width: 30%;
-  font-size: 3vmin;
+.slideshow-text {
+  color: #000;
   font-family: Gravity, 'Times New Roman', Times, serif;
-  color: black;
+  font-size: 3vmin;
+  width: 30%;
 }

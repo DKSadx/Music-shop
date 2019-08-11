@@ -1,45 +1,48 @@
 @mixin form-styling {
+  color: #fff;
   position: absolute;
-  width: 50%;
   top: 2%;
-  color: white;
+  width: 50%;
   h4 {
     font-size: 2.5vmin;
     padding: 1vh 0;
   }
   input {
-    height: 4vh;
-    font-size: 3vmin;
     display: block;
+    font-size: 3vmin;
+    height: 4vh;
     width: 43vw;
   }
   button {
-    margin: 1.5%;
-    width: 20vw;
-    height: 8vh;
     background-color: #008080;
     font-size: 3vmin;
+    height: 8vh;
+    margin: 1.5%;
+    width: 20vw;
     &:hover {
-      background-color: cyan;
+      background-color: #0ff;
     }
   }
   .edit-delete-btn {
-    background-color: red;
+    background-color: #f00;
     &:hover {
-      background-color: rgb(255, 66, 66);
+      background-color: #ff4242;
     }
   }
 }
+
 .edit-form {
+  background-color: #10363b;
+  height: 100vh;
   position: relative;
-  background-color: rgb(16, 54, 59);
-  height: 150vh;
-  .product-edit {
-    padding-left: 3%;
-    @include form-styling();
-  }
-  .category-edit {
-    left: 50%;
-    @include form-styling();
-  }
+}
+
+.product-edit {
+  @include form-styling();
+  padding-left: 3%;
+}
+
+.category-edit {
+  @include form-styling();
+  left: 50%;
 }

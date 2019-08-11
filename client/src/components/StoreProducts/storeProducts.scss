@@ -1,0 +1,132 @@
+.store-grid {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.store-grid-categories {
+  margin: 20%;
+  ul {
+    list-style-position: inside;
+    list-style: none;
+    .categories-title {
+      background-color: #222;
+      color: #fff;
+      font-family: Gravity, Arial, Helvetica, sans-serif;
+      font-size: 2vmin;
+      font-weight: 900;
+      padding: 1vh;
+    }
+    .category-list-items {
+      background-color: #fff;
+      color: black;
+      font-family: Gravity, Arial, Helvetica, sans-serif;
+      font-size: 1.9vmin;
+      padding: 1vh;
+      a {
+        text-decoration: none;
+      }
+      &::after {
+        content: '›';
+        left: 15%;
+        position: absolute;
+        vertical-align: middle;
+        vertical-align: middle;
+      }
+      &:hover {
+        background-color: #333;
+        color: #fff;
+        font-weight: 800;
+      }
+    }
+  }
+}
+
+.store-grid-products {
+  font-family: 'Madeleina-sans', Arial, Helvetica, sans-serif;
+  margin: 5% 10% 10% 5%;
+  width: auto;
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 100%;
+    li {
+      background-color: #fff;
+      list-style: none;
+      padding: 3%;
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.products-info {
+  margin: auto;
+  position: relative;
+  width: 15vw;
+  img {
+    display: block;
+    height: 30vh;
+    margin: auto;
+    width: 100%;
+  }
+  &-overlay {
+    visibility: hidden;
+  }
+  &:hover {
+    color: #f00;
+    .products-info-overlay {
+      background-color: #4444;
+      font-size: 2vmin;
+      height: 30vh;
+      position: absolute;
+      transition-property: background;
+      transition-duration: 400ms;
+      visibility: visible;
+      width: 100%;
+      word-wrap: break-word;
+    }
+  }
+}
+
+.products-info-text {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 10vh;
+  margin: auto;
+  width: 100%;
+  button {
+    border-radius: 5%;
+    bottom: 0;
+    font-size: 1.7vmin;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    height: 5vh;
+    right: 0;
+    padding: 2%;
+    position: absolute;
+    width: 35%;
+    &:hover {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+}
+
+.products-info-name {
+  align-self: end;
+  font-size: 2vmin;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.products-info-price {
+  // price
+  font-size: 2.5vmin;
+  grid-column: 1/2;
+  grid-row: 2/3;
+  padding-top: 5%;
+  top: 1vh;
+}

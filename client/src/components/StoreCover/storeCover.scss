@@ -1,0 +1,16 @@
+.shopCover {
+  background-image: url('../../assets/images/shop-cover.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 80vh;
+  position: relative;
+  width: 100%;
+  h3 {
+    bottom: 35%;
+    color: #fff;
+    font-size: 5vmin;
+    left: 8%;
+    position: absolute;
+    width: 15vw;
+  }
+}

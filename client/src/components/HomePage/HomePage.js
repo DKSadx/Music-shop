@@ -11,8 +11,8 @@ export default function HomePage() {
   return (
     <>
       <Slideshow navbar={<NavBar />} />
-      <TrendingMenu className="trendingMenu" />
-      <PopularMenu className="popularMenu" />
+      <TrendingMenu className="trending-menu" />
+      <PopularMenu className="popular-menu" />
       <Footer />
     </>
   );

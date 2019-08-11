@@ -10,10 +10,10 @@ export default function PopularMenu(props) {
   // Generating <li> items
   const createItems = () => {
     return data.map((x, i) => (
-      <li key={i} style={{ backgroundImage: `url("${x.url}")` }}>
-        <div className="onHoverDiv" />
-        <button className="popularBuyBtn">Buy now</button>
-        <button className="popularDetailsBtn">Details</button>
+      <li key={i} className="popular-grid-item" style={{ backgroundImage: `url("${x.url}")` }}>
+        <div className="popular-item-hover" />
+        <button>Buy now</button>
+        <button className="popular-details-btn">Details</button>
         <a>{x.name}</a>
       </li>
     ));
@@ -34,7 +34,7 @@ export default function PopularMenu(props) {
         >
           <Tween
             // Wraps all <li> tags that are dynamically created
-            wrapper={<ul className="PI-grid" />}
+            wrapper={<ul className="product-grid" />}
             staggerFrom={{
               opacity: 0,
               cycle: {
