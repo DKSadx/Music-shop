@@ -1,10 +1,17 @@
 const Category = require('../models/category');
 const Product = require('../models/product');
+const ITEMS_PER_PAGE = require('../variables').ITEMS_PER_PAGE;
 
 // Returns all products
-exports.getAllProducts = async (req, res, next) => {
-  const result = await Product.find();
-  res.send(result);
+exports.getProducts = async (req, res, next) => {
+  const page = req.query.page;
+  const products = await Product.find()
+    .skip((page - 1) * ITEMS_PER_PAGE)
+    .limit(ITEMS_PER_PAGE);
+  res.send({
+    products,
+    page
+  });
   next();
 };
 // Adds product to db and adds it to the corresponding category

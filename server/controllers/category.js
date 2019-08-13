@@ -1,5 +1,6 @@
 const Category = require('../models/category');
 const Product = require('../models/product');
+const ITEMS_PER_PAGE = require('../variables').ITEMS_PER_PAGE;
 
 // Returns all categories(list)
 exports.getAllCategories = async (req, res, next) => {
@@ -8,9 +9,12 @@ exports.getAllCategories = async (req, res, next) => {
 };
 // Returns category
 exports.getCategory = async (req, res, next) => {
-  const name = req.params.categoryName;
-  const category = await Category.find({ name }).populate('products', '-category');
-  await res.status(200).send(category);
+  const category = { category: req.params.categoryName };
+  const page = req.query.page;
+  const products = await Product.find(category)
+    .skip((page - 1) * ITEMS_PER_PAGE)
+    .limit(ITEMS_PER_PAGE);
+  await res.status(200).send(products);
   next();
 };
 // Adds category to db

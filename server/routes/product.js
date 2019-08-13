@@ -5,7 +5,7 @@ const router = express.Router();
 
 // ! --------GET--------
 // /product - returns all products
-router.get('/', productController.getAllProducts);
+router.get('/', productController.getProducts);
 
 // ! --------POST--------
 // /product - adds product to db
