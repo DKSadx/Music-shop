@@ -70,7 +70,7 @@ export default class Edit extends Component {
       price: '759.99',
       description: "Equipped with Seymour Duncan JB and '59 pickup set",
       imageUrl: '/Cort-z-custom-bs.jpg',
-      category: 'Guitars & Bass'
+      category: 'Guitars and Bass'
     });
   }
   clearProduct() {

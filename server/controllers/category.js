@@ -11,10 +11,12 @@ exports.getAllCategories = async (req, res, next) => {
 exports.getCategory = async (req, res, next) => {
   const category = { category: req.params.categoryName };
   const page = req.query.page;
+  const productsCount = await Product.find(category).countDocuments();
+  const lastPage = Math.ceil(productsCount / ITEMS_PER_PAGE);
   const products = await Product.find(category)
     .skip((page - 1) * ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE);
-  await res.status(200).send(products);
+  await res.status(200).send({ products, lastPage });
   next();
 };
 // Adds category to db

@@ -91,25 +91,27 @@ export default class StoreProducts extends Component {
     );
   }
   pagination() {
-    const { currentPage, query } = this.state;
+    const { currentPage, lastPage, query } = this.state;
     return (
       <ul className="pagination">
-        <li>
-          {/* Left arrow */}
-          <Link
-            to={{
-              pathname: '/store',
-              search: `?category=${query.category}&page=${currentPage > 1 ? currentPage - 1 : 1}`
-            }}
-            onClick={async () => {
-              // Prevents setting the current page to less than 1 with left arrow
-              await this.setState({ currentPage: currentPage > 2 ? currentPage - 1 : 1 });
-              this.fetchProducts(query.category);
-            }}
-          >
-            <i className="fas fa-chevron-left" />
-          </Link>
-        </li>
+        {currentPage > 1 && (
+          <li>
+            {/* Left arrow */}
+            <Link
+              to={{
+                pathname: '/store',
+                search: `?category=${query.category}&page=${currentPage > 1 ? currentPage - 1 : 1}`
+              }}
+              onClick={async () => {
+                // Prevents setting the current page to less than 1 with left arrow
+                await this.setState({ currentPage: currentPage > 2 ? currentPage - 1 : 1 });
+                this.fetchProducts(query.category);
+              }}
+            >
+              <i className="fas fa-chevron-left" />
+            </Link>
+          </li>
+        )}
         {currentPage > 1 ? (
           // Styling if the current page is > 1
           <>
@@ -128,71 +130,80 @@ export default class StoreProducts extends Component {
               </Link>
             </li>
             <li className="currentPage">{currentPage}</li>
-            <li>
-              <Link
-                to={{
-                  pathname: '/store',
-                  // prettier-ignore
-                  search: `?category=${query.category}&page=${currentPage + 1}`
-                }}
-                onClick={async () => {
-                  await this.setState({ currentPage: currentPage + 1 });
-                  this.fetchProducts(query.category);
-                }}
-              >
-                {currentPage + 1}
-              </Link>
-            </li>
+
+            {currentPage < lastPage && (
+              <li>
+                <Link
+                  to={{
+                    pathname: '/store',
+                    // prettier-ignore
+                    search: `?category=${query.category}&page=${currentPage + 1}`
+                  }}
+                  onClick={async () => {
+                    await this.setState({ currentPage: currentPage + 1 });
+                    this.fetchProducts(query.category);
+                  }}
+                >
+                  {currentPage + 1}
+                </Link>
+              </li>
+            )}
           </>
         ) : (
           // Styling if the current page is === 1
           <>
             <li className="currentPage">1</li>
-            <li>
-              <Link
-                to={{
-                  pathname: '/store',
-                  search: `?category=${query.category}&page=2`
-                }}
-                onClick={async () => {
-                  await this.setState({ currentPage: 2 });
-                  this.fetchProducts(query.category);
-                }}
-              >
-                {currentPage + 1}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={{
-                  pathname: '/store',
-                  search: `?category=${query.category}&page=3`
-                }}
-                onClick={async () => {
-                  await this.setState({ currentPage: 3 });
-                  this.fetchProducts(query.category);
-                }}
-              >
-                {currentPage + 2}
-              </Link>
-            </li>
+            {currentPage < lastPage && (
+              <li>
+                <Link
+                  to={{
+                    pathname: '/store',
+                    search: `?category=${query.category}&page=2`
+                  }}
+                  onClick={async () => {
+                    await this.setState({ currentPage: 2 });
+                    this.fetchProducts(query.category);
+                  }}
+                >
+                  {currentPage + 1}
+                </Link>
+              </li>
+            )}
+            {currentPage + 1 < lastPage && (
+              <li>
+                <Link
+                  to={{
+                    pathname: '/store',
+                    search: `?category=${query.category}&page=3`
+                  }}
+                  onClick={async () => {
+                    await this.setState({ currentPage: 3 });
+                    this.fetchProducts(query.category);
+                  }}
+                >
+                  {currentPage + 2}
+                </Link>
+              </li>
+            )}
           </>
         )}
-        <li>
-          {/* Right arrow */}
-          <Link
-            to={{
-              pathname: '/store',
-              search: `?category=${query.category}&page=${currentPage + 1}`
-            }}
-            onClick={async () => {
-              await this.setState({ currentPage: currentPage + 1 });
-              await this.fetchProducts(query.category);
-            }}
-          >
-            <i className="fas fa-chevron-right" />
-          </Link>
-        </li>
+        {currentPage < lastPage && (
+          <li>
+            {/* Right arrow */}
+            <Link
+              to={{
+                pathname: '/store',
+                search: `?category=${query.category}&page=${currentPage + 1}`
+              }}
+              onClick={async () => {
+                await this.setState({ currentPage: currentPage + 1 });
+                await this.fetchProducts(query.category);
+              }}
+            >
+              <i className="fas fa-chevron-right" />
+            </Link>
+          </li>
+        )}
       </ul>
     );
   }
@@ -204,7 +215,8 @@ export default class StoreProducts extends Component {
         .get(`http://localhost:8080/category/${category}?page=${this.state.currentPage}`)
         .then(result => {
           this.setState({
-            products: result.data ? result.data : []
+            products: result.data.products ? result.data.products : [],
+            lastPage: result.data.lastPage
           });
         })
         .catch(err => console.log(err));
@@ -212,7 +224,8 @@ export default class StoreProducts extends Component {
       // Fetch all products if the category isn't set
       axios.get(`http://localhost:8080/product?page=${this.state.currentPage}`).then(result => {
         this.setState({
-          products: result.data.products
+          products: result.data.products,
+          lastPage: result.data.lastPage
         });
       });
     }
@@ -228,7 +241,7 @@ export default class StoreProducts extends Component {
         });
       })
       .catch(err => console.log(err));
-    this.fetchProducts();
+    this.fetchProducts(this.state.query.category);
   }
 
   render() {
