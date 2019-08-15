@@ -1,0 +1,13 @@
+@import '../auth-mixins.scss';
+
+.sign-up-page {
+  @include auth-page();
+}
+
+.sign-up-form {
+  @include auth-form();
+}
+
+.form-submit-btn {
+  @include form-submit-btn();
+}

@@ -1,0 +1,80 @@
+@mixin auth-page {
+  background-color: #000c;
+  height: 100vh;
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  z-index: 1;
+}
+@mixin auth-form {
+  background-color: #fffb;
+  border-radius: 4px;
+  height: fit-content;
+  left: 55%;
+  padding: 0 3%;
+  position: relative;
+  top: 50%;
+  transform: translate(-55%, -50%);
+  width: 30%;
+  z-index: 1;
+  // Close icon
+  i {
+    color: #000;
+    cursor: pointer;
+    font-size: 4vmin;
+    position: absolute;
+    right: 5%;
+    top: 4%;
+    z-index: 2;
+  }
+  h2 {
+    font-family: Inter, sans-serif;
+    font-size: 4vmin;
+    padding: 10% 5%;
+    text-align: center;
+  }
+  input {
+    background-color: #fff;
+    border-radius: 2px;
+    border: 0;
+    border: 1px solid #777;
+    font-size: 2.3vmin;
+    height: 5vh;
+    margin: 0 5%;
+    padding-left: 3%;
+    width: 87%;
+    &:focus {
+      border-bottom: 3px solid cyan;
+      outline: none;
+    }
+  }
+  p {
+    color: #222;
+    font-family: 'Madeleina-sans';
+    font-size: 2vmin;
+    padding: 2% 5% 5% 5%;
+  }
+  .a-like {
+    color: blue;
+    cursor: pointer;
+    padding: 0 0 0 5%;
+    text-decoration: underline;
+  }
+}
+@mixin form-submit-btn {
+  background-color: #00b836;
+  border-radius: 25px;
+  border: 1px solid #777;
+  color: #fff;
+  cursor: pointer;
+  font-size: 3vmin;
+  height: 5vh;
+  margin: 5% 25%;
+  width: 50%;
+  &:hover {
+    background-color: #5fcf80;
+  }
+  &:focus {
+    outline: none;
+  }
+}
