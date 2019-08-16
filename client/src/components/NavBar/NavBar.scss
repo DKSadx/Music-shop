@@ -4,6 +4,11 @@
   list-style: none;
   position: absolute;
 }
+.nav-bar-container {
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+}
 .main-nav-bar {
   background-color: #0004;
   display: flex;
@@ -11,7 +16,6 @@
   font-size: 2vmin;
   height: 6vh;
   overflow: hidden;
-  position: relative;
   white-space: nowrap;
 }
 .main-nav-bar-center {

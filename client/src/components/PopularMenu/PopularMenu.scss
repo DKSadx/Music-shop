@@ -6,8 +6,8 @@
     font-family: Gravity;
     font-size: 4vmin;
     font-weight: 200;
-    left: 2%;
-    top: 2%;
+    left: 2vw;
+    top: 2vh;
     position: absolute;
   }
 }
@@ -15,7 +15,7 @@
 .product-grid {
   display: grid;
   grid-row-gap: 15vh;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-template-rows: auto auto auto auto;
   justify-items: center;
   margin: 0 10%;

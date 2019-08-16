@@ -11,8 +11,12 @@ export default class NavBar extends Component {
       signUpForm: false,
       signInForm: false
     };
+    this.scrollToTop = this.scrollToTop.bind(this);
     this.closePopUp = this.closePopUp.bind(this);
     this.showPopUp = this.showPopUp.bind(this);
+  }
+  scrollToTop() {
+    window.scrollTo(0, 0);
   }
   showPopUp(type) {
     this.setState({
@@ -28,17 +32,21 @@ export default class NavBar extends Component {
   }
   render() {
     return (
-      <>
+      <div className="nav-bar-container">
         <ul className="main-nav-bar">
           <li id="logo">
             <Link to="/">Logo</Link>
           </li>
           <ul className="main-nav-bar-center">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={() => this.scrollToTop()}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/store">Store</Link>
+              <Link to="/store" onClick={() => this.scrollToTop()}>
+                Store
+              </Link>
             </li>
             <li>
               <Link to="/about">About us</Link>
@@ -55,7 +63,7 @@ export default class NavBar extends Component {
         </ul>
         {this.state.signUpForm ? <SignUpForm show={this.showPopUp} close={this.closePopUp} /> : <></>}
         {this.state.signInForm ? <SignInForm show={this.showPopUp} close={this.closePopUp} /> : <></>}
-      </>
+      </div>
     );
   }
 }

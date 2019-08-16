@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Tween } from 'react-gsap';
 import './storeProducts.scss';
 
 export default class StoreProducts extends Component {
@@ -246,14 +247,16 @@ export default class StoreProducts extends Component {
 
   render() {
     return (
-      <div className="store-grid">
-        {this.state.products && this.state.categories && (
-          <>
-            <div className="store-categories">{this.generateCategoriesList()}</div>
-            <div className="store-products">{this.generateProducts()}</div>
-          </>
-        )}
-      </div>
+      <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} duration={2} delay={0.5}>
+        <div className="store-grid">
+          {this.state.products && this.state.categories && (
+            <>
+              <div className="store-categories">{this.generateCategoriesList()}</div>
+              <div className="store-products">{this.generateProducts()}</div>
+            </>
+          )}
+        </div>
+      </Tween>
     );
   }
 }

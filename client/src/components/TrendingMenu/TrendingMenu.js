@@ -12,10 +12,10 @@ export default function TrendingMenu(props) {
 
       <Controller>
         <Scene
-          duration={400}
-          offset={-250}
+          duration={500}
+          offset={-100}
           triggerElement="#trending-image"
-          reverse={true}
+          // reverse={false}
           // indicators={{
           //   colorStart: '#fff',
           //   colorEnd: 'blue'
@@ -23,15 +23,14 @@ export default function TrendingMenu(props) {
         >
           <Tween
             from={{
-              visibility: 'hidden',
-              y: 100,
+              y: 300,
               opacity: 0
             }}
             to={{
-              visibility: 'visible',
               y: 0,
               opacity: 1
             }}
+            // immediateRender={false}
           >
             <p id="trending-text">Trending now:</p>
             <ul className="trending-menu-items">

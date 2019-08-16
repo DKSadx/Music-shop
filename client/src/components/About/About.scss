@@ -1,0 +1,32 @@
+.about-page {
+  height: 100vh;
+  background-color: #000;
+}
+.about-cover {
+  height: 100%;
+  &-image {
+    background-color: #000;
+    background-image: url('../../assets/images/about-cover.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100%;
+  }
+  h1 {
+    color: #fff;
+    font-family: 'Madeleina-sans';
+    font-size: 5vmin;
+    left: 4%;
+    position: absolute;
+    top: 40%;
+  }
+  p {
+    bottom: 35%;
+    color: #fff;
+    font-family: 'Madeleina-sans';
+    font-size: 3vmin;
+    height: 10vh;
+    left: 4%;
+    position: absolute;
+    width: 30%;
+  }
+}

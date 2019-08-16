@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 import HomePage from './components/HomePage/HomePage';
 import Store from './components/Store/Store';
+import About from './components/About/About';
 import Edit from './components/Edit-testing/Edit';
 
 // const Slideshow = React.lazy(() =>
@@ -16,7 +17,7 @@ const App = () => {
         <Route path="/" exact component={HomePage} />
         <Route path="/store" component={Store} />
         <Route path="/edit" component={Edit} />
-        {/* <Route path="/about" component={About} /> */}
+        <Route path="/about" component={About} />
       </Switch>
     </div>
   );
