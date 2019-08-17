@@ -19,8 +19,8 @@ export default function SignUpForm(props) {
         <form className="sign-in-form" action="">
           <i className="far fa-times-circle" onClick={() => props.close()} />
           <h2>Sign in</h2>
-          <input type="text" placeholder="Username" pattern="([A-Za-z]|[0-9]|_)+$" required />
-          <input type="password" placeholder="Password" pattern=".{6,}" required />
+          <input className="auth-input" type="text" placeholder="Username" required />
+          <input className="auth-input" type="password" placeholder="Password" required />
           <p className="a-like" onClick={() => props.show('signUp')}>
             Don't have an account?
           </p>

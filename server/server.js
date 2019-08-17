@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -18,8 +19,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// Routes
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
+app.use('/auth', authRoutes);
 
 mongoose
   .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_DATABASE}`, { useNewUrlParser: true })
