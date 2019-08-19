@@ -16,6 +16,7 @@ exports.validateSignup = () => [
     .exists()
     .isEmail()
     .withMessage('Invalid email!')
+    .normalizeEmail()
     .custom(email => {
       return User.findOne({ email }).then(user => {
         if (user) {
@@ -27,4 +28,19 @@ exports.validateSignup = () => [
     .exists()
     .isLength({ min: 6 })
     .withMessage('Password too short!')
+];
+
+exports.validateSignin = () => [
+  body('username')
+    .exists()
+    .custom(username => {
+      return User.findOne({ username }).then(user => {
+        if (!user) {
+          throw new Error('Invalid value');
+        }
+      });
+    }),
+  body('password')
+    .exists()
+    .isLength({ min: 6 })
 ];

@@ -7,7 +7,8 @@
 .sign-in-form {
   @include auth-form();
   h2 {
-    padding-bottom: 2%;
+    padding-bottom: 7%;
+    padding-top: 7%;
   }
   input {
     margin-bottom: 5%;
@@ -18,4 +19,10 @@
 
 .form-submit-btn {
   @include form-submit-btn();
+}
+
+.sign-in-error {
+  color: #f00;
+  font-size: 1.8vmin;
+  text-align: center;
 }

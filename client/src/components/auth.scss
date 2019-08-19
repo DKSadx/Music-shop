@@ -17,16 +17,7 @@
   transform: translate(-55%, -50%);
   width: 30%;
   z-index: 1;
-  // Close icon
-  i {
-    color: #000;
-    cursor: pointer;
-    font-size: 4vmin;
-    position: absolute;
-    right: 5%;
-    top: 4%;
-    z-index: 2;
-  }
+
   h2 {
     font-family: Inter, sans-serif;
     font-size: 4vmin;
@@ -85,6 +76,16 @@
       outline: none;
     }
   }
+}
+
+.close-icon {
+  color: #000;
+  cursor: pointer;
+  font-size: 4vmin;
+  position: absolute;
+  right: 5%;
+  top: 4%;
+  z-index: 2;
 }
 
 .input-message {
