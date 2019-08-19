@@ -11,26 +11,18 @@ export default class SignUpForm extends Component {
     this.state = {
       username: {
         value: '',
-        type: 'string',
-        required: true,
         errorMessage: ''
       },
       email: {
         value: '',
-        type: 'string',
-        required: true,
         errorMessage: ''
       },
       password: {
         value: '',
-        type: 'string',
-        required: true,
         errorMessage: ''
       },
       repeatedPassword: {
         value: '',
-        type: 'string',
-        required: true,
         errorMessage: ''
       }
     };
@@ -46,6 +38,7 @@ export default class SignUpForm extends Component {
       password: '',
       repeatedPassword: ''
     };
+    // Client side validation
     if (password.value !== repeatedPassword.value) {
       isValid = false;
       errorMessages.repeatedPassword = "Passwords don't match!";
@@ -76,6 +69,7 @@ export default class SignUpForm extends Component {
     }
     return isValid;
   }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: {
@@ -88,15 +82,34 @@ export default class SignUpForm extends Component {
     e.preventDefault();
     const isValid = this.validation();
     if (isValid) {
-      // const { username, email, password } = this.state;
-      // axios
-      //   .put('http://localhost:8080/auth/signup', {
-      //     username,
-      //     email,
-      //     password
-      //   })
-      //   .then(response => console.log(response))
-      //   .catch(err => console.log(err));
+      const { username, email, password } = this.state;
+      axios
+        .post('http://localhost:8080/auth/signup', {
+          username: username.value,
+          email: email.value,
+          password: password.value
+        })
+        .then(res => {
+          // Checks if server side validation has errors
+          if (res.data.errorMessages) {
+            const { username, email, password } = res.data.errorMessages;
+            this.setState({
+              username: {
+                ...this.state.username,
+                errorMessage: username
+              },
+              email: {
+                ...this.state.email,
+                errorMessage: email
+              },
+              password: {
+                ...this.state.password,
+                errorMessage: password
+              }
+            });
+          }
+        })
+        .catch(err => console.log(err));
     }
   }
 
@@ -128,7 +141,11 @@ export default class SignUpForm extends Component {
               placeholder="Username"
               required
             />
-            <p className="input-message">This will be your username. It will be public for everyone.</p>
+            {username.errorMessage === '' ? (
+              <p className="input-message">This will be your username. It will be public for everyone.</p>
+            ) : (
+              <p className="input-message-error">{username.errorMessage}</p>
+            )}
             {/* prettier-ignore */}
             <input
               className={email.errorMessage === '' ? 'auth-input' : 'auth-input-error'}
