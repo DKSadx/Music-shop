@@ -22,19 +22,19 @@ export default class SignUpForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const { username, password } = this.state;
-    const jwtToken = localStorage.getItem('shop-token');
     const api = 'http://localhost:8080/auth/signin';
     const data = {
       username,
       password
     };
-    const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
-      .post(api, data, config)
+      .post(api, data)
       .then(res => {
         if (res.data.token) {
           localStorage.setItem('shop-token', res.data.token);
+          window.location.reload();
         } else {
+          console.log(res);
           this.setState({
             errorMessage: res.data.errorMessage
           });

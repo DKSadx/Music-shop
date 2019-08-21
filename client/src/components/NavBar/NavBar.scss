@@ -1,3 +1,13 @@
+@mixin nav-bar-icons {
+  color: #fff;
+  cursor: pointer;
+  font-size: 2.5vmin;
+  margin-left: 4vw;
+  &:hover {
+    color: #f00;
+    transition: color 300ms;
+  }
+}
 #logo {
   align-self: center;
   left: 3vw;
@@ -58,6 +68,7 @@
     list-style: none;
     margin: 0 10%;
     text-decoration: none;
+    transition: color 300ms;
     width: 100%;
     &:hover {
       color: #f00;
@@ -74,5 +85,81 @@
   &:hover {
     background-color: #000;
     color: #fff;
+    transition: all 300ms;
+  }
+}
+
+.cart-icon {
+  @include nav-bar-icons();
+  position: relative;
+  &-number {
+    background-color: #ff4747;
+    border-radius: 50%;
+    color: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.3vmin;
+    height: 2vmin;
+    left: 85%;
+    line-height: 2vmin;
+    position: absolute;
+    text-align: center;
+    top: -20%;
+    width: 2vmin;
+  }
+}
+
+.user-icon {
+  @include nav-bar-icons();
+  .user-dropdown-menu {
+    display: none;
+  }
+  &:hover {
+    .user-dropdown-menu {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 15vh;
+      justify-content: space-evenly;
+      left: 10%;
+      position: absolute;
+      top: 5vh;
+      width: 100%;
+      z-index: 1;
+      &:before {
+        background-color: #fff;
+        content: '';
+        height: 3vh;
+        position: absolute;
+        right: 8%;
+        top: -5%;
+        transform: rotate(45deg);
+        width: 3vh;
+        z-index: -1;
+      }
+      &:after {
+        content: '';
+        height: 10vh;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: -20%;
+        width: 5vw;
+        z-index: -1;
+      }
+      li {
+        .dropdown-text {
+          color: #333;
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          font-size: 1.7vmin;
+          text-decoration: none;
+          i {
+            padding-left: 10%;
+          }
+          &:hover {
+            color: #f00;
+          }
+        }
+      }
+    }
   }
 }

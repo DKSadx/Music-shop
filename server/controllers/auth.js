@@ -50,7 +50,7 @@ exports.signin = (req, res, next) => {
           );
           res.status(200).json({ token, userId: user._id.toString() });
         } else {
-          res.status(203).send(errorMessage);
+          res.status(203).send({ errorMessage });
         }
       })
       .catch(err => console.log(err));
