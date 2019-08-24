@@ -5,6 +5,7 @@ const router = express.Router();
 
 // GET /category
 router.get('/', categoryController.getAllCategories);
+
 // GET /category/:categoryName
 router.get('/:categoryName', categoryController.getCategory);
 

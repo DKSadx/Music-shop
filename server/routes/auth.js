@@ -7,8 +7,8 @@ const isAuth = require('../middleware/isAuth');
 
 const router = express.Router();
 
-// GET auth/isAuth
-router.get('/isauth', isAuth);
+// GET auth/isAuth, returns if users jwt token is valid
+router.get('/isauth', isAuth, authController.isAuth);
 
 // POST auth/signup
 router.post('/signup', isValid.validateSignup(), authController.signup);

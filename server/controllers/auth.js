@@ -20,7 +20,8 @@ exports.signup = (req, res, next) => {
     const user = new User({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      cart: []
     });
     user.save();
 
@@ -54,5 +55,10 @@ exports.signin = (req, res, next) => {
         }
       })
       .catch(err => console.log(err));
+  }
+};
+exports.isAuth = (req, res, next) => {
+  if (req.isAuth) {
+    res.send({ isAuth: true });
   }
 };

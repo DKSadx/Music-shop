@@ -4,7 +4,7 @@ import axios from 'axios';
 import './SignUpForm.scss';
 
 import Spinner from '../Spinner/Spinner';
-import delay from '../../utils/functions';
+import { delay } from '../../utils/functions';
 import emailRegex from '../../utils/consts';
 
 export default class SignUpForm extends Component {

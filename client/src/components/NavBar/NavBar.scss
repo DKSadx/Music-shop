@@ -146,18 +146,16 @@
         width: 5vw;
         z-index: -1;
       }
-      li {
-        .dropdown-text {
-          color: #333;
-          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-          font-size: 1.7vmin;
-          text-decoration: none;
-          i {
-            padding-left: 10%;
-          }
-          &:hover {
-            color: #f00;
-          }
+      .dropdown-text {
+        color: #333;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 1.7vmin;
+        text-decoration: none;
+        i {
+          padding-left: 10%;
+        }
+        &:hover {
+          color: #f00;
         }
       }
     }

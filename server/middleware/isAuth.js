@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
       throw new Error('Invalid token');
     } else {
       req.userId = decodedToken.userId;
-      res.send({ isAuth: true });
+      req.isAuth = true;
     }
   });
   next();

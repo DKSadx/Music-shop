@@ -18,6 +18,7 @@ export default class NavBar extends Component {
     this.scrollToTop = this.scrollToTop.bind(this);
     this.closePopUp = this.closePopUp.bind(this);
     this.showPopUp = this.showPopUp.bind(this);
+    this.logout = this.logout.bind(this);
   }
   scrollToTop() {
     window.scrollTo(0, 0);
@@ -33,6 +34,10 @@ export default class NavBar extends Component {
       signInForm: false,
       signUpForm: false
     });
+  }
+  logout() {
+    window.localStorage.removeItem('shop-token');
+    window.location.reload();
   }
   componentDidMount() {
     const jwtToken = localStorage.getItem('shop-token');
@@ -92,11 +97,9 @@ export default class NavBar extends Component {
                         <i className="fas fa-cog" />
                       </Link>
                     </li>
-                    <li>
-                      <Link className="dropdown-text" to="/logout">
-                        Log out
-                        <i className="fas fa-sign-out-alt" />
-                      </Link>
+                    <li className="dropdown-text" onClick={() => this.logout()}>
+                      Log out
+                      <i className="fas fa-sign-out-alt" />
                     </li>
                   </ul>
                 </i>

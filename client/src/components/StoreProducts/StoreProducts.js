@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Tween } from 'react-gsap';
 import './storeProducts.scss';
+import { addToCart } from '../../utils/functions';
 
 export default class StoreProducts extends Component {
   constructor(props) {
@@ -79,7 +80,7 @@ export default class StoreProducts extends Component {
                     <div className="products-info-text">
                       <p className="products-info-name">{products[i].name}</p>
                       <p className="products-info-price">{products[i].price}$</p>
-                      <button>Add to cart</button>
+                      <button onClick={() => addToCart(products[i]._id)}>Add to cart</button>
                     </div>
                   </div>
                 </a>

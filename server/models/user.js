@@ -14,7 +14,13 @@ const userSchema = new Schema({
   email: {
     type: String,
     require: true
-  }
+  },
+  cart: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Product'
+    }
+  ]
 });
 
 module.exports = mongoose.model('User', userSchema);

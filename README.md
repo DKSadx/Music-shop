@@ -12,6 +12,11 @@ Modern e-commerce SPA(single-page app) made with MERN stack.
 
 upload images option, error handling, account management, integrate add/delete/edit from /edit to account, cart, checkout, smaller screens design, logo, lazy loading...
 
+#### Bug fixes
+
+Account dropdown menu width
+Product count in cart
+
 #### Video:
 
 <hr/>
