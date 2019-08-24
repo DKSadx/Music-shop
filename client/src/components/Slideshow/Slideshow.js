@@ -3,16 +3,8 @@ import React, { Component } from 'react';
 import './Slideshow.scss';
 import { slideshowText } from './text';
 import { textAnimation } from './animations';
-import { image1, image2, image3 } from '../../assets/index.js';
-const images = {
-  image1,
-  image2,
-  image3
-};
-let currentSlide = {
-  imageNumber: 1,
-  image: image1
-};
+
+let currentSlide = 1;
 export default class Slideshow extends Component {
   constructor(props) {
     super(props);
@@ -21,8 +13,7 @@ export default class Slideshow extends Component {
 
   changeImage() {
     this.interval = setInterval(() => {
-      currentSlide.imageNumber = currentSlide.imageNumber !== 3 ? currentSlide.imageNumber + 1 : 1;
-      currentSlide.image = images[`image${currentSlide.imageNumber}`];
+      currentSlide = currentSlide !== 3 ? currentSlide + 1 : 1;
       this.forceUpdate();
     }, 5000);
   }
@@ -36,9 +27,9 @@ export default class Slideshow extends Component {
   }
   render() {
     return (
-      <div className="slideshow" style={{ backgroundImage: `url("${currentSlide.image}")` }}>
+      <div className={`slide-${currentSlide}`}>
         {this.props.navbar}
-        {textAnimation(slideshowText, currentSlide.imageNumber - 1)}
+        {textAnimation(slideshowText, currentSlide - 1)}
       </div>
     );
   }

@@ -1,4 +1,5 @@
-.slideshow {
+@mixin image-properties($image) {
+  background-image: url($image);
   background-size: cover;
   height: 100vh;
   transition-duration: 400ms;
@@ -6,7 +7,17 @@
   transition-timing-function: ease-in;
   width: 100%;
 }
-.slideshow-text {
+
+.slide-1 {
+  @include image-properties('../../assets/images/1.jpg');
+}
+.slide-2 {
+  @include image-properties('../../assets/images/2.jpeg');
+}
+.slide-3 {
+  @include image-properties('../../assets/images/3.jpg');
+}
+.slide-text {
   color: #000;
   font-family: Gravity, 'Times New Roman', Times, serif;
   font-size: 3vmin;

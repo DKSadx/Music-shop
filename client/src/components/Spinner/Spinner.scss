@@ -1,0 +1,33 @@
+.spinner {
+  display: block;
+  padding: 10% 0;
+}
+.circle-border {
+  align-items: center;
+  animation: spin 0.8s linear 0s infinite;
+  background: #3ff9dc;
+  background: linear-gradient(0deg, #93e0d51a 33%, #dc6180 100%);
+  border-radius: 50%;
+  display: flex;
+  height: 5vh;
+  justify-content: center;
+  margin: auto;
+  padding: 0.5vmin;
+  width: 5vh;
+}
+
+.circle-core {
+  background: linear-gradient(45deg, #35394a 0%, #1f222e 100%);
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

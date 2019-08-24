@@ -7,12 +7,13 @@ import trendingBg from '../../assets/images/trending-bg.jpg';
 
 export default function TrendingMenu(props) {
   return (
+    // class=trending-menu
     <div className={props.className}>
       <img src={trendingBg} id="trending-image" alt="Trending image" />
 
       <Controller>
         <Scene
-          duration={500}
+          duration={400}
           offset={-100}
           triggerElement="#trending-image"
           // reverse={false}
@@ -22,28 +23,24 @@ export default function TrendingMenu(props) {
           // }}
         >
           <Tween
-            from={{
+            staggerFrom={{
               y: 300,
               opacity: 0
             }}
-            to={{
+            staggerTo={{
               y: 0,
               opacity: 1
             }}
-            // immediateRender={false}
           >
             <p id="trending-text">Trending now:</p>
             <ul className="trending-menu-items">
-              <li id="trending-item-1">
+              <li id="trending-item-1" onClick={() => (window.location.href = '#')}>
                 <p>Sony WH-CH500</p>
-                <button>Buy now</button>
               </li>
-              <li id="trending-item-2">
-                <button>Buy now</button>
+              <li id="trending-item-2" onClick={() => (window.location.href = '#')}>
                 <p>Shure SM57</p>
               </li>
-              <li id="trending-item-3">
-                <button>Buy now</button>
+              <li id="trending-item-3" onClick={() => (window.location.href = '#')}>
                 <p>Beoplay H9</p>
               </li>
             </ul>

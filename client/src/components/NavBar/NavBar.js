@@ -12,7 +12,8 @@ export default class NavBar extends Component {
     this.state = {
       signUpForm: false,
       signInForm: false,
-      isLoggedIn: false
+      isLoggedIn: false,
+      isJWTValid: true // Prevents showing sign in/up buttons before receiving data if the user is logged in
     };
     this.scrollToTop = this.scrollToTop.bind(this);
     this.closePopUp = this.closePopUp.bind(this);
@@ -46,10 +47,15 @@ export default class NavBar extends Component {
           });
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          isJWTValid: false
+        });
+      });
   }
   render() {
-    const { isLoggedIn } = this.state;
+    const { isLoggedIn, isJWTValid } = this.state;
     return (
       <div className="nav-bar-container">
         <ul className="main-nav-bar">
@@ -72,6 +78,7 @@ export default class NavBar extends Component {
             </li>
           </ul>
           <ul className="main-nav-bar-end">
+            {/* Checks if the jwt token exists/isValid */}
             {isLoggedIn ? (
               <>
                 <i className="cart-icon fas fa-shopping-cart">
@@ -95,14 +102,17 @@ export default class NavBar extends Component {
                 </i>
               </>
             ) : (
-              <>
-                <li onClick={async () => await this.setState({ signInForm: true, signUpForm: false })}>SIGN IN</li>
-                <li>
-                  <button className="signup-btn" onClick={async () => await this.setState({ signUpForm: true, signInForm: false })}>
-                    SIGN UP
-                  </button>
-                </li>
-              </>
+              // Prevents showing sign in/up buttons before receiving data if the user is logged in
+              !isJWTValid && (
+                <>
+                  <li onClick={async () => await this.setState({ signInForm: true, signUpForm: false })}>SIGN IN</li>
+                  <li>
+                    <button className="signup-btn" onClick={async () => await this.setState({ signUpForm: true, signInForm: false })}>
+                      SIGN UP
+                    </button>
+                  </li>
+                </>
+              )
             )}
           </ul>
         </ul>

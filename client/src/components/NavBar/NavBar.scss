@@ -115,7 +115,7 @@
   }
   &:hover {
     .user-dropdown-menu {
-      background-color: #fff;
+      background-color: #eee;
       display: flex;
       flex-direction: column;
       height: 15vh;
@@ -126,7 +126,7 @@
       width: 100%;
       z-index: 1;
       &:before {
-        background-color: #fff;
+        background-color: #eee;
         content: '';
         height: 3vh;
         position: absolute;

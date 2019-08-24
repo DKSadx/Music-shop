@@ -1,3 +1,6 @@
+$main-text-color: #dc6180;
+$main-background-color: #32364a;
+@import '../App.scss'; // Placeholder mixin
 @mixin auth-page {
   background-color: #000c;
   height: 100vh;
@@ -7,11 +10,10 @@
   z-index: 1;
 }
 @mixin auth-form {
-  background-color: #fffb;
-  border-radius: 4px;
+  background: linear-gradient(45deg, $main-background-color 0%, #1f222e 100%);
+  border-top: 0.3vh $main-text-color solid;
   height: fit-content;
   left: 55%;
-  padding: 0 3%;
   position: relative;
   top: 50%;
   transform: translate(-55%, -50%);
@@ -19,30 +21,33 @@
   z-index: 1;
 
   h2 {
+    color: $main-text-color;
+    font-family: 'Madeleina-sans';
     font-family: Inter, sans-serif;
-    font-size: 4vmin;
+    font-size: 5vmin;
     padding: 10% 5%;
     text-align: center;
   }
   .a-like {
-    color: blue;
+    color: #f69cb3;
     cursor: pointer;
     padding: 0 0 0 5%;
     text-decoration: underline;
   }
 }
 @mixin form-submit-btn {
-  background-color: #00b836;
+  background: #313547;
   border-radius: 25px;
-  border: 1px solid #777;
-  color: #fff;
+  border: 0.4vmin solid $main-text-color;
+  color: $main-text-color;
   cursor: pointer;
   font-size: 3vmin;
   height: 5vh;
   margin: 5% 25%;
   width: 50%;
   &:hover {
-    background-color: #5fcf80;
+    background-color: $main-text-color;
+    color: #313547;
   }
   &:focus {
     outline: none;
@@ -50,36 +55,43 @@
 }
 
 .auth-input {
-  background-color: #fff;
+  @include placeholder(#aa4d64ab);
+  background: $main-background-color;
+  border-bottom: 1px solid #8a3d50;
   border-radius: 2px;
-  border: 1px solid #777;
+  border-top: 1px solid #8a3d50;
+  box-sizing: border-box;
+  color: $main-text-color;
   font-size: 2.3vmin;
   height: 5vh;
-  margin: 0 5%;
-  padding-left: 3%;
-  width: 87%;
+  padding-left: 10%;
+  width: 100%;
+
   &:focus {
-    border-bottom: 3px solid #0ff;
+    border-bottom: 3px solid $main-text-color;
     outline: none;
+    transition: all 500ms;
   }
   &-error {
-    background-color: #fff;
+    background: $main-background-color;
+    border-bottom: 1px solid #8a3d50;
     border-radius: 2px;
-    border: 2px solid #f00;
+    border-top: 1px solid #8a3d50;
+    box-sizing: border-box;
+    color: $main-text-color;
     font-size: 2.3vmin;
     height: 5vh;
-    margin: 0 5%;
-    padding-left: 3%;
-    width: 87%;
+    padding-left: 10%;
+    width: 100%;
     &:focus {
-      border-bottom: 3px solid #0ff;
+      border-bottom: 3px solid $main-text-color;
       outline: none;
     }
   }
 }
 
 .close-icon {
-  color: #000;
+  color: $main-text-color;
   cursor: pointer;
   font-size: 4vmin;
   position: absolute;
@@ -89,14 +101,15 @@
 }
 
 .input-message {
-  color: #222;
+  color: $main-text-color;
   font-family: 'Madeleina-sans';
   font-size: 2vmin;
   padding: 2% 5% 5% 5%;
   &-error {
-    color: red;
+    color: #f00;
     font-family: 'Madeleina-sans';
     font-size: 2vmin;
+    font-weight: 900;
     padding: 2% 5% 5% 5%;
   }
 }

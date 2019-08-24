@@ -23,7 +23,7 @@ export default function PopularMenu(props) {
       <h3>Popular products:</h3>
       <Controller>
         <Scene
-          duration={1000}
+          duration={2200}
           offset={-100}
           triggerElement={`.${props.className}`}
           reverse={true}
@@ -38,11 +38,12 @@ export default function PopularMenu(props) {
             staggerFrom={{
               opacity: 0,
               cycle: {
-                x: i => -(i + 1) * 50
+                // x: i => (i + 1) * 80
+                x: 500
               }
-              // ease: Back.easeOut
+              // ease: 'Back.easeIn'
             }}
-            stagger={0.3}
+            stagger={0.5}
           >
             {createItems()}
           </Tween>

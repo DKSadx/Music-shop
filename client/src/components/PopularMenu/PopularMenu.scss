@@ -1,25 +1,25 @@
 @import '../TrendingMenu/TrendingMenu.scss';
 
 .popular-menu {
-  position: relative;
   h3 {
     font-family: Gravity;
-    font-size: 4vmin;
+    font-size: 4.5vmin;
     font-weight: 200;
-    left: 2vw;
-    top: 2vh;
-    position: absolute;
+    padding: 5% 0;
+    text-align: center;
+    font-family: Madeleina-sans;
   }
 }
 
 .product-grid {
+  background-color: #fff;
   display: grid;
   grid-row-gap: 15vh;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-template-rows: auto auto auto auto;
   justify-items: center;
-  margin: 0 10%;
-  padding: 10% 0;
+  margin: 0 10% 10% 10%;
+  padding: 5% 0;
 }
 
 .popular-grid-item {

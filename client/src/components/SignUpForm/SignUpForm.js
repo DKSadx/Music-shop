@@ -3,7 +3,9 @@ import { Tween } from 'react-gsap';
 import axios from 'axios';
 import './SignUpForm.scss';
 
-import emailRegex from '../variables';
+import Spinner from '../Spinner/Spinner';
+import delay from '../../utils/functions';
+import emailRegex from '../../utils/consts';
 
 export default class SignUpForm extends Component {
   constructor(props) {
@@ -25,21 +27,22 @@ export default class SignUpForm extends Component {
       repeatedPassword: {
         value: '',
         errorMessage: ''
-      }
+      },
+      isLoading: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Client side validation
   validation() {
     let isValid = true;
-    const { username, email, password, repeatedPassword } = this.state;
+    const { email, password, repeatedPassword } = this.state;
     const errorMessages = {
       email: '',
       password: '',
       repeatedPassword: ''
     };
-    // Client side validation
     if (password.value !== repeatedPassword.value) {
       isValid = false;
       errorMessages.repeatedPassword = "Passwords don't match!";
@@ -52,6 +55,7 @@ export default class SignUpForm extends Component {
       isValid = false;
       errorMessages.email = 'Email is not valid!';
     }
+    // If something is not valid, displays error messages
     if (!isValid) {
       this.setState({
         email: {
@@ -83,38 +87,50 @@ export default class SignUpForm extends Component {
     e.preventDefault();
     const isValid = this.validation();
     if (isValid) {
-      const { username, email, password } = this.state;
-      axios
-        .post('http://localhost:8080/auth/signup', {
-          username: username.value,
-          email: email.value,
-          password: password.value
-        })
-        .then(res => {
-          // Checks if server side validation has errors
-          // If it has errors, it displays error messages. Else it redirects to SignUpSuccessful page
-          if (res.data.errorMessages) {
-            const { username, email, password } = res.data.errorMessages;
+      this.setState({
+        isLoading: true
+      });
+      // Displays spinner for 1.5s
+      delay(1500).then(() => {
+        const { username, email, password } = this.state;
+        axios
+          .post('http://localhost:8080/auth/signup', {
+            username: username.value,
+            email: email.value,
+            password: password.value
+          })
+          .then(res => {
+            // Checks if server side validation has errors
+            // If it has errors, it displays error messages. Else it redirects to SignUpSuccessful page
+            if (res.data.errorMessages) {
+              const { username, email, password } = res.data.errorMessages;
+              this.setState({
+                username: {
+                  ...this.state.username,
+                  errorMessage: username
+                },
+                email: {
+                  ...this.state.email,
+                  errorMessage: email
+                },
+                password: {
+                  ...this.state.password,
+                  errorMessage: password
+                },
+                isLoading: false
+              });
+            } else if (res.data.isSuccessful) {
+              this.isSignUpSuccessful = true;
+              this.forceUpdate();
+            }
+          })
+          .catch(err => {
             this.setState({
-              username: {
-                ...this.state.username,
-                errorMessage: username
-              },
-              email: {
-                ...this.state.email,
-                errorMessage: email
-              },
-              password: {
-                ...this.state.password,
-                errorMessage: password
-              }
+              isLoading: false
             });
-          } else if (res.data.isSuccessful) {
-            this.isSignUpSuccessful = true;
-            this.forceUpdate();
-          }
-        })
-        .catch(err => console.log(err));
+            console.log(err);
+          });
+      });
     }
   }
 
@@ -126,7 +142,7 @@ export default class SignUpForm extends Component {
   }
 
   render() {
-    const { username, email, password, repeatedPassword } = this.state;
+    const { username, email, password, repeatedPassword, isLoading } = this.state;
     return (
       <div className="sign-up-page">
         <Tween
@@ -140,7 +156,7 @@ export default class SignUpForm extends Component {
           }}
           duration={0.5}
         >
-          <form className="sign-up-form" onSubmit={this.handleSubmit}>
+          <form autoComplete="off" className="sign-up-form" onSubmit={this.handleSubmit}>
             <i className="close-icon far fa-times-circle" onClick={() => this.props.close()} />
             {!this.isSignUpSuccessful ? (
               <>
@@ -163,6 +179,7 @@ export default class SignUpForm extends Component {
                 {/* prettier-ignore */}
                 <input
                   className={email.errorMessage === '' ? 'auth-input' : 'auth-input-error'}
+                  autoComplete="off"
                   type="text"
                   name="email"
                   onChange={this.handleChange}
@@ -207,9 +224,13 @@ export default class SignUpForm extends Component {
                 <p className="a-like" onClick={() => this.props.show('signIn')}>
                   Already have an account?
                 </p>
-                <button className="form-submit-btn" type="submit">
-                  Sign Up
-                </button>
+                {isLoading ? (
+                  <Spinner />
+                ) : (
+                  <button className="form-submit-btn" type="submit">
+                    Sign Up
+                  </button>
+                )}
               </>
             ) : (
               <div className="signup-successful">
