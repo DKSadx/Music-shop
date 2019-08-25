@@ -5,6 +5,7 @@ import axios from 'axios';
 import './NavBar.scss';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import SignInForm from '../SignInForm/SignInForm';
+import Cart from '../Cart/Cart';
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ export default class NavBar extends Component {
       signUpForm: false,
       signInForm: false,
       isLoggedIn: false,
-      isJWTValid: true // Prevents showing sign in/up buttons before receiving data if the user is logged in
+      isJWTValid: true, // Prevents showing sign in/up buttons before receiving data if the user is logged in
+      showCart: false
     };
     this.scrollToTop = this.scrollToTop.bind(this);
     this.closePopUp = this.closePopUp.bind(this);
@@ -26,13 +28,15 @@ export default class NavBar extends Component {
   showPopUp(type) {
     this.setState({
       signInForm: type === 'signIn' ? true : false,
-      signUpForm: type === 'signUp' ? true : false
+      signUpForm: type === 'signUp' ? true : false,
+      showCart: type === 'cart' ? true : false
     });
   }
   closePopUp() {
     this.setState({
       signInForm: false,
-      signUpForm: false
+      signUpForm: false,
+      showCart: false
     });
   }
   logout() {
@@ -41,8 +45,8 @@ export default class NavBar extends Component {
   }
   componentDidMount() {
     const jwtToken = localStorage.getItem('shop-token');
-    const api = 'http://localhost:8080/auth/isauth';
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
+    const api = 'http://localhost:8080/auth/isauth';
     axios
       .get(api, config)
       .then(res => {
@@ -86,7 +90,7 @@ export default class NavBar extends Component {
             {/* Checks if the jwt token exists/isValid */}
             {isLoggedIn ? (
               <>
-                <i className="cart-icon fas fa-shopping-cart">
+                <i className="cart-icon fas fa-shopping-cart" onClick={() => this.setState({ signInForm: false, signUpForm: false, showCart: true })}>
                   <i className="cart-icon-number">2</i>
                 </i>
                 <i className="user-icon fas fa-user">
@@ -108,9 +112,9 @@ export default class NavBar extends Component {
               // Prevents showing sign in/up buttons before receiving data if the user is logged in
               !isJWTValid && (
                 <>
-                  <li onClick={async () => await this.setState({ signInForm: true, signUpForm: false })}>SIGN IN</li>
+                  <li onClick={() => this.setState({ signInForm: true, signUpForm: false, showCart: false })}>SIGN IN</li>
                   <li>
-                    <button className="signup-btn" onClick={async () => await this.setState({ signUpForm: true, signInForm: false })}>
+                    <button className="signup-btn" onClick={() => this.setState({ signUpForm: true, signInForm: false, showCart: false })}>
                       SIGN UP
                     </button>
                   </li>
@@ -119,8 +123,10 @@ export default class NavBar extends Component {
             )}
           </ul>
         </ul>
+        {/* Modal windows */}
         {this.state.signUpForm ? <SignUpForm show={this.showPopUp} close={this.closePopUp} /> : <></>}
         {this.state.signInForm ? <SignInForm show={this.showPopUp} close={this.closePopUp} /> : <></>}
+        {this.state.showCart ? <Cart close={this.closePopUp} /> : <></>}
       </div>
     );
   }

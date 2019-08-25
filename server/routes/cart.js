@@ -10,4 +10,7 @@ router.get('/getCart', isAuth, cartController.getCart);
 // POST /cart/addToCart
 router.post('/addToCart', isAuth, cartController.addToCart);
 
+// POST /cart/removeFromCart
+router.post('/removeFromCart', isAuth, cartController.removeFromCart);
+
 module.exports = router;

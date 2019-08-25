@@ -46,7 +46,7 @@ exports.signin = (req, res, next) => {
             },
             'yxnPAu3Prq93LtiFYVQk9',
             {
-              expiresIn: '1h'
+              expiresIn: '24h'
             }
           );
           res.status(200).json({ token, userId: user._id.toString() });

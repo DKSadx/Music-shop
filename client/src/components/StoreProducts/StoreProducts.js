@@ -66,7 +66,7 @@ export default class StoreProducts extends Component {
   }
 
   generateProducts() {
-    const products = this.state.products;
+    const { products } = this.state;
     return (
       <>
         <ul className="store-products-grid">
