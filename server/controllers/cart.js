@@ -8,22 +8,26 @@ exports.getCart = async (req, res, next) => {
   next();
 };
 
-exports.addToCart = async (req, res, next) => {
-  const productId = req.body.productId;
+exports.getCartSize = async (req, res, next) => {
   const userId = req.userId;
-  const user = { _id: userId };
-  const product = { $push: { cart: productId } };
-  await User.findOneAndUpdate(user, product, { useFindAndModify: false });
-  res.status(200).send();
+  const user = await User.findById(userId).populate('cart');
+  res.send({ cartSize: user.cart.length });
+  next();
+};
+
+exports.addToCart = async (req, res, next) => {
+  const userId = { _id: req.userId };
+  const productId = { $push: { cart: req.body.productId } };
+  const user = await User.findOneAndUpdate(userId, productId, { useFindAndModify: false, new: true });
+  res.send({ cartSize: user.cart.length });
   next();
 };
 
 exports.removeFromCart = async (req, res, next) => {
-  const productId = req.body._id;
-  const userId = req.userId;
-  const user = { _id: userId };
-  const product = { $pull: { cart: productId } };
-  const cart = await User.findOneAndUpdate(user, product, { useFindAndModify: false, new: true }).populate('cart');
+  const userId = { _id: req.userId };
+  const productId = { $pull: { cart: req.body._id } };
+  // Without 'new: true' findOneAndUpdate() returns the state BEFORE the update
+  const cart = await User.findOneAndUpdate(userId, productId, { useFindAndModify: false, new: true }).populate('cart');
   res.send(cart);
   next();
 };

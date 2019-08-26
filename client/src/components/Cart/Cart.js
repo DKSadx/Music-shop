@@ -6,7 +6,8 @@ export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartItems: []
+      cartItems: [],
+      cartSize: 0
     };
     this.generateCartItems = this.generateCartItems.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
@@ -21,9 +22,13 @@ export default class Cart extends Component {
     axios
       .post(api, data, config)
       .then(res => {
-        this.setState({
-          cartItems: res.data.cart
-        });
+        this.setState(
+          {
+            cartItems: res.data.cart
+          },
+          // Sends updated amount to parent component via props function, NavBar
+          () => this.props.updateCartSize(this.state.cartItems.length)
+        );
       })
       .catch(err => console.log(err));
   }
@@ -48,6 +53,7 @@ export default class Cart extends Component {
     );
   }
   componentDidMount() {
+    // Gets cart items from a db
     const api = 'http://localhost:8080/cart/getCart';
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -57,6 +63,7 @@ export default class Cart extends Component {
       });
     });
   }
+
   render() {
     const { cartItems } = this.state;
     return (

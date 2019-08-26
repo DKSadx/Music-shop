@@ -9,12 +9,12 @@ import data from './popularMenuData.json';
 export default function PopularMenu(props) {
   // Generating <li> items
   const createItems = () => {
-    return data.map((x, i) => (
-      <li key={i} className="popular-grid-item" style={{ backgroundImage: `url("${x.url}")` }}>
+    return data.map((product, i) => (
+      <li key={i} className="popular-grid-item" style={{ backgroundImage: `url("${product.url}")` }}>
         <div className="popular-item-hover" />
         <button>Buy now</button>
         <button className="popular-details-btn">Details</button>
-        <a>{x.name}</a>
+        <a>{product.name}</a>
       </li>
     ));
   };

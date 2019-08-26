@@ -15,12 +15,14 @@ export default class NavBar extends Component {
       signInForm: false,
       isLoggedIn: false,
       isJWTValid: true, // Prevents showing sign in/up buttons before receiving data if the user is logged in
-      showCart: false
+      showCart: false,
+      cartSize: this.props.cartSize
     };
     this.scrollToTop = this.scrollToTop.bind(this);
     this.closePopUp = this.closePopUp.bind(this);
     this.showPopUp = this.showPopUp.bind(this);
     this.logout = this.logout.bind(this);
+    this.updateCartSize = this.updateCartSize.bind(this);
   }
   scrollToTop() {
     window.scrollTo(0, 0);
@@ -43,6 +45,12 @@ export default class NavBar extends Component {
     window.localStorage.removeItem('shop-token');
     window.location.reload();
   }
+
+  updateCartSize(cartSize) {
+    this.setState({
+      cartSize
+    });
+  }
   componentDidMount() {
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -63,8 +71,13 @@ export default class NavBar extends Component {
         });
       });
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      cartSize: nextProps.cartSize
+    });
+  }
   render() {
-    const { isLoggedIn, isJWTValid } = this.state;
+    const { isLoggedIn, isJWTValid, cartSize } = this.state;
     return (
       <div className="nav-bar-container">
         <ul className="main-nav-bar">
@@ -91,7 +104,7 @@ export default class NavBar extends Component {
             {isLoggedIn ? (
               <>
                 <i className="cart-icon fas fa-shopping-cart" onClick={() => this.setState({ signInForm: false, signUpForm: false, showCart: true })}>
-                  <i className="cart-icon-number">2</i>
+                  <i className="cart-icon-number">{cartSize}</i>
                 </i>
                 <i className="user-icon fas fa-user">
                   <ul className="user-dropdown-menu">
@@ -126,7 +139,7 @@ export default class NavBar extends Component {
         {/* Modal windows */}
         {this.state.signUpForm ? <SignUpForm show={this.showPopUp} close={this.closePopUp} /> : <></>}
         {this.state.signInForm ? <SignInForm show={this.showPopUp} close={this.closePopUp} /> : <></>}
-        {this.state.showCart ? <Cart close={this.closePopUp} /> : <></>}
+        {this.state.showCart ? <Cart close={this.closePopUp} updateCartSize={this.updateCartSize} /> : <></>}
       </div>
     );
   }

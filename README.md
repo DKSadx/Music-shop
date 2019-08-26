@@ -15,8 +15,9 @@ upload images option, error handling, account management, integrate add/delete/e
 #### Bugs to fix
 
 Account dropdown menu width
-Product count in cart
 Change popup to modal (naming)
+Cart number improve
+Front page popular products fetching
 
 #### Video:
 

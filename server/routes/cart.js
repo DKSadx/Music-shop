@@ -7,6 +7,9 @@ const router = express.Router();
 // GET /cart/getCart
 router.get('/getCart', isAuth, cartController.getCart);
 
+// GET /cart/getCartSize
+router.get('/getCartSize', isAuth, cartController.getCartSize);
+
 // POST /cart/addToCart
 router.post('/addToCart', isAuth, cartController.addToCart);
 

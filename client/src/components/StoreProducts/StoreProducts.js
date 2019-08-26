@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Tween } from 'react-gsap';
 import './storeProducts.scss';
+
 import { addToCart } from '../../utils/functions';
 
 export default class StoreProducts extends Component {
@@ -16,6 +17,7 @@ export default class StoreProducts extends Component {
         category: this.props.query.category ? this.props.query.category : 'all'
       }
     };
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   generateCategoriesList() {
@@ -64,6 +66,11 @@ export default class StoreProducts extends Component {
       </ul>
     );
   }
+  async addItemToCart(productId) {
+    // Imported function, adds to cart and returns updated cart size
+    const cartSize = await addToCart(productId);
+    this.props.updateCartSize(cartSize);
+  }
 
   generateProducts() {
     const { products } = this.state;
@@ -80,7 +87,7 @@ export default class StoreProducts extends Component {
                     <div className="products-info-text">
                       <p className="products-info-name">{products[i].name}</p>
                       <p className="products-info-price">{products[i].price}$</p>
-                      <button onClick={() => addToCart(products[i]._id)}>Add to cart</button>
+                      <button onClick={() => this.addItemToCart(products[i]._id)}>Add to cart</button>
                     </div>
                   </div>
                 </a>
