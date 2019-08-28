@@ -1,4 +1,4 @@
-$main-text-color: #dc6180;
+$main-text-color: #ff8f27;
 $main-background-color: #32364a;
 @import '../App.scss'; // Placeholder mixin
 @mixin auth-page {
@@ -11,7 +11,8 @@ $main-background-color: #32364a;
 }
 @mixin auth-form {
   background: linear-gradient(45deg, $main-background-color 0%, #1f222e 100%);
-  border-top: 0.3vh $main-text-color solid;
+  border: 0.1vh $main-text-color solid;
+  border-top: 0.7vh $main-text-color solid;
   height: fit-content;
   left: 55%;
   position: relative;
@@ -29,7 +30,7 @@ $main-background-color: #32364a;
     text-align: center;
   }
   .a-like {
-    color: #f69cb3;
+    color: #fab677;
     cursor: pointer;
     padding: 0 0 0 5%;
     text-decoration: underline;
@@ -55,11 +56,11 @@ $main-background-color: #32364a;
 }
 
 .auth-input {
-  @include placeholder(#aa4d64ab);
+  @include placeholder(#ff8f27ab);
   background: $main-background-color;
-  border-bottom: 1px solid #8a3d50;
+  border-bottom: 1px solid #cf6400;
   border-radius: 2px;
-  border-top: 1px solid #8a3d50;
+  border-top: 1px solid #cf6400;
   box-sizing: border-box;
   color: $main-text-color;
   font-size: 2.3vmin;
@@ -68,15 +69,15 @@ $main-background-color: #32364a;
   width: 100%;
 
   &:focus {
-    border-bottom: 3px solid $main-text-color;
+    border-bottom: 0.4vh solid $main-text-color;
     outline: none;
     transition: all 500ms;
   }
   &-error {
     background: $main-background-color;
-    border-bottom: 1px solid #8a3d50;
+    border-bottom: 1px solid #f00;
     border-radius: 2px;
-    border-top: 1px solid #8a3d50;
+    border-top: 1px solid #f00;
     box-sizing: border-box;
     color: $main-text-color;
     font-size: 2.3vmin;
@@ -84,7 +85,7 @@ $main-background-color: #32364a;
     padding-left: 10%;
     width: 100%;
     &:focus {
-      border-bottom: 3px solid $main-text-color;
+      border-bottom: 0.4vh solid $main-text-color;
       outline: none;
     }
   }

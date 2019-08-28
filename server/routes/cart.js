@@ -13,6 +13,9 @@ router.get('/getCartSize', isAuth, cartController.getCartSize);
 // POST /cart/addToCart
 router.post('/addToCart', isAuth, cartController.addToCart);
 
+// POST /cart/changeQuantity
+router.post('/changeQuantity', isAuth, cartController.changeQuantity);
+
 // POST /cart/removeFromCart
 router.post('/removeFromCart', isAuth, cartController.removeFromCart);
 

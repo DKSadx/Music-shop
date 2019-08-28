@@ -10,7 +10,7 @@ Modern e-commerce SPA(single-page app) made with MERN stack.
 
 #### To do:
 
-upload images option, error handling, account management, integrate add/delete/edit from /edit to account, cart, checkout, smaller screens design, logo, lazy loading...
+details page, upload images option, password hashing, error handling, account management, cart, checkout, smaller screens design, logo, lazy loading...
 
 #### Bugs to fix
 
@@ -18,6 +18,10 @@ Account dropdown menu width
 Change popup to modal (naming)
 Cart number improve
 Front page popular products fetching
+
+#### Can be improved?
+
+remove from cart controller
 
 #### Video:
 
