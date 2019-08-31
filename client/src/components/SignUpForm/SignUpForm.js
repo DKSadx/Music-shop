@@ -4,8 +4,7 @@ import axios from 'axios';
 import './SignUpForm.scss';
 
 import Spinner from '../Spinner/Spinner';
-import { delay } from '../../utils/functions';
-import emailRegex from '../../utils/consts';
+import { delay, validation } from '../../utils/functions';
 
 export default class SignUpForm extends Component {
   constructor(props) {
@@ -33,48 +32,6 @@ export default class SignUpForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  // Client side validation
-  validation() {
-    let isValid = true;
-    const { email, password, repeatedPassword } = this.state;
-    const errorMessages = {
-      email: '',
-      password: '',
-      repeatedPassword: ''
-    };
-    if (password.value !== repeatedPassword.value) {
-      isValid = false;
-      errorMessages.repeatedPassword = "Passwords don't match!";
-    }
-    if (password.value.length < 6) {
-      isValid = false;
-      errorMessages.password = 'Password is too short!';
-    }
-    if (!emailRegex.test(email.value)) {
-      isValid = false;
-      errorMessages.email = 'Email is not valid!';
-    }
-    // If something is not valid, displays error messages
-    if (!isValid) {
-      this.setState({
-        email: {
-          ...this.state.email,
-          errorMessage: errorMessages.email
-        },
-        password: {
-          ...this.state.password,
-          errorMessage: errorMessages.password
-        },
-        repeatedPassword: {
-          ...this.state.repeatedPassword,
-          errorMessage: errorMessages.repeatedPassword
-        }
-      });
-    }
-    return isValid;
-  }
-
   handleChange(e) {
     this.setState({
       [e.target.name]: {
@@ -85,8 +42,9 @@ export default class SignUpForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const isValid = this.validation();
-    if (isValid) {
+    const { email, password, repeatedPassword } = this.state;
+    const validated = validation(email, password, repeatedPassword);
+    if (validated.isValid) {
       this.setState({
         isLoading: true
       });
@@ -130,6 +88,21 @@ export default class SignUpForm extends Component {
             });
             console.log(err);
           });
+      });
+    } else {
+      this.setState({
+        email: {
+          ...this.state.email,
+          errorMessage: validated.errorMessages.email
+        },
+        password: {
+          ...this.state.password,
+          errorMessage: validated.errorMessages.password
+        },
+        repeatedPassword: {
+          ...this.state.repeatedPassword,
+          errorMessage: validated.errorMessages.repeatedPassword
+        }
       });
     }
   }

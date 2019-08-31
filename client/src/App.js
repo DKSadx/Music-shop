@@ -6,6 +6,7 @@ import HomePage from './components/HomePage/HomePage';
 import Store from './components/Store/Store';
 import About from './components/About/About';
 import Edit from './components/Edit-testing/Edit';
+import Account from './components/Account/Account';
 
 // const Slideshow = React.lazy(() =>
 //   import('./components/Slideshow/Slideshow.js')
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/store" component={Store} />
         <Route path="/edit" component={Edit} />
         <Route path="/about" component={About} />
+        <Route path="/account" component={Account} />
       </Switch>
     </div>
   );

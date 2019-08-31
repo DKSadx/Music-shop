@@ -18,24 +18,7 @@
   font-family: 'Inter';
   src: url('/fonts/Inter-Bold.otf');
 }
-@mixin placeholder($color) {
-  &::-webkit-input-placeholder {
-    /* WebKit browsers */
-    color: $color;
-  }
-  &:-moz-placeholder {
-    /* Mozilla Firefox 4 to 18 */
-    color: $color;
-  }
-  &::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
-    color: $color;
-  }
-  &:-ms-input-placeholder {
-    /* Internet Explorer 10+ */
-    color: $color;
-  }
-}
+
 * {
   margin: 0;
   padding: 0;

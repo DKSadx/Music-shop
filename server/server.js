@@ -7,6 +7,7 @@ const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
 const authRoutes = require('./routes/auth');
 const cartRoutes = require('./routes/cart');
+const accountRoutes = require('./routes/account');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
+app.use('/account', accountRoutes);
 
 mongoose
   .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_DATABASE}`, { useNewUrlParser: true })
