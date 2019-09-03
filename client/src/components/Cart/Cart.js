@@ -31,7 +31,7 @@ export default class Cart extends Component {
               cartItems: res.data.cart,
               totalPrice: total
             },
-            // Sends updated amount to parent component via props function, NavBar
+            // Sends updated amount to parent component via props function, Store <- NavBar <- Cart
             () => this.props.updateCartSize(this.state.cartItems.length)
           );
         }
@@ -47,11 +47,19 @@ export default class Cart extends Component {
           <p className="cart-product-name">{item.product.name}</p>
           <p className="cart-product-price">{item.product.price}$</p>
           <div className="cart-product-qty">
-            <i className="cart-product-qty-minus fas fa-minus" onClick={() => this.changeQty(item.product._id, '-')} />
+            <i
+              className="cart-product-qty-minus fas fa-minus"
+              onClick={() => this.changeQty(item.product._id, '-')}
+            />
             <p className="cart-product-qty-number">{item.quantity}</p>
-            <i className="cart-product-qty-plus fas fa-plus" onClick={() => this.changeQty(item.product._id, '+')} />
+            <i
+              className="cart-product-qty-plus fas fa-plus"
+              onClick={() => this.changeQty(item.product._id, '+')}
+            />
           </div>
-          <p className="cart-product-total">{Math.round(item.quantity * item.product.price * 100) / 100}$</p>
+          <p className="cart-product-total">
+            {Math.round(item.quantity * item.product.price * 100) / 100}$
+          </p>
           <p className="cart-product-description">Description: {item.product.description}</p>
           <p className="cart-product-remove" onClick={() => this.removeFromCart(item.product._id)}>
             Remove
@@ -78,9 +86,7 @@ export default class Cart extends Component {
   }
   calculateTotal(cart) {
     let total = 0;
-    cart.map(item => {
-      total += item.quantity * item.product.price;
-    });
+    cart.map(item => (total += item.quantity * item.product.price));
     total = Math.round(total * 100) / 100;
     return total;
   }
@@ -119,8 +125,9 @@ export default class Cart extends Component {
           </ul>
           <ul className="cart-checkout">
             <p className="cart-checkout-note">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos, beatae nisi! Dolorum consequatur corporis dignissimos, est harum quos
-              fugiat explicabo, quas doloremque reprehenderit officiis tenetur fugit totam vero adipisci obcaecati.
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos, beatae nisi! Dolorum
+              consequatur corporis dignissimos, est harum quos fugiat explicabo, quas doloremque
+              reprehenderit officiis tenetur fugit totam vero adipisci obcaecati.
             </p>
             <li>
               <p className="cart-checkout-left">Subtotal:</p>

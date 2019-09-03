@@ -1,3 +1,5 @@
+$main-color: #ff8f27;
+$hover-color: #c06b1b;
 .store-grid {
   background-color: #eee;
   display: grid;
@@ -19,7 +21,7 @@
     }
     .category-list-items {
       background-color: #fff;
-      color: black;
+      color: #000;
       display: block;
       font-family: Gravity, Arial, Helvetica, sans-serif;
       font-size: 1.9vmin;
@@ -66,25 +68,25 @@
   margin: auto;
   position: relative;
   width: 15vw;
-  img {
+  &-image {
     display: block;
     height: 30vh;
     margin: auto;
     width: 100%;
   }
   &-overlay {
-    visibility: hidden;
+    display: none;
   }
   &:hover {
-    color: #f00;
+    color: $main-color;
     .products-info-overlay {
       background-color: #4444;
+      display: block;
       font-size: 2vmin;
       height: 30vh;
       position: absolute;
       transition-property: background;
       transition-duration: 400ms;
-      visibility: visible;
       width: 100%;
       word-wrap: break-word;
     }
@@ -100,7 +102,9 @@
   width: 100%;
   button {
     border-radius: 5%;
+    background-color: $main-color;
     bottom: 0;
+    cursor: pointer;
     font-size: 1.8vmin;
     grid-column: 2/3;
     grid-row: 1/2;
@@ -110,8 +114,8 @@
     position: absolute;
     width: 35%;
     &:hover {
-      background-color: #000;
-      color: #fff;
+      background-color: $hover-color;
+      color: #000;
     }
   }
 }
@@ -145,7 +149,7 @@
       font-size: 1.7vmin;
     }
     a {
-      color: black;
+      color: #000;
       font-size: 2vmin;
       text-align: center;
       text-decoration: none;

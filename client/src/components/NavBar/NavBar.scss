@@ -1,10 +1,11 @@
+$main-color: #ff8f27;
 @mixin nav-bar-icons {
   color: #fff;
   cursor: pointer;
   font-size: 2.5vmin;
   margin-left: 4vw;
   &:hover {
-    color: #f00;
+    color: $main-color;
     transition: color 300ms;
   }
 }
@@ -42,14 +43,14 @@
       width: 100%;
     }
     &:hover {
-      border: 1px solid #f00;
+      border: 1px solid $main-color;
       border-left: 0;
       border-right: 0;
       border-top: 0;
       padding-bottom: 0.8vh;
       transition: all 0.5s;
       a {
-        color: #f00;
+        color: $main-color;
       }
     }
   }
@@ -71,7 +72,7 @@
     transition: color 300ms;
     width: 100%;
     &:hover {
-      color: #f00;
+      color: $main-color;
     }
   }
 }
@@ -155,7 +156,7 @@
           padding-left: 10%;
         }
         &:hover {
-          color: #f00;
+          color: $main-color;
         }
       }
     }

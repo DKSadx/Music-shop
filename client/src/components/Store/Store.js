@@ -3,7 +3,6 @@ import queryString from 'query-string';
 import './Store.scss';
 
 import { getCartSize } from '../../utils/functions';
-
 import NavBar from '../NavBar/NavBar';
 import StoreCover from '../StoreCover/StoreCover';
 import StoreProducts from '../StoreProducts/StoreProducts';
@@ -32,9 +31,12 @@ export default class Store extends Component {
   render() {
     return (
       <div className="store">
-        <NavBar cartSize={this.state.cartSize} />
+        <NavBar cartSize={this.state.cartSize} updateCartSize={this.updateCartSize} />
         <StoreCover />
-        <StoreProducts query={queryString.parse(this.props.location.search)} updateCartSize={this.updateCartSize} />
+        <StoreProducts
+          query={queryString.parse(this.props.location.search)}
+          updateCartSize={this.updateCartSize}
+        />
         <Footer />
       </div>
     );

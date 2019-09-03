@@ -2,8 +2,8 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 const ITEMS_PER_PAGE = require('../variables').ITEMS_PER_PAGE;
 
-// Returns products
-exports.getProducts = async (req, res, next) => {
+// Returns all products
+exports.getAllProducts = async (req, res, next) => {
   const page = req.query.page;
   const productsCount = await Product.find().countDocuments();
   const lastPage = Math.ceil(productsCount / ITEMS_PER_PAGE);
@@ -17,6 +17,16 @@ exports.getProducts = async (req, res, next) => {
   });
   next();
 };
+// Returns single product
+exports.getProduct = async (req, res, next) => {
+  const id = req.params.id;
+  const product = await Product.findById(id);
+  res.send({
+    product
+  });
+  next();
+};
+
 // Adds product to db and adds it to the corresponding category
 exports.addProduct = async (req, res, next) => {
   const product = new Product({

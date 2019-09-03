@@ -1,5 +1,8 @@
 @import '../TrendingMenu/TrendingMenu.scss';
 
+$main-color: #ff8f27;
+$hover-color: #c06b1b;
+
 .popular-menu {
   h3 {
     font-family: Gravity;
@@ -33,7 +36,7 @@
   button {
     visibility: hidden;
   }
-  a {
+  .popular-item-name {
     background-color: #fff;
     bottom: -10%;
     color: #000;
@@ -46,18 +49,17 @@
     word-wrap: break-word;
   }
   &:hover {
-    button {
-      @include buy-button();
-      bottom: 25%;
+    .popular-details-btn {
+      @include details-button();
+      bottom: 10%;
+      border-radius: 5px;
       min-width: 40%;
       visibility: visible;
+      background-color: $main-color;
       &:hover {
-        background-color: #000;
-        color: #fff;
+        background-color: $hover-color;
+        color: #000;
       }
-    }
-    .popular-details-btn {
-      bottom: 10%;
     }
     .popular-item-hover {
       background-color: #000;

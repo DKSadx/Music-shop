@@ -1,0 +1,115 @@
+$main-text-color: #ff8f27;
+$hover-color: #c06b1b;
+.details-page {
+  background-color: #000c;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 5;
+}
+.dp-container {
+  background-color: #fff;
+  color: #333;
+  display: grid;
+  font-family: 'Madeleina-sans';
+  grid-template-columns: 1fr 1.2fr;
+  grid-template-rows: 2fr 1fr;
+  height: 90vh;
+  left: 50%;
+  position: relative;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+}
+
+.dp-img {
+  align-self: center;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  height: 30vw;
+  justify-self: center;
+}
+.dp-info {
+  border-left: solid 1px #ccc;
+  grid-column: 2/3;
+  grid-row: 1/2;
+  padding: 0 5%;
+  &-header {
+    font-size: 5vmin;
+    padding: 7% 0 3% 0;
+  }
+  &-price {
+    border-top: 1px solid #ccc;
+    color: $main-text-color;
+    font-size: 3vmin;
+    padding: 2% 0;
+  }
+  &-text {
+    border-top: 1px solid #ccc;
+    font-size: 2vmin;
+    padding-top: 3%;
+  }
+  &-qty {
+    background-color: #ddd;
+    font-size: 2vmin;
+    height: 4vh;
+    margin: 10% 3%;
+    text-align: center;
+    width: 10%;
+  }
+  &-btn {
+    background-color: $main-text-color;
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
+    font-size: 2vmin;
+    height: 7vh;
+    margin: 5% 0 5% 10%;
+    width: 50%;
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+  &-category {
+    border-top: 1px solid #ccc;
+    font-size: 2.5vmin;
+    margin-top: 15%;
+    p {
+      display: inline;
+      font-weight: 100;
+      padding-left: 2%;
+    }
+  }
+  i {
+    cursor: pointer;
+  }
+}
+.dp-description {
+  grid-column: 1/3;
+  grid-row: 2/2;
+  padding: 5%;
+  &-title {
+    font-size: 3vmin;
+  }
+  &-text {
+    border-top: 1px solid #ccc;
+    font-size: 2.2vmin;
+    padding-top: 2%;
+  }
+}
+.details-btn {
+  background-color: #ff8f27ee;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.7vmin;
+  height: 15%;
+  left: 30%;
+  position: absolute;
+  top: 45%;
+  width: 40%;
+  &:hover {
+    background-color: #c06b1bee;
+  }
+}

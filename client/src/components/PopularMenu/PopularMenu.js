@@ -12,9 +12,8 @@ export default function PopularMenu(props) {
     return data.map((product, i) => (
       <li key={i} className="popular-grid-item" style={{ backgroundImage: `url("${product.url}")` }}>
         <div className="popular-item-hover" />
-        <button>Buy now</button>
         <button className="popular-details-btn">Details</button>
-        <a>{product.name}</a>
+        <p className="popular-item-name">{product.name}</p>
       </li>
     ));
   };

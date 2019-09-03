@@ -10,7 +10,7 @@ Modern e-commerce SPA(single-page app) made with MERN stack.
 
 #### To do:
 
-details page, status codes, upload images option, password hashing, error handling, account management, checkout, smaller screens design, logo, lazy loading...
+status codes, spinners, component transitions, upload images option, password hashing, error handling, smaller screens design, logo, lazy loading...
 
 #### Bugs to fix
 

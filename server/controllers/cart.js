@@ -28,7 +28,7 @@ exports.addToCart = async (req, res, next) => {
     product = { $set: { [`cart.${index}.quantity`]: ++user.cart[index].quantity } };
     // Else pushes the product and sets quantity to 1
   } else {
-    product = { $push: { cart: { product: req.body.productId, quantity: 1 } } };
+    product = { $push: { cart: { product: req.body.productId, quantity: req.body.quantity } } };
   }
   const updatedUser = await User.findOneAndUpdate(userId, product, { useFindAndModify: false, new: true });
   res.send({ cartSize: updatedUser.cart.length });

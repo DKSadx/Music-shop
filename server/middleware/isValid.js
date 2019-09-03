@@ -52,7 +52,7 @@ exports.validateUsername = () => [
   body('newUsername')
     .exists()
     .isAlphanumeric()
-    .withMessage('Username can only container numbers and letters.')
+    .withMessage('Username can only contain numbers and letters.')
     .custom(username => {
       return User.findOne({ username }).then(user => {
         if (user) {

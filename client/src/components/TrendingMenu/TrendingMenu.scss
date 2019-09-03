@@ -1,4 +1,4 @@
-@mixin buy-button {
+@mixin details-button {
   background-color: #cccc;
   border-radius: 5%;
   bottom: 5vh;
@@ -52,7 +52,7 @@
       visibility: hidden;
     }
     button {
-      @include buy-button();
+      @include details-button();
       &:hover {
         background-color: #000;
         color: #fff;

@@ -31,11 +31,12 @@ export const validation = (email, password, repeatedPassword) => {
   return { isValid };
 };
 
-export const addToCart = async productId => {
+export const addToCart = async (productId, quantity = 1) => {
   const jwtToken = localStorage.getItem('shop-token');
   const api = 'http://localhost:8080/cart/addToCart';
   const data = {
-    productId
+    productId,
+    quantity
   };
   const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
   const res = await axios.post(api, data, config);

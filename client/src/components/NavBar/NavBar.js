@@ -22,7 +22,6 @@ export default class NavBar extends Component {
     this.closePopUp = this.closePopUp.bind(this);
     this.showPopUp = this.showPopUp.bind(this);
     this.logout = this.logout.bind(this);
-    this.updateCartSize = this.updateCartSize.bind(this);
   }
   scrollToTop() {
     window.scrollTo(0, 0);
@@ -46,20 +45,16 @@ export default class NavBar extends Component {
     window.location.reload();
   }
 
-  updateCartSize(cartSize) {
-    this.setState({
-      cartSize
-    });
-  }
   componentDidMount() {
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
-    const api = 'http://localhost:8080/auth/isauth';
+    const api = 'http://localhost:8080/cart/getCartSize';
     axios
       .get(api, config)
       .then(res => {
-        if (res.data.isAuth) {
+        if (res.data.cartSize >= 0) {
           this.setState({
+            cartSize: res.data.cartSize,
             isLoggedIn: true
           });
         }
@@ -103,7 +98,12 @@ export default class NavBar extends Component {
             {/* Checks if the jwt token exists/isValid */}
             {isLoggedIn ? (
               <>
-                <i className="cart-icon fas fa-shopping-cart" onClick={() => this.setState({ signInForm: false, signUpForm: false, showCart: true })}>
+                <i
+                  className="cart-icon fas fa-shopping-cart"
+                  onClick={() =>
+                    this.setState({ signInForm: false, signUpForm: false, showCart: true })
+                  }
+                >
                   <i className="cart-icon-number">{cartSize}</i>
                 </i>
                 <i className="user-icon fas fa-user">
@@ -125,9 +125,20 @@ export default class NavBar extends Component {
               // Prevents showing sign in/up buttons before receiving data if the user is logged in
               !isJWTValid && (
                 <>
-                  <li onClick={() => this.setState({ signInForm: true, signUpForm: false, showCart: false })}>SIGN IN</li>
+                  <li
+                    onClick={() =>
+                      this.setState({ signInForm: true, signUpForm: false, showCart: false })
+                    }
+                  >
+                    SIGN IN
+                  </li>
                   <li>
-                    <button className="signup-btn" onClick={() => this.setState({ signUpForm: true, signInForm: false, showCart: false })}>
+                    <button
+                      className="signup-btn"
+                      onClick={() =>
+                        this.setState({ signUpForm: true, signInForm: false, showCart: false })
+                      }
+                    >
                       SIGN UP
                     </button>
                   </li>
@@ -137,9 +148,11 @@ export default class NavBar extends Component {
           </ul>
         </ul>
         {/* Modal windows */}
-        {this.state.signUpForm ? <SignUpForm show={this.showPopUp} close={this.closePopUp} /> : <></>}
-        {this.state.signInForm ? <SignInForm show={this.showPopUp} close={this.closePopUp} /> : <></>}
-        {this.state.showCart ? <Cart close={this.closePopUp} updateCartSize={this.updateCartSize} /> : <></>}
+        {this.state.signUpForm && <SignUpForm show={this.showPopUp} close={this.closePopUp} />}
+        {this.state.signInForm && <SignInForm show={this.showPopUp} close={this.closePopUp} />}
+        {this.state.showCart && (
+          <Cart close={this.closePopUp} updateCartSize={this.props.updateCartSize} />
+        )}
       </div>
     );
   }

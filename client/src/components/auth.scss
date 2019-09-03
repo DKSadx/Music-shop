@@ -21,7 +21,7 @@ $main-background-color: #32364a;
 @mixin auth-page {
   background-color: #000c;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0%;
   width: 100%;
   z-index: 1;

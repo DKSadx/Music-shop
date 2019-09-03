@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Tween } from 'react-gsap';
+import { withRouter } from 'react-router-dom';
+
 import './storeProducts.scss';
-
 import { addToCart } from '../../utils/functions';
+import DetailsPage from '../DetailsPage/DetailsPage';
 
-export default class StoreProducts extends Component {
+class StoreProducts extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +20,8 @@ export default class StoreProducts extends Component {
       }
     };
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.showDetailsPage = this.showDetailsPage.bind(this);
+    this.closeDetailsPage = this.closeDetailsPage.bind(this);
   }
 
   generateCategoriesList() {
@@ -80,17 +84,22 @@ export default class StoreProducts extends Component {
           {products.map((item, i) => {
             return (
               <li key={i}>
-                <a>
-                  <div className="products-info">
-                    <div className="products-info-overlay">{/* <p>{products[i]._id}</p> */}</div>
-                    <img src={products[i].imageUrl} alt="img" />
-                    <div className="products-info-text">
-                      <p className="products-info-name">{products[i].name}</p>
-                      <p className="products-info-price">{products[i].price}$</p>
-                      <button onClick={() => this.addItemToCart(products[i]._id)}>Add to cart</button>
-                    </div>
+                <div className="products-info">
+                  <div className="products-info-overlay">
+                    <button
+                      className="details-btn"
+                      onClick={() => this.showDetailsPage(products[i]._id)}
+                    >
+                      Details
+                    </button>
                   </div>
-                </a>
+                  <img className="products-info-image" src={products[i].imageUrl} alt="img" />
+                  <div className="products-info-text">
+                    <p className="products-info-name">{products[i].name}</p>
+                    <p className="products-info-price">{products[i].price}$</p>
+                    <button onClick={() => this.addItemToCart(products[i]._id)}>Add to cart</button>
+                  </div>
+                </div>
               </li>
             );
           })}
@@ -239,7 +248,21 @@ export default class StoreProducts extends Component {
       });
     }
   }
-
+  showDetailsPage(productId) {
+    this.props.history.push({
+      pathname: '/store',
+      search: `?productId=${productId}`
+    });
+    this.setState({
+      query: { productId }
+    });
+  }
+  closeDetailsPage() {
+    this.props.history.push('/store');
+    this.setState({
+      query: { productId: null }
+    });
+  }
   componentDidMount() {
     // Get the category names
     axios
@@ -255,12 +278,19 @@ export default class StoreProducts extends Component {
 
   render() {
     return (
-      <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} duration={2} delay={0.5}>
+      <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} duration={1} delay={0.5}>
         <div className="store-grid">
           {this.state.products && this.state.categories && (
             <>
               <div className="store-categories">{this.generateCategoriesList()}</div>
               <div className="store-products">{this.generateProducts()}</div>
+              {this.state.query.productId && (
+                <DetailsPage
+                  productId={this.state.query.productId}
+                  close={this.closeDetailsPage}
+                  updateCartSize={this.props.updateCartSize}
+                />
+              )}
             </>
           )}
         </div>
@@ -268,3 +298,5 @@ export default class StoreProducts extends Component {
     );
   }
 }
+
+export default withRouter(StoreProducts); // HOC needed to modify url query strings
