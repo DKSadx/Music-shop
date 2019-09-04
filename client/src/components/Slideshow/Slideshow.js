@@ -28,7 +28,6 @@ export default class Slideshow extends Component {
   render() {
     return (
       <div className={`slide-${currentSlide}`}>
-        {this.props.navbar}
         {textAnimation(slideshowText, currentSlide - 1)}
       </div>
     );

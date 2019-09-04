@@ -4,7 +4,7 @@ $main-color: #ff8f27;
 $hover-color: #c06b1b;
 
 .popular-menu {
-  h3 {
+  &-title {
     font-family: Gravity;
     font-size: 4.5vmin;
     font-weight: 200;
@@ -22,7 +22,7 @@ $hover-color: #c06b1b;
   grid-template-rows: auto auto auto auto;
   justify-items: center;
   margin: 0 10% 10% 10%;
-  padding: 5% 0;
+  padding: 3% 0;
 }
 
 .popular-grid-item {
@@ -33,9 +33,6 @@ $hover-color: #c06b1b;
   text-align: center;
   width: 15vw;
   position: relative;
-  button {
-    visibility: hidden;
-  }
   .popular-item-name {
     background-color: #fff;
     bottom: -10%;
@@ -48,23 +45,14 @@ $hover-color: #c06b1b;
     position: absolute;
     word-wrap: break-word;
   }
+  .popular-item-overlay {
+    visibility: hidden;
+  }
   &:hover {
-    .popular-details-btn {
-      @include details-button();
-      bottom: 10%;
-      border-radius: 5px;
-      min-width: 40%;
+    .popular-item-overlay {
+      background-color: #4444;
       visibility: visible;
-      background-color: $main-color;
-      &:hover {
-        background-color: $hover-color;
-        color: #000;
-      }
-    }
-    .popular-item-hover {
-      background-color: #000;
       height: 100%;
-      opacity: 0.5;
       transition-property: background;
       transition-duration: 400ms;
       width: 100%;

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { Tween } from 'react-gsap';
-import { withRouter } from 'react-router-dom';
 
 import './storeProducts.scss';
 import { addToCart } from '../../utils/functions';
@@ -108,6 +107,7 @@ class StoreProducts extends Component {
       </>
     );
   }
+  // Pagination logic
   pagination() {
     const { currentPage, lastPage, query } = this.state;
     return (
@@ -248,6 +248,7 @@ class StoreProducts extends Component {
       });
     }
   }
+
   showDetailsPage(productId) {
     this.props.history.push({
       pathname: '/store',
@@ -257,6 +258,7 @@ class StoreProducts extends Component {
       query: { productId }
     });
   }
+
   closeDetailsPage() {
     this.props.history.push('/store');
     this.setState({

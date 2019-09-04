@@ -75,13 +75,13 @@ $hover-color: #c06b1b;
     width: 100%;
   }
   &-overlay {
-    display: none;
+    visibility: hidden;
   }
   &:hover {
     color: $main-color;
     .products-info-overlay {
       background-color: #4444;
-      display: block;
+      visibility: visible;
       font-size: 2vmin;
       height: 30vh;
       position: absolute;

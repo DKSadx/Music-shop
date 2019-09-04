@@ -1,53 +1,113 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Controller, Scene } from 'react-scrollmagic';
+import { withRouter } from 'react-router-dom';
 import { Tween } from 'react-gsap';
-import { Back } from 'gsap/EasePack';
+import axios from 'axios';
 
 import './PopularMenu.scss';
-import data from './popularMenuData.json';
+import DetailsPage from '../DetailsPage/DetailsPage';
 
-export default function PopularMenu(props) {
+class PopularMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: null,
+      query: {
+        productId: ''
+      }
+    };
+    this.showDetailsPage = this.showDetailsPage.bind(this);
+    this.closeDetailsPage = this.closeDetailsPage.bind(this);
+  }
+
   // Generating <li> items
-  const createItems = () => {
-    return data.map((product, i) => (
-      <li key={i} className="popular-grid-item" style={{ backgroundImage: `url("${product.url}")` }}>
-        <div className="popular-item-hover" />
-        <button className="popular-details-btn">Details</button>
-        <p className="popular-item-name">{product.name}</p>
+  createItems() {
+    const { products } = this.state;
+    return products.map((p, i) => (
+      <li
+        key={i}
+        className="popular-grid-item"
+        style={{ backgroundImage: `url("${p.product.imageUrl}")` }}
+      >
+        <div className="popular-item-overlay">
+          <button className="details-btn" onClick={() => this.showDetailsPage(p.product._id)}>
+            Details
+          </button>
+        </div>
+        <p className="popular-item-name">{p.product.name}</p>
       </li>
     ));
-  };
-  return (
-    <div className={props.className}>
-      <h3>Popular products:</h3>
-      <Controller>
-        <Scene
-          duration={2200}
-          offset={-100}
-          triggerElement={`.${props.className}`}
-          reverse={true}
-          // indicators={{
-          //   colorStart: 'red',
-          //   colorEnd: 'green'
-          // }}
-        >
-          <Tween
-            // Wraps all <li> tags that are dynamically created
-            wrapper={<ul className="product-grid" />}
-            staggerFrom={{
-              opacity: 0,
-              cycle: {
-                // x: i => (i + 1) * 80
-                x: 500
-              }
-              // ease: 'Back.easeIn'
-            }}
-            stagger={0.5}
+  }
+
+  showDetailsPage(productId) {
+    this.props.history.push({
+      pathname: '/',
+      search: `?productId=${productId}`
+    });
+    this.setState({
+      query: { productId }
+    });
+  }
+
+  closeDetailsPage() {
+    this.props.history.push('/');
+    this.setState({
+      query: { productId: null }
+    });
+  }
+
+  componentDidMount() {
+    const api = 'http://localhost:8080/product/getPopularMenu';
+    const jwtToken = localStorage.getItem('shop-token');
+    const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
+    axios
+      .get(api, config)
+      .then(res => {
+        if (res.data.products) {
+          this.setState({
+            products: res.data.products
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  }
+  render() {
+    const { products, query } = this.state;
+    return (
+      <div className={this.props.className}>
+        <h3 className="popular-menu-title">Popular products:</h3>
+        <Controller>
+          <Scene
+            duration={1800}
+            offset={-150}
+            triggerElement={`.${this.props.className}`}
+            reverse={true}
           >
-            {createItems()}
-          </Tween>
-        </Scene>
-      </Controller>
-    </div>
-  );
+            <Tween
+              // Wraps all <li> tags that are dynamically created
+              wrapper={<ul className="product-grid" />}
+              staggerFrom={{
+                opacity: 0,
+                cycle: {
+                  x: 500
+                }
+              }}
+              stagger={0.5}
+            >
+              {products && this.createItems()}
+            </Tween>
+          </Scene>
+        </Controller>
+        {query.productId && (
+          <DetailsPage
+            productId={query.productId}
+            close={this.closeDetailsPage}
+            updateCartSize={this.props.updateCartSize}
+          />
+        )}
+      </div>
+    );
+  }
 }
+
+export default withRouter(PopularMenu);

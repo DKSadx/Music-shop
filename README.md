@@ -10,18 +10,12 @@ Modern e-commerce SPA(single-page app) made with MERN stack.
 
 #### To do:
 
-status codes, spinners, component transitions, upload images option, password hashing, error handling, smaller screens design, logo, lazy loading...
+status codes, spinners,item added to cart notif, component transitions, upload images option, rcc->rfc, password hashing, error handling, smaller screens design, logo, lazy loading...
 
 #### Bugs to fix
 
 Account dropdown menu width
 Change popup to modal (naming)
-Cart number improve
-Front page popular products fetching
-
-#### Can be improved?
-
-remove from cart controller
 
 #### Video:
 
