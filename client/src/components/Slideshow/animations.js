@@ -28,7 +28,7 @@ export const textAnimation = (animatedText, slideNumber) => {
         x: '52vw',
         y: '70vh',
         opacity: 1,
-        color: 'white'
+        color: '#fff'
       }}
     >
       {animatedText[slideNumber]}
@@ -43,7 +43,7 @@ export const textAnimation = (animatedText, slideNumber) => {
         x: '40vw',
         y: '30vh',
         opacity: 1,
-        color: 'black'
+        color: '#000'
       }}
     >
       {animatedText[slideNumber]}

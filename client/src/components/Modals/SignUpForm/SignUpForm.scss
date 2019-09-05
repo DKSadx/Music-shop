@@ -1,4 +1,4 @@
-@import '../auth.scss';
+@import '../../../utils/auth.scss';
 
 .sign-up-page {
   @include auth-page();

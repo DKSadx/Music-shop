@@ -1,7 +1,7 @@
 const Category = require('../models/category');
 const Product = require('../models/product');
 const PopularMenu = require('../models/popularMenu');
-const ITEMS_PER_PAGE = require('../variables').ITEMS_PER_PAGE;
+const ITEMS_PER_PAGE = require('../utils/variables').ITEMS_PER_PAGE;
 
 // Returns all products
 exports.getAllProducts = async (req, res) => {

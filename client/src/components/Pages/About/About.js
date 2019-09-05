@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Tween } from 'react-gsap';
 
 import './About.scss';
-import { getCartSize } from '../../utils/functions';
-import NavBar from '../NavBar/NavBar';
+import { getCartSize } from '../../../utils/functions';
+import NavBar from '../../NavBar/NavBar';
 
 export default class About extends Component {
   constructor(props) {

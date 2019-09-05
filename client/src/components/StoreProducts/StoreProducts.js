@@ -5,7 +5,7 @@ import { Tween } from 'react-gsap';
 
 import './storeProducts.scss';
 import { addToCart } from '../../utils/functions';
-import DetailsPage from '../DetailsPage/DetailsPage';
+import DetailsPage from '../Modals/DetailsPage/DetailsPage';
 import Spinner from '../Spinner/Spinner';
 import CartNotification from '../CartNotification/CartNotification';
 

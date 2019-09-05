@@ -5,7 +5,7 @@ import { Tween } from 'react-gsap';
 import axios from 'axios';
 
 import './PopularMenu.scss';
-import DetailsPage from '../DetailsPage/DetailsPage';
+import DetailsPage from '../Modals/DetailsPage/DetailsPage';
 import Spinner from '../Spinner/Spinner';
 
 class PopularMenu extends Component {

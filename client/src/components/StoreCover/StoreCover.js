@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tween } from 'react-gsap';
+
 import './storeCover.scss';
 
 export default function StoreCover() {

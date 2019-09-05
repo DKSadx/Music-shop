@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import './Store.scss';
 
-import { getCartSize, isAuth } from '../../utils/functions';
-import NavBar from '../NavBar/NavBar';
-import StoreCover from '../StoreCover/StoreCover';
-import StoreProducts from '../StoreProducts/StoreProducts';
-import Footer from '../Footer/Footer';
+import './Store.scss';
+import { getCartSize, isAuth } from '../../../utils/functions';
+import NavBar from '../../NavBar/NavBar';
+import StoreCover from '../../StoreCover/StoreCover';
+import StoreProducts from '../../StoreProducts/StoreProducts';
+import Footer from '../../Footer/Footer';
 
 export default class Store extends Component {
   constructor(props) {

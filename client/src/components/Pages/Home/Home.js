@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 
-import { getCartSize } from '../../utils/functions';
-import NavBar from '../NavBar/NavBar';
-import Slideshow from '../Slideshow/Slideshow';
-import TrendingMenu from '../TrendingMenu/TrendingMenu';
-import PopularMenu from '../PopularMenu/PopularMenu';
-import Footer from '../Footer/Footer';
+import { getCartSize } from '../../../utils/functions';
+import NavBar from '../../NavBar/NavBar';
+import Slideshow from '../../Slideshow/Slideshow';
+import TrendingMenu from '../../TrendingMenu/TrendingMenu';
+import PopularMenu from '../../PopularMenu/PopularMenu';
+import Footer from '../../Footer/Footer';
 
-export default class HomePage extends Component {
+export default class Home extends Component {
   constructor(props) {
     document.title = 'Home';
     super(props);

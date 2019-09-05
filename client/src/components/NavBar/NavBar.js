@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './NavBar.scss';
-import SignUpForm from '../SignUpForm/SignUpForm';
-import SignInForm from '../SignInForm/SignInForm';
-import Cart from '../Cart/Cart';
+import SignUpForm from '../Modals/SignUpForm/SignUpForm';
+import SignInForm from '../Modals/SignInForm/SignInForm';
+import Cart from '../Modals/Cart/Cart';
 
 export default class NavBar extends Component {
   constructor(props) {

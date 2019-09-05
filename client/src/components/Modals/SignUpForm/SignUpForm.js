@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Tween } from 'react-gsap';
 import axios from 'axios';
-import './SignUpForm.scss';
 
-import Spinner from '../Spinner/Spinner';
-import { delay, validation } from '../../utils/functions';
+import './SignUpForm.scss';
+import Spinner from '../../Spinner/Spinner';
+import { delay, validation } from '../../../utils/functions';
 
 export default class SignUpForm extends Component {
   constructor(props) {

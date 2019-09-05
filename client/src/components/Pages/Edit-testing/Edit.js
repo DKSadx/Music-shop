@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import './Edit.scss';
 
 export default class Edit extends Component {
@@ -127,13 +128,33 @@ export default class Edit extends Component {
           <h4>Price:</h4>
           <input type="text" name="price" onChange={this.handleChange} value={this.state.price} />
           <h4>Description:</h4>
-          <input type="text" name="description" onChange={this.handleChange} value={this.state.description} />
+          <input
+            type="text"
+            name="description"
+            onChange={this.handleChange}
+            value={this.state.description}
+          />
           <h4>ImageUrl:</h4>
-          <input type="text" name="imageUrl" onChange={this.handleChange} value={this.state.imageUrl} />
+          <input
+            type="text"
+            name="imageUrl"
+            onChange={this.handleChange}
+            value={this.state.imageUrl}
+          />
           <h4>Category:</h4>
-          <input type="text" name="category" onChange={this.handleChange} value={this.state.category} />
+          <input
+            type="text"
+            name="category"
+            onChange={this.handleChange}
+            value={this.state.category}
+          />
           <h4>ObjectId:</h4>
-          <input type="text" name="objectId" onChange={this.handleChange} value={this.state.objectId} />
+          <input
+            type="text"
+            name="objectId"
+            onChange={this.handleChange}
+            value={this.state.objectId}
+          />
           <button type="button" onClick={() => this.addProduct()}>
             Add
           </button>
@@ -146,7 +167,11 @@ export default class Edit extends Component {
           <button type="button" className="edit-delete-btn" onClick={() => this.deleteProduct()}>
             Delete
           </button>
-          <button type="button" className="edit-delete-btn" onClick={() => this.deleteProduct(true)}>
+          <button
+            type="button"
+            className="edit-delete-btn"
+            onClick={() => this.deleteProduct(true)}
+          >
             Delete by Id
           </button>
         </div>
@@ -154,7 +179,12 @@ export default class Edit extends Component {
         <div className="category-edit">
           <h1>Category:</h1>
           <h4>Name:</h4>
-          <input type="text" name="categoryName" onChange={this.handleChange} value={this.state.categoryName} />
+          <input
+            type="text"
+            name="categoryName"
+            onChange={this.handleChange}
+            value={this.state.categoryName}
+          />
           <button type="button" onClick={() => this.addCategory()}>
             Add
           </button>

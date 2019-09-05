@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Tween } from 'react-gsap';
+
 import './Cart.scss';
+import Spinner from '../../Spinner/Spinner';
 
 export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartItems: [],
+      cartItems: null,
       cartSize: 0,
       totalPrice: 0
     };
@@ -109,42 +112,50 @@ export default class Cart extends Component {
   render() {
     const { cartItems, totalPrice } = this.state;
     return (
-      <div className="cart-page">
-        <i className="close-icon far fa-times-circle" onClick={() => this.props.close()} />
-        <div className="cart-items-container">
-          <h1 className="cart-header">Shopping cart</h1>
-          <ul>
-            <ul className="cart-titles">
-              <li />
-              <li />
-              <li>Price</li>
-              <li>Qty</li>
-              <li>Total</li>
-            </ul>
-            {cartItems && this.generateCartItems()}
-          </ul>
-          <ul className="cart-checkout">
-            <p className="cart-checkout-note">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos, beatae nisi! Dolorum
-              consequatur corporis dignissimos, est harum quos fugiat explicabo, quas doloremque
-              reprehenderit officiis tenetur fugit totam vero adipisci obcaecati.
-            </p>
-            <li>
-              <p className="cart-checkout-left">Subtotal:</p>
-              <p className="cart-checkout-right">{totalPrice}$</p>
-            </li>
-            <li>
-              <p className="cart-checkout-left">Shipping:</p>
-              <p className="cart-checkout-right">0.00$</p>
-            </li>
-            <li className="cart-checkout-total">
-              <p className="cart-checkout-left">TOTAL:</p>
-              <p className="cart-checkout-right">{totalPrice}$</p>
-            </li>
-            <button className="cart-checkout-button">Check Out</button>
-          </ul>
+      <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} duration={0.8}>
+        <div className="cart-page">
+          <i className="close-icon far fa-times-circle" onClick={() => this.props.close()} />
+          <div className="cart-items-container">
+            <h1 className="cart-header">Shopping cart</h1>
+            {cartItems ? (
+              <>
+                <ul>
+                  <ul className="cart-titles">
+                    <li />
+                    <li />
+                    <li>Price</li>
+                    <li>Qty</li>
+                    <li>Total</li>
+                  </ul>
+                  {cartItems && this.generateCartItems()}
+                </ul>
+                <ul className="cart-checkout">
+                  <p className="cart-checkout-note">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos, beatae nisi!
+                    Dolorum consequatur corporis dignissimos, est harum quos fugiat explicabo, quas
+                    doloremque reprehenderit officiis tenetur fugit totam vero adipisci obcaecati.
+                  </p>
+                  <li>
+                    <p className="cart-checkout-left">Subtotal:</p>
+                    <p className="cart-checkout-right">{totalPrice}$</p>
+                  </li>
+                  <li>
+                    <p className="cart-checkout-left">Shipping:</p>
+                    <p className="cart-checkout-right">0.00$</p>
+                  </li>
+                  <li className="cart-checkout-total">
+                    <p className="cart-checkout-left">TOTAL:</p>
+                    <p className="cart-checkout-right">{totalPrice}$</p>
+                  </li>
+                  <button className="cart-checkout-button">Check Out</button>
+                </ul>
+              </>
+            ) : (
+              <Spinner />
+            )}
+          </div>
         </div>
-      </div>
+      </Tween>
     );
   }
 }

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import './TrendingMenu.scss';
 import trendingBg from '../../assets/images/trending-bg.jpg';
-import DetailsPage from '../DetailsPage/DetailsPage';
+import DetailsPage from '../Modals/DetailsPage/DetailsPage';
 
 class TrendingMenu extends Component {
   constructor(props) {

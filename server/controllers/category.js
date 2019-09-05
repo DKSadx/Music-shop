@@ -1,6 +1,6 @@
 const Category = require('../models/category');
 const Product = require('../models/product');
-const ITEMS_PER_PAGE = require('../variables').ITEMS_PER_PAGE;
+const ITEMS_PER_PAGE = require('../utils/variables').ITEMS_PER_PAGE;
 
 // Returns all categories(list)
 exports.getAllCategories = async (req, res, next) => {
@@ -30,6 +30,8 @@ exports.addCategory = async (req, res, next) => {
 // Deletes category from db
 exports.deleteCategory = async (req, res, next) => {
   const deletedCategory = await Category.deleteOne({ name: req.body.name });
-  deletedCategory.n ? res.status(200).send('Category deleted') : res.status(204).send('Category was not deleted');
+  deletedCategory.n
+    ? res.status(200).send('Category deleted')
+    : res.status(204).send('Category was not deleted');
   next();
 };
