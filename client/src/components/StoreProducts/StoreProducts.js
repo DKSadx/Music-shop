@@ -102,7 +102,11 @@ class StoreProducts extends Component {
                   <div className="products-info-text">
                     <p className="products-info-name">{products[i].name}</p>
                     <p className="products-info-price">{products[i].price}$</p>
-                    <button onClick={() => this.addItemToCart(products[i]._id)}>Add to cart</button>
+                    {this.props.isLoggedIn && (
+                      <button onClick={() => this.addItemToCart(products[i]._id)}>
+                        Add to cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </li>

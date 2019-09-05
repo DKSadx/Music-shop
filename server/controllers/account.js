@@ -10,7 +10,11 @@ exports.changeUsername = async (req, res, next) => {
     // Else change the username in the database
     const userId = { _id: req.userId };
     const newUsername = { $set: { username: req.body.newUsername } };
-    await User.findOneAndUpdate(userId, newUsername, { useFindAndModify: false });
+    try {
+      await User.findOneAndUpdate(userId, newUsername, { useFindAndModify: false });
+    } catch (error) {
+      console.log(error);
+    }
     res.status(200).send();
   }
   next();
@@ -25,7 +29,11 @@ exports.changePassword = async (req, res, next) => {
     // Else change the password in the database
     const userId = { _id: req.userId };
     const newPassword = { $set: { password: req.body.newPassword } };
-    await User.findOneAndUpdate(userId, newPassword, { useFindAndModify: false });
+    try {
+      await User.findOneAndUpdate(userId, newPassword, { useFindAndModify: false });
+    } catch (error) {
+      console.log(error);
+    }
     res.status(200).send();
   }
   next();
@@ -40,7 +48,11 @@ exports.changeEmail = async (req, res, next) => {
     // Else change the email in the database
     const userId = { _id: req.userId };
     const newEmail = { $set: { email: req.body.newEmail } };
-    await User.findOneAndUpdate(userId, newEmail, { useFindAndModify: false });
+    try {
+      await User.findOneAndUpdate(userId, newEmail, { useFindAndModify: false });
+    } catch (error) {
+      console.log(error);
+    }
     res.status(200).send();
   }
   next();

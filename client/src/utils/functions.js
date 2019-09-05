@@ -50,3 +50,11 @@ export const getCartSize = async () => {
   const res = await axios.get(api, config);
   return res.data.cartSize;
 };
+
+export const isAuth = async () => {
+  const jwtToken = localStorage.getItem('shop-token');
+  const api = 'http://localhost:8080/auth/isauth';
+  const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
+  const res = await axios.get(api, config);
+  return res.data.isAuth;
+};

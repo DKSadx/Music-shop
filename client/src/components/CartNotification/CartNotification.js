@@ -30,7 +30,11 @@ export default class CartNotification extends Component {
         }
         ref={ref => (this.timeline = ref)}
       >
-        <Tween from={{ opacity: 0, x: '70vw', y: -100 }} to={{ opacity: 1, y: 50 }} duration={1} />
+        <Tween
+          from={{ opacity: 0, x: '70vw', y: -100 }}
+          to={{ opacity: 1, y: 50 }}
+          duration={0.5}
+        />
         <Tween to={{ opacity: 0, y: -100 }} delay={0.5} />
       </Timeline>
     );

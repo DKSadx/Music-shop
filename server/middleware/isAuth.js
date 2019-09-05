@@ -9,10 +9,11 @@ module.exports = (req, res, next) => {
   jwt.verify(jwtToken, 'yxnPAu3Prq93LtiFYVQk9', (err, decodedToken) => {
     if (err) {
       throw new Error('Invalid token');
+      res.send(401);
     } else {
       req.userId = decodedToken.userId;
       req.isAuth = true;
+      next();
     }
   });
-  next();
 };

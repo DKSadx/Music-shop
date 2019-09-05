@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import './DetailsPage.scss';
-import { addToCart } from '../../utils/functions';
+import { addToCart, isAuth } from '../../utils/functions';
 import CartNotification from '../CartNotification/CartNotification';
 
 export default class Details extends Component {
@@ -12,7 +12,8 @@ export default class Details extends Component {
     this.state = {
       productId: this.props.productId,
       product: null,
-      quantity: 1
+      quantity: 1,
+      isLoggedIn: false
     };
     this.changeQuantity = this.changeQuantity.bind(this);
   }
@@ -43,22 +44,26 @@ export default class Details extends Component {
     return <CartNotification />;
   }
   // Fetches product data
-  componentDidMount() {
+  async componentDidMount() {
     const { productId } = this.state;
     const api = `http://localhost:8080/product/${productId}`;
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
-    axios
-      .get(api, config)
-      .then(res =>
-        this.setState({
-          product: res.data.product
-        })
-      )
-      .catch(err => console.log(err));
+    const res = await axios.get(api, config);
+    let isLoggedIn;
+    // If the server returns error when authenticating, sets isLoggedIn to false else sets it to true
+    try {
+      isLoggedIn = await isAuth();
+    } catch (e) {
+      isLoggedIn = false;
+    }
+    this.setState({
+      product: res.data.product,
+      isLoggedIn
+    });
   }
   render() {
-    const { productId, product, quantity } = this.state;
+    const { productId, product, quantity, isLoggedIn } = this.state;
     return (
       product && (
         <div className="details-page">
@@ -82,15 +87,21 @@ export default class Details extends Component {
                 libero necessitatibus, vel vitae. Quisquam voluptatum accusantium ab porro sequi
                 temporibus corporis quaerat, possimus ut.
               </p>
-              <i className="fas fa-minus noselect" onClick={() => this.changeQuantity('-')} />
-              <input className="dp-info-qty noselect" type="text" value={quantity} readOnly />
-              <i className="fas fa-plus noselect" onClick={() => this.changeQuantity('+')} />
-              <button
-                className="dp-info-btn noselect"
-                onClick={() => this.addItemToCart(productId)}
-              >
-                ADD TO CART
-              </button>
+              {isLoggedIn ? (
+                <>
+                  <i className="fas fa-minus noselect" onClick={() => this.changeQuantity('-')} />
+                  <input className="dp-info-qty noselect" type="text" value={quantity} readOnly />
+                  <i className="fas fa-plus noselect" onClick={() => this.changeQuantity('+')} />
+                  <button
+                    className="dp-info-btn noselect"
+                    onClick={() => this.addItemToCart(productId)}
+                  >
+                    ADD TO CART
+                  </button>
+                </>
+              ) : (
+                <p className="not-logged-in-message">Please log in to buy this product.</p>
+              )}
               <br />
               <h3 className="dp-info-category">
                 Category:
