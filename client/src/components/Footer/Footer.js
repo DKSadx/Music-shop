@@ -5,59 +5,58 @@ import './Footer.scss';
 export default function Footer() {
   return (
     <footer>
-      {/* <h4>Social:</h4>
-      <h4>Info:</h4> */}
       <ul className="footer-social">
         <h4>Follow us</h4>
         <li>
-          <a href="https://facebook.com" target="_blank">
-            <img src="/icons/facebook.png" />
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <img src="/icons/facebook.png" alt="facebook icon" />
           </a>
         </li>
         <li>
-          <a href="https://instagram.com" target="_blank">
-            <img src="/icons/instagram.png" />
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <img src="/icons/instagram.png" alt="instagram icon" />
           </a>
         </li>
         <li>
-          <a href="https://twitter.com" target="_blank">
-            <img src="/icons/twitter.png" />
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <img src="/icons/twitter.png" alt="twitter icon" />
           </a>
         </li>
         <li>
-          <a href="https://youtube.com" target="_blank">
-            <img src="/icons/youtube.png" />
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+            <img src="/icons/youtube.png" alt="youtube icon" />
           </a>
         </li>
       </ul>
       <ul className="footer-info">
         <li>
-          <a href="#">Contact Us</a>
+          <a href="http://localhost:3000/">Contact Us</a>
         </li>
         <li>
-          <a href="#">Shipping</a>
+          <a href="http://localhost:3000/">Shipping</a>
         </li>
         <li>
-          <a href="#">FAQs</a>
+          <a href="http://localhost:3000/">FAQs</a>
         </li>
         <li>
-          <a href="#">Payment methods</a>
+          <a href="http://localhost:3000/">Payment methods</a>
         </li>
         <li>
-          <a href="#">Cookies</a>
+          <a href="http://localhost:3000/">Cookies</a>
         </li>
         <li>
-          <a href="#">Privacy Policy</a>
+          <a href="http://localhost:3000/">Privacy Policy</a>
         </li>
         <li>
-          <a href="#">Terms of Service</a>
+          <a href="http://localhost:3000/">Terms of Service</a>
         </li>
       </ul>
       <div className="footer-important">
         <h3>Lorem ipsum!</h3>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, atque earum quidem mollitia explicabo iure dolore, fuga temporibus quam
-          labore nemo! Sunt officiis cupiditate saepe inventore? Voluptates hic nulla tenetur!
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, atque earum quidem
+          mollitia explicabo iure dolore, fuga temporibus quam labore nemo! Sunt officiis cupiditate
+          saepe inventore? Voluptates hic nulla tenetur!
         </p>
       </div>
     </footer>

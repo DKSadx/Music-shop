@@ -96,7 +96,9 @@ export default class SignUpForm extends Component {
               Don't have an account?
             </p>
             {isLoading ? (
-              <Spinner />
+              <div className="auth-loading">
+                <Spinner />
+              </div>
             ) : (
               <button className="form-submit-btn" type="submit">
                 Log In

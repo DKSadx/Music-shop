@@ -1,0 +1,24 @@
+$main-color: #ff8f27;
+.cart-notification {
+  background-color: #fffc;
+  border: 0.5vh solid $main-color;
+  height: 15vh;
+  position: fixed;
+  top: 0;
+  width: 15vw;
+  z-index: 10;
+  img {
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    left: 5%;
+  }
+  p {
+    font-family: 'Madeleina-sans', Arial, Helvetica, sans-serif;
+    font-size: 2vmin;
+    height: 15vh;
+    line-height: 25vh;
+    text-align: center;
+    vertical-align: middle;
+  }
+}

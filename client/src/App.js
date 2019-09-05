@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import './App.scss';
@@ -8,9 +8,6 @@ import About from './components/About/About';
 import Edit from './components/Edit-testing/Edit';
 import Account from './components/Account/Account';
 
-// const Slideshow = React.lazy(() =>
-//   import('./components/Slideshow/Slideshow.js')
-// );
 const App = () => {
   return (
     <div className="App">

@@ -9,7 +9,6 @@ import { delay, validation } from '../../utils/functions';
 export default class SignUpForm extends Component {
   constructor(props) {
     super(props);
-    let isSignUpSuccessful = false;
     this.state = {
       username: {
         value: '',
@@ -27,7 +26,8 @@ export default class SignUpForm extends Component {
         value: '',
         errorMessage: ''
       },
-      isLoading: false
+      isLoading: false,
+      isSignUpSuccessful: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -78,8 +78,9 @@ export default class SignUpForm extends Component {
                 isLoading: false
               });
             } else if (res.data.isSuccessful) {
-              this.isSignUpSuccessful = true;
-              this.forceUpdate();
+              this.setState({
+                isSignUpSuccessful: true
+              });
             }
           })
           .catch(err => {
@@ -115,7 +116,14 @@ export default class SignUpForm extends Component {
   }
 
   render() {
-    const { username, email, password, repeatedPassword, isLoading } = this.state;
+    const {
+      username,
+      email,
+      password,
+      repeatedPassword,
+      isLoading,
+      isSignUpSuccessful
+    } = this.state;
     return (
       <div className="sign-up-page">
         <Tween
@@ -131,7 +139,7 @@ export default class SignUpForm extends Component {
         >
           <form autoComplete="off" className="sign-up-form" onSubmit={this.handleSubmit}>
             <i className="close-icon far fa-times-circle" onClick={() => this.props.close()} />
-            {!this.isSignUpSuccessful ? (
+            {!isSignUpSuccessful ? (
               <>
                 <h2>Sign Up</h2>
                 {/* prettier-ignore */}
@@ -145,7 +153,9 @@ export default class SignUpForm extends Component {
                   required
                 />
                 {username.errorMessage === '' ? (
-                  <p className="input-message">This will be your username. It will be public for everyone.</p>
+                  <p className="input-message">
+                    This will be your username. It will be public for everyone.
+                  </p>
                 ) : (
                   <p className="input-message-error">{username.errorMessage}</p>
                 )}
@@ -161,7 +171,9 @@ export default class SignUpForm extends Component {
                   required
                 />
                 {email.errorMessage === '' ? (
-                  <p className="input-message">We need your email address to verify your account.</p>
+                  <p className="input-message">
+                    We need your email address to verify your account.
+                  </p>
                 ) : (
                   <p className="input-message-error">{email.errorMessage}</p>
                 )}
@@ -181,7 +193,9 @@ export default class SignUpForm extends Component {
                   <p className="input-message-error">{password.errorMessage}</p>
                 )}
                 <input
-                  className={repeatedPassword.errorMessage === '' ? 'auth-input' : 'auth-input-error'}
+                  className={
+                    repeatedPassword.errorMessage === '' ? 'auth-input' : 'auth-input-error'
+                  }
                   type="password"
                   name="repeatedPassword"
                   onChange={this.handleChange}
@@ -198,7 +212,9 @@ export default class SignUpForm extends Component {
                   Already have an account?
                 </p>
                 {isLoading ? (
-                  <Spinner />
+                  <div className="auth-loading">
+                    <Spinner />
+                  </div>
                 ) : (
                   <button className="form-submit-btn" type="submit">
                     Sign Up

@@ -6,13 +6,17 @@ import { Tween } from 'react-gsap';
 import './storeProducts.scss';
 import { addToCart } from '../../utils/functions';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import Spinner from '../Spinner/Spinner';
+import CartNotification from '../CartNotification/CartNotification';
 
 class StoreProducts extends Component {
   constructor(props) {
     super(props);
+    this.notification = false;
     this.state = {
       categories: [],
       currentPage: this.props.query.page ? +this.props.query.page : 1,
+      // Url string query
       query: {
         ...this.props.query,
         category: this.props.query.category ? this.props.query.category : 'all'
@@ -22,7 +26,7 @@ class StoreProducts extends Component {
     this.showDetailsPage = this.showDetailsPage.bind(this);
     this.closeDetailsPage = this.closeDetailsPage.bind(this);
   }
-
+  // Generates list of categories, category side-menu
   generateCategoriesList() {
     return (
       <ul className="store-categories-grid">
@@ -70,11 +74,13 @@ class StoreProducts extends Component {
     );
   }
   async addItemToCart(productId) {
+    // notification set to true will trigger this.showNotification()
+    this.notification = true;
     // Imported function, adds to cart and returns updated cart size
     const cartSize = await addToCart(productId);
     this.props.updateCartSize(cartSize);
   }
-
+  // Generating grid of products
   generateProducts() {
     const { products } = this.state;
     return (
@@ -124,6 +130,7 @@ class StoreProducts extends Component {
                 // Prevents setting the current page to less than 1 with left arrow
                 await this.setState({ currentPage: currentPage > 2 ? currentPage - 1 : 1 });
                 this.fetchProducts(query.category);
+                window.scrollTo(0, 0);
               }}
             >
               <i className="fas fa-chevron-left" />
@@ -142,6 +149,7 @@ class StoreProducts extends Component {
                 onClick={async () => {
                   await this.setState({ currentPage: currentPage - 1 });
                   this.fetchProducts(query.category);
+                  window.scrollTo(0, 0);
                 }}
               >
                 {currentPage - 1}
@@ -160,6 +168,7 @@ class StoreProducts extends Component {
                   onClick={async () => {
                     await this.setState({ currentPage: currentPage + 1 });
                     this.fetchProducts(query.category);
+                    window.scrollTo(0, 0);
                   }}
                 >
                   {currentPage + 1}
@@ -181,6 +190,7 @@ class StoreProducts extends Component {
                   onClick={async () => {
                     await this.setState({ currentPage: 2 });
                     this.fetchProducts(query.category);
+                    window.scrollTo(0, 0);
                   }}
                 >
                   {currentPage + 1}
@@ -197,6 +207,7 @@ class StoreProducts extends Component {
                   onClick={async () => {
                     await this.setState({ currentPage: 3 });
                     this.fetchProducts(query.category);
+                    window.scrollTo(0, 0);
                   }}
                 >
                   {currentPage + 2}
@@ -215,7 +226,8 @@ class StoreProducts extends Component {
               }}
               onClick={async () => {
                 await this.setState({ currentPage: currentPage + 1 });
-                await this.fetchProducts(query.category);
+                this.fetchProducts(query.category);
+                window.scrollTo(0, 0);
               }}
             >
               <i className="fas fa-chevron-right" />
@@ -248,7 +260,7 @@ class StoreProducts extends Component {
       });
     }
   }
-
+  // Displays product details modal
   showDetailsPage(productId) {
     this.props.history.push({
       pathname: '/store',
@@ -258,12 +270,17 @@ class StoreProducts extends Component {
       query: { productId }
     });
   }
-
+  // Closes product details modal
   closeDetailsPage() {
     this.props.history.push('/store');
     this.setState({
       query: { productId: null }
     });
+  }
+  // Shows 'Added to cart' notification
+  showNotification() {
+    this.notification = false;
+    return <CartNotification />;
   }
   componentDidMount() {
     // Get the category names
@@ -281,8 +298,10 @@ class StoreProducts extends Component {
   render() {
     return (
       <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} duration={1} delay={0.5}>
-        <div className="store-grid">
-          {this.state.products && this.state.categories && (
+        {this.state.products && this.state.categories ? (
+          <div className="store-grid">
+            {/* If this.notification inside this.addToCart() is set to true, show notification */}
+            {this.notification && this.showNotification()}
             <>
               <div className="store-categories">{this.generateCategoriesList()}</div>
               <div className="store-products">{this.generateProducts()}</div>
@@ -294,8 +313,13 @@ class StoreProducts extends Component {
                 />
               )}
             </>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="store-fetching">
+            <p>Fetching products...</p>
+            <Spinner />
+          </div>
+        )}
       </Tween>
     );
   }

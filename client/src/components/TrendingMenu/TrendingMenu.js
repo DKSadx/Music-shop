@@ -57,19 +57,19 @@ class TrendingMenu extends Component {
               <ul className="trending-menu-items">
                 <li
                   id="trending-item-1"
-                  onClick={() => this.showDetailsPage('5d534ec7ed674819496ef8f3')}
+                  onClick={() => this.showDetailsPage('5d534ec6ed674819496ef8f1')}
                 >
                   <p>Sony WH-CH500</p>
                 </li>
                 <li
                   id="trending-item-2"
-                  onClick={() => this.showDetailsPage('5d534ec7ed674819496ef8f3')}
+                  onClick={() => this.showDetailsPage('5d534ec7ed674819496ef8f2')}
                 >
                   <p>Shure SM57</p>
                 </li>
                 <li
                   id="trending-item-3"
-                  onClick={() => this.showDetailsPage('5d534ec7ed674819496ef8f3')}
+                  onClick={() => this.showDetailsPage('5d534ec6ed674819496ef8f0')}
                 >
                   <p>Beoplay H9</p>
                 </li>

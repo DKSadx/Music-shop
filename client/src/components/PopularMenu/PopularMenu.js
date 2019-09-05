@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import './PopularMenu.scss';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import Spinner from '../Spinner/Spinner';
 
 class PopularMenu extends Component {
   constructor(props) {
@@ -76,34 +77,43 @@ class PopularMenu extends Component {
     return (
       <div className={this.props.className}>
         <h3 className="popular-menu-title">Popular products:</h3>
-        <Controller>
-          <Scene
-            duration={1800}
-            offset={-150}
-            triggerElement={`.${this.props.className}`}
-            reverse={true}
-          >
-            <Tween
-              // Wraps all <li> tags that are dynamically created
-              wrapper={<ul className="product-grid" />}
-              staggerFrom={{
-                opacity: 0,
-                cycle: {
-                  x: 500
-                }
-              }}
-              stagger={0.5}
-            >
-              {products && this.createItems()}
-            </Tween>
-          </Scene>
-        </Controller>
-        {query.productId && (
-          <DetailsPage
-            productId={query.productId}
-            close={this.closeDetailsPage}
-            updateCartSize={this.props.updateCartSize}
-          />
+        {products ? (
+          <>
+            <Controller>
+              <Scene
+                duration={1800}
+                offset={-150}
+                triggerElement={`.${this.props.className}`}
+                reverse={true}
+              >
+                <Tween
+                  // Wraps all <li> tags that are dynamically created
+                  wrapper={<ul className="product-grid" />}
+                  staggerFrom={{
+                    opacity: 0,
+                    cycle: {
+                      x: 500
+                    }
+                  }}
+                  stagger={0.5}
+                >
+                  {products && this.createItems()}
+                </Tween>
+              </Scene>
+            </Controller>
+            {query.productId && (
+              <DetailsPage
+                productId={query.productId}
+                close={this.closeDetailsPage}
+                updateCartSize={this.props.updateCartSize}
+              />
+            )}
+          </>
+        ) : (
+          <div className="popular-fetching">
+            <p>Fetching products...</p>
+            <Spinner />
+          </div>
         )}
       </div>
     );
