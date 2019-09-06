@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
-exports.signup = (req, res, next) => {
+exports.signup = async (req, res, next) => {
   let errorMessages = {
     username: '',
     email: '',
@@ -17,10 +17,11 @@ exports.signup = (req, res, next) => {
     });
     res.status(200).send({ errorMessages });
   } else {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       cart: []
     });
     user.save();
@@ -30,31 +31,29 @@ exports.signup = (req, res, next) => {
   next();
 };
 
-exports.signin = (req, res, next) => {
-  const { username } = req.body;
+exports.signin = async (req, res, next) => {
+  const { username, password } = req.body;
   const errorMessage = 'You have entered an invalid username or password.';
   if (!validationResult(req).isEmpty()) {
     res.status(203).send({ errorMessage });
   } else {
-    User.findOne({ username })
-      .then(user => {
-        if (user && user.password === req.body.password) {
-          const token = jwt.sign(
-            {
-              userId: user._id.toString(),
-              username: user.username
-            },
-            'yxnPAu3Prq93LtiFYVQk9',
-            {
-              expiresIn: '24h'
-            }
-          );
-          res.status(200).json({ token, userId: user._id.toString() });
-        } else {
-          res.status(203).send({ errorMessage });
+    const user = await User.findOne({ username });
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (user && isPasswordCorrect) {
+      const token = jwt.sign(
+        {
+          userId: user._id.toString(),
+          username: user.username
+        },
+        'yxnPAu3Prq93LtiFYVQk9',
+        {
+          expiresIn: '24h'
         }
-      })
-      .catch(err => console.log(err));
+      );
+      res.status(200).json({ token, userId: user._id.toString() });
+    } else {
+      res.status(203).send({ errorMessage });
+    }
   }
 };
 exports.isAuth = (req, res, next) => {

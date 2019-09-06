@@ -29,7 +29,10 @@ app.use('/cart', cartRoutes);
 app.use('/account', accountRoutes);
 
 mongoose
-  .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_DATABASE}`, { useNewUrlParser: true })
+  .connect(
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_DATABASE}`,
+    { useNewUrlParser: true }
+  )
   .then(result => {
     app.listen(process.env.PORT || 8080);
   })
