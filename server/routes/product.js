@@ -1,5 +1,7 @@
 const express = require('express');
 const productController = require('../controllers/product');
+const isAuth = require('../middleware/isAuth');
+const isAdmin = require('../middleware/isAdmin');
 
 const router = express.Router();
 
@@ -13,9 +15,9 @@ router.get('/', productController.getAllProducts);
 router.get('/:id', productController.getProduct);
 
 // POST /product/ - adds product to db
-router.post('/', productController.addProduct);
+router.post('/', isAuth, isAdmin, productController.addProduct);
 
-// DELETE /product/ - deletes product from db
-router.delete('/', productController.deleteProduct);
+// POST /product/delete - deletes product from db
+router.post('/delete', isAuth, isAdmin, productController.deleteProduct);
 
 module.exports = router;

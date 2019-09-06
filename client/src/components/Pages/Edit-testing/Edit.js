@@ -14,7 +14,8 @@ export default class Edit extends Component {
       imageUrl: '',
       category: '',
       objectId: '',
-      categoryName: ''
+      categoryName: '',
+      isAdmin: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -25,14 +26,12 @@ export default class Edit extends Component {
   }
   addProduct() {
     const { name, price, description, imageUrl, category } = this.state;
+    const api = 'http://localhost:8080/product';
+    const data = { name, price, description, imageUrl, category };
+    const jwtToken = localStorage.getItem('shop-token');
+    const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
-      .post('http://localhost:8080/product', {
-        name,
-        price,
-        description,
-        imageUrl,
-        category
-      })
+      .post(api, data, config)
       .then(response => {
         console.log(response);
       })
@@ -42,6 +41,9 @@ export default class Edit extends Component {
   }
 
   deleteProduct(objectId) {
+    const api = 'http://localhost:8080/product/delete';
+    const jwtToken = localStorage.getItem('shop-token');
+    const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     let data;
     if (objectId) {
       data = {
@@ -52,11 +54,8 @@ export default class Edit extends Component {
         name: this.state.name
       };
     }
-
     axios
-      .delete('http://localhost:8080/product', {
-        data
-      })
+      .post(api, data, config)
       .then(response => {
         console.log(response);
       })
@@ -85,10 +84,12 @@ export default class Edit extends Component {
   }
   addCategory() {
     const name = this.state.categoryName;
+    const api = 'http://localhost:8080/category';
+    const data = { name };
+    const jwtToken = localStorage.getItem('shop-token');
+    const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
-      .post('http://localhost:8080/category', {
-        name
-      })
+      .post(api, data, config)
       .then(response => {
         console.log(response);
       })
@@ -98,12 +99,14 @@ export default class Edit extends Component {
   }
 
   deleteCategory() {
+    const api = 'http://localhost:8080/category/delete';
+    const data = {
+      name: this.state.categoryName
+    };
+    const jwtToken = localStorage.getItem('shop-token');
+    const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
-      .delete('http://localhost:8080/category/delete', {
-        data: {
-          name: this.state.categoryName
-        }
-      })
+      .post(api, data, config)
       .then(response => {
         console.log(response);
       })
@@ -117,9 +120,26 @@ export default class Edit extends Component {
       categoryName: 'Other'
     });
   }
+  componentDidMount() {
+    const api = 'http://localhost:8080/auth/isAdmin';
+    const jwtToken = localStorage.getItem('shop-token');
+    const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
+    axios
+      .get(api, config)
+      .then(res => {
+        if (res.data.isAdmin)
+          this.setState({
+            isAdmin: true
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   render() {
-    return (
+    const { isAdmin } = this.state;
+    return isAdmin ? (
       <form className="edit-form">
         <div className="product-edit">
           <h1>Product:</h1>
@@ -196,6 +216,8 @@ export default class Edit extends Component {
           </button>
         </div>
       </form>
+    ) : (
+      <h1>Not authorized to view this site.</h1>
     );
   }
 }

@@ -61,3 +61,9 @@ exports.isAuth = (req, res, next) => {
     res.send({ isAuth: true });
   }
 };
+
+exports.isAdmin = (req, res, next) => {
+  if (req.isAdmin) {
+    res.send({ isAdmin: true });
+  }
+};
