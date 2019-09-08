@@ -10,7 +10,7 @@ Modern e-commerce SPA(single-page app) made with MERN stack.
 
 #### To do:
 
-status codes, error handling, upload images option, rcc->rfc, smaller screens design, logo
+status codes, error handling, smaller screens design, logo, add more products
 
 #### Video:
 

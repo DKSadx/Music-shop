@@ -24,20 +24,24 @@ class PopularMenu extends Component {
   // Generating <li> items
   createItems() {
     const { products } = this.state;
-    return products.map((p, i) => (
-      <li
-        key={i}
-        className="popular-grid-item"
-        style={{ backgroundImage: `url("${p.product.imageUrl}")` }}
-      >
-        <div className="popular-item-overlay">
-          <button className="details-btn" onClick={() => this.showDetailsPage(p.product._id)}>
-            Details
-          </button>
-        </div>
-        <p className="popular-item-name">{p.product.name}</p>
-      </li>
-    ));
+    return products.map((p, i) => {
+      return (
+        p.product && (
+          <li
+            key={i}
+            className="popular-grid-item"
+            style={{ backgroundImage: `url("${p.product.imageUrl}")` }}
+          >
+            <div className="popular-item-overlay">
+              <button className="details-btn" onClick={() => this.showDetailsPage(p.product._id)}>
+                Details
+              </button>
+            </div>
+            <p className="popular-item-name">{p.product.name}</p>
+          </li>
+        )
+      );
+    });
   }
 
   showDetailsPage(productId) {
@@ -81,7 +85,7 @@ class PopularMenu extends Component {
           <>
             <Controller>
               <Scene
-                duration={1800}
+                duration={1400}
                 offset={-150}
                 triggerElement={`.${this.props.className}`}
                 reverse={true}

@@ -50,7 +50,7 @@ $hover-color: #c06b1b;
   background-color: #fff;
   .store-products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     height: 100%;
     li {
       background-color: #fff;

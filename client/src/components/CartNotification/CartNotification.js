@@ -7,7 +7,9 @@ import cartIcon from '../../assets/images/cart-plus.svg';
 export default class CartNotification extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      timeline: null
+    };
   }
   componentDidMount() {
     // timeline is now a TimelineMax class instance, enables original gsap instead of react-gsap

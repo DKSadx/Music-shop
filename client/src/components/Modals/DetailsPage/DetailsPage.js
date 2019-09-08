@@ -75,11 +75,7 @@ export default class Details extends Component {
           <div className="dp-container">
             {product ? (
               <>
-                <img
-                  className="dp-img"
-                  src={`http://localhost:3000${product.imageUrl}`}
-                  alt={product.name}
-                />
+                <img className="dp-img" src={product.imageUrl} alt={product.name} />
                 <div className="dp-info">
                   <h1 className="dp-info-header">{product.name}</h1>
                   <p className="dp-info-price">${product.price}</p>

@@ -11,7 +11,7 @@ export default class Edit extends Component {
       name: '',
       price: '',
       description: '',
-      imageUrl: '',
+      image: '',
       category: '',
       objectId: '',
       categoryName: '',
@@ -20,18 +20,29 @@ export default class Edit extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
+    let value;
+    if (e.target.name === 'image') {
+      value = e.target.files[0];
+    } else {
+      value = e.target.value;
+    }
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     });
   }
   addProduct() {
-    const { name, price, description, imageUrl, category } = this.state;
+    const { name, price, description, image, category } = this.state;
+    const fd = new FormData();
+    fd.append('name', name);
+    fd.append('price', price);
+    fd.append('description', description);
+    fd.append('image', image, image.name);
+    fd.append('category', category);
     const api = 'http://localhost:8080/product';
-    const data = { name, price, description, imageUrl, category };
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
-      .post(api, data, config)
+      .post(api, fd, config)
       .then(response => {
         console.log(response);
       })
@@ -154,13 +165,8 @@ export default class Edit extends Component {
             onChange={this.handleChange}
             value={this.state.description}
           />
-          <h4>ImageUrl:</h4>
-          <input
-            type="text"
-            name="imageUrl"
-            onChange={this.handleChange}
-            value={this.state.imageUrl}
-          />
+          <h4>Image:</h4>
+          <input type="file" name="image" onChange={this.handleChange} />
           <h4>Category:</h4>
           <input
             type="text"

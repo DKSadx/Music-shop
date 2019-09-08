@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const Category = require('../models/category');
 const Product = require('../models/product');
 const PopularMenu = require('../models/popularMenu');
@@ -28,11 +31,15 @@ exports.getProduct = async (req, res) => {
 
 // Adds product to db and adds it to the corresponding category
 exports.addProduct = async (req, res) => {
+  if (!req.file) {
+    throw new Error('No image provided.');
+  }
+  const imageUrl = `http://localhost:8080/${req.file.path}`;
   const product = new Product({
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
-    imageUrl: req.body.imageUrl,
+    imageUrl,
     category: req.body.category
   });
   product.save();
@@ -50,6 +57,9 @@ exports.deleteProduct = async (req, res) => {
   } else {
     product = await Product.find({ name: req.body.name });
   }
+  const rootDir = path.dirname(require.main.filename);
+  const imagePath = path.join(rootDir, `/images${product[0].imageUrl.split('images')[1]}`);
+  fs.unlink(imagePath, err => err && console.log(err));
   await Category.updateOne({ name: product[0].category }, { $pull: { products: product[0]._id } });
   const isDeleted = await Product.deleteOne({ _id: product[0]._id });
   // Checks if the number of deleted products !== 0
