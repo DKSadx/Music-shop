@@ -7,26 +7,28 @@ export default function Footer() {
     <footer>
       <ul className="footer-social">
         <h4>Follow us</h4>
-        <li>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <img src="/icons/facebook.png" alt="facebook icon" />
-          </a>
-        </li>
-        <li>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <img src="/icons/instagram.png" alt="instagram icon" />
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-            <img src="/icons/twitter.png" alt="twitter icon" />
-          </a>
-        </li>
-        <li>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-            <img src="/icons/youtube.png" alt="youtube icon" />
-          </a>
-        </li>
+        <div className="footer-icons">
+          <li>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <img src="/icons/facebook.png" alt="facebook icon" />
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <img src="/icons/instagram.png" alt="instagram icon" />
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <img src="/icons/twitter.png" alt="twitter icon" />
+            </a>
+          </li>
+          <li>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+              <img src="/icons/youtube.png" alt="youtube icon" />
+            </a>
+          </li>
+        </div>
       </ul>
       <ul className="footer-info">
         <li>
