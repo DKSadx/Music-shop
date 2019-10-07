@@ -1,3 +1,5 @@
+$main-color: #ff8f27;
+
 @mixin details-button {
   background-color: #cccc;
   border-radius: 5%;
@@ -23,8 +25,8 @@
   transform: translateY(-50%);
   height: 60%;
   width: 40%;
-  button {
-    display: none;
+  #trending-item-buy {
+    visibility: hidden;
   }
   p {
     bottom: -20%;
@@ -41,22 +43,27 @@
     height: 10vh;
     width: 20vw;
   }
-  &:hover {
+  &:hover,
+  &:focus {
     background-image: url($bg-image-hover);
     background-size: 100% 100%;
     height: 100%;
     transition-duration: 300ms;
     transition-property: height, width;
     width: 100%;
+    #trending-item-buy {
+      visibility: visible;
+      position: absolute;
+      bottom: 10%;
+      left: 15%;
+      font-size: 4vmin;
+      font-family: Quarca, Tahoma, Sans-Serif;
+      &:hover {
+        color: $main-color;
+      }
+    }
     p {
       visibility: hidden;
-    }
-    button {
-      @include details-button();
-      &:hover {
-        background-color: #000;
-        color: #fff;
-      }
     }
   }
 }
@@ -85,7 +92,7 @@
   background-image: url('../../assets/images/gradient.png');
   background-size: 100% 100%;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, auto);
   grid-template-rows: auto;
   height: 60vh;
   width: 100%;
@@ -93,13 +100,44 @@
   #trending-item {
     // background-image, grid-column
     &-1 {
-      @include trending-items('../../assets/images/trending-1.png', '../../assets/images/trending-1-hover.png', 1/2);
+      @include trending-items(
+        '../../assets/images/trending-1.png',
+        '../../assets/images/trending-1-hover.png',
+        1/2
+      );
     }
     &-2 {
-      @include trending-items('../../assets/images/trending-2.png', '../../assets/images/trending-2-hover.png', 2/3);
+      @include trending-items(
+        '../../assets/images/trending-2.png',
+        '../../assets/images/trending-2-hover.png',
+        2/3
+      );
     }
     &-3 {
-      @include trending-items('../../assets/images/trending-3.png', '../../assets/images/trending-3-hover.png', 3/4);
+      @include trending-items(
+        '../../assets/images/trending-3.png',
+        '../../assets/images/trending-3-hover.png',
+        3/4
+      );
     }
+  }
+}
+
+@media (max-width: 767px) {
+  .trending-menu-items {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, auto);
+    height: 120vh;
+    #trending-item {
+      &-1,
+      &-2,
+      &-3 {
+        width: 50%;
+      }
+    }
+  }
+  #trending-item-buy {
+    font-size: 6vmin !important; // !important overwrites mixin when max-width is < 768px
   }
 }
