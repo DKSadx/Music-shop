@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './Slideshow.scss';
 import { slideshowText } from './text';
-import { textAnimation } from './animations';
+import { textAnimation, textAnimationMobile } from './animations';
 
 let currentSlide = 1;
 export default class Slideshow extends Component {
@@ -26,9 +26,13 @@ export default class Slideshow extends Component {
     clearTimeout(this.interval);
   }
   render() {
-    return (
+    return window.innerWidth > 900 ? (
       <div className={`slide-${currentSlide}`}>
         {textAnimation(slideshowText, currentSlide - 1)}
+      </div>
+    ) : (
+      <div className={`slide-${currentSlide}-mobile`}>
+        {textAnimationMobile(slideshowText, currentSlide - 1)}
       </div>
     );
   }

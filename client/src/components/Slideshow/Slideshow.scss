@@ -5,9 +5,17 @@
   transition-duration: 400ms;
   transition-property: background;
   transition-timing-function: ease-in;
-  width: 100%;
 }
-
+@mixin image-properties-mobile($image) {
+  background-image: url($image);
+  transition-duration: 400ms;
+  transition-property: background;
+  transition-timing-function: ease-in;
+  padding-top: 66.64%;
+  background-size: cover;
+  height: 60vh;
+  background-repeat: no-repeat;
+}
 .slide-1 {
   @include image-properties('../../assets/images/1.jpg');
 }
@@ -22,4 +30,25 @@
   font-family: Gravity, 'Times New Roman', Times, serif;
   font-size: 3vmin;
   width: 30%;
+}
+
+@media (max-width: 900px) {
+  .slide-1-mobile {
+    @include image-properties-mobile('../../assets/images/1-mobile.jpg');
+  }
+  .slide-2-mobile {
+    @include image-properties-mobile('../../assets/images/2-mobile.jpg');
+  }
+  .slide-3-mobile {
+    @include image-properties-mobile('../../assets/images/3-mobile.jpg');
+  }
+  .slide-text {
+    position: absolute;
+    font-size: 4vmin;
+    text-align: center;
+    width: 60%;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
