@@ -109,13 +109,50 @@ $hover-color: #c06b1b;
   cursor: pointer;
   font-size: 2vmin;
   height: 5vh;
-  left: 30%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   min-width: fit-content;
   position: absolute;
-  top: 45%;
-  width: 40%;
+  width: 60%;
   font-family: Arial, Helvetica, sans-serif;
   &:hover {
     background-color: #c06b1bee;
+  }
+}
+
+@media (max-width: 450px) {
+  .dp-container {
+    height: 60vh;
+    grid-template-rows: 1fr 1fr;
+  }
+  .dp-info {
+    &-text {
+      border-top: 1px solid #ccc;
+      font-size: 2.5vmin;
+      padding-top: 3%;
+    }
+    &-btn {
+      height: 4vh;
+      margin: 5% 0 5% 10%;
+      width: 50%;
+    }
+    &-qty {
+      font-size: 2.5vmin;
+      height: 3.5vh;
+      width: 15%;
+      &-icons {
+        font-size: 3vmin;
+      }
+    }
+  }
+  .dp-description-text {
+    font-size: 2.5vmin;
+  }
+  .details-btn {
+    height: 15%;
+    width: 70%;
+    border-radius: 5%;
+    font-size: 2.5vmin;
   }
 }

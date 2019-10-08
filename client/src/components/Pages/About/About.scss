@@ -1,6 +1,6 @@
 .about-page {
   height: 100vh;
-  background-color: #000;
+  background-color: #141027;
 }
 .about-cover {
   height: 100%;
@@ -28,5 +28,28 @@
     left: 4%;
     position: absolute;
     width: 30%;
+  }
+}
+
+@media (max-width: 450px) {
+  .about-cover {
+    height: 50%;
+    &-image {
+      background-image: url('../../../assets/images/about-mobile.jpg');
+      background-size: cover;
+    }
+    h1 {
+      position: static;
+      text-align: center;
+      font-size: 8vmin;
+      padding: 5% 0;
+    }
+    p {
+      position: static;
+      text-align: center;
+      padding: 5% 10%;
+      width: auto;
+      font-size: 4vmin;
+    }
   }
 }

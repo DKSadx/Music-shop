@@ -46,6 +46,7 @@ $main-color: #ff8f27;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
   margin: 0 3vw 1vh 3vw;
+  text-align: center;
   li {
     font-size: 2.5vmin;
     font-weight: bold;
@@ -67,7 +68,7 @@ $main-color: #ff8f27;
     width: 100%;
   }
   &-name {
-    font-family: 'Madeleina-sans';
+    font-family: 'Madeleina-sans', 'Arial Narrow', Arial, sans-serif;
     font-size: 3vmin;
     grid-column: 2/3;
     grid-row: 1/2;
@@ -77,40 +78,33 @@ $main-color: #ff8f27;
     align-self: center;
     grid-column: 3/4;
     grid-row: 1/2;
+    text-align: center;
   }
   &-qty {
     display: flex;
     grid-column: 4/5;
     grid-row: 1/2;
-    left: -4%;
-    position: relative;
+    justify-content: center;
+    align-items: center;
     &-minus {
       cursor: pointer;
-      height: 5vh;
-      left: -14%;
-      line-height: 5vh;
-      position: absolute;
     }
     &-number {
       border: 1px $main-color solid;
       font-size: 2vmin;
-      height: 5vh;
-      line-height: 5vh;
+      padding: 1vw;
+      margin: 0 1vw;
       text-align: center;
-      width: 3.5vw;
     }
     &-plus {
       cursor: pointer;
-      height: 5vh;
-      left: 35%;
-      line-height: 5vh;
-      position: absolute;
     }
   }
   &-total {
     align-self: center;
     grid-column: 5/6;
     grid-row: 1/2;
+    text-align: center;
   }
   &-description {
     background-color: #fdfbf9;
@@ -126,6 +120,7 @@ $main-color: #ff8f27;
     cursor: pointer;
     grid-column: 5/6;
     grid-row: 2/3;
+    text-align: center;
     &:hover {
       color: #aa611d;
     }
@@ -182,4 +177,20 @@ $main-color: #ff8f27;
   right: 7%;
   top: 7%;
   z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .cart-product {
+    height: 10vh;
+  }
+  .cart-items-container {
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+  .cart-checkout {
+    button {
+      height: 5vh;
+    }
+  }
 }

@@ -8,6 +8,10 @@ $main-color: #ff8f27;
     color: $main-color;
     transition: color 300ms;
   }
+  @media (max-width: 767px) {
+    font-size: 4vmin;
+    margin-left: 8vw;
+  }
 }
 #logo {
   align-self: center;
@@ -159,6 +163,43 @@ $main-color: #ff8f27;
           color: $main-color;
         }
       }
+    }
+  }
+}
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+@media (max-width: 1550px) {
+  .dropdown-text {
+    font-size: 1.4vmin !important;
+  }
+}
+@media (max-width: 767px) {
+  .main-nav-bar-end {
+    display: flex;
+    position: absolute;
+    right: 8vw;
+    top: 50%;
+    transform: translateY(-50%);
+    li {
+      font-size: 2.5vmin;
+    }
+  }
+  .signup-btn {
+    font-size: 2vmin;
+    padding: 8% 3vw;
+  }
+  .cart-icon-number {
+    font-size: 2vmin;
+    height: 2.5vmin;
+    line-height: 2.5vmin;
+    width: 2.5vmin;
+  }
+  .dropdown-text {
+    font-size: 2.3vmin !important;
+    i {
+      padding-left: 10%;
     }
   }
 }

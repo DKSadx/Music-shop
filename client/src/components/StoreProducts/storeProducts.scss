@@ -7,7 +7,7 @@ $hover-color: #c06b1b;
 }
 
 .store-categories {
-  margin: 20%;
+  margin: 10%;
   .store-categories-grid {
     list-style-position: inside;
     list-style: none;
@@ -48,9 +48,9 @@ $hover-color: #c06b1b;
   margin: 5% 10% 10% 5%;
   width: auto;
   background-color: #fff;
-  .store-products-grid {
+  &-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     height: 100%;
     li {
       background-color: #fff;
@@ -96,23 +96,19 @@ $hover-color: #c06b1b;
 .products-info-text {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  height: 10vh;
-  margin: auto;
-  width: 100%;
+  grid-template-rows: 1fr;
+  padding-top: 10%;
+  column-gap: 5%;
   button {
     border-radius: 5%;
     background-color: $main-color;
-    bottom: 0;
     cursor: pointer;
     font-size: 1.8vmin;
     grid-column: 2/3;
-    grid-row: 1/2;
+    grid-row: 1/3;
+    align-self: center;
     height: fit-content;
-    right: 0;
     padding: 2%;
-    position: absolute;
-    width: 35%;
     &:hover {
       background-color: $hover-color;
       color: #000;
@@ -159,6 +155,7 @@ $hover-color: #c06b1b;
 .currentPage {
   font-weight: bolder;
   font-size: 2.2vmin;
+  align-self: center;
 }
 
 .store-fetching {
@@ -172,5 +169,38 @@ $hover-color: #c06b1b;
     text-align: center;
     top: 33vh;
     width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .store-categories {
+    margin: 20% 5%;
+  }
+  .store-products {
+    &-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .products-info {
+    &-text {
+      button {
+        font-size: 1.2vmin;
+      }
+    }
+    &-image {
+      height: 15vh;
+    }
+    &-name {
+      font-size: 2vmin;
+    }
+
+    &-price {
+      font-size: 2vmin;
+    }
+    &:hover {
+      .products-info-overlay {
+        height: 15vh;
+      }
+    }
   }
 }
