@@ -7,6 +7,7 @@ import axios from 'axios';
 import './PopularMenu.scss';
 import DetailsPage from '../Modals/DetailsPage/DetailsPage';
 import Spinner from '../Spinner/Spinner';
+import { baseIp } from '../../utils/consts';
 
 class PopularMenu extends Component {
   constructor(props) {
@@ -14,8 +15,8 @@ class PopularMenu extends Component {
     this.state = {
       products: null,
       query: {
-        productId: ''
-      }
+        productId: '',
+      },
     };
     this.showDetailsPage = this.showDetailsPage.bind(this);
     this.closeDetailsPage = this.closeDetailsPage.bind(this);
@@ -47,22 +48,22 @@ class PopularMenu extends Component {
   showDetailsPage(productId) {
     this.props.history.push({
       pathname: '/',
-      search: `?productId=${productId}`
+      search: `?productId=${productId}`,
     });
     this.setState({
-      query: { productId }
+      query: { productId },
     });
   }
 
   closeDetailsPage() {
     this.props.history.push('/');
     this.setState({
-      query: { productId: null }
+      query: { productId: null },
     });
   }
 
   componentDidMount() {
-    const api = 'http://localhost:8080/product/getPopularMenu';
+    const api = `${baseIp}/product/getPopularMenu`;
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
@@ -70,7 +71,7 @@ class PopularMenu extends Component {
       .then(res => {
         if (res.data.products) {
           this.setState({
-            products: res.data.products
+            products: res.data.products,
           });
         }
       })
@@ -96,8 +97,8 @@ class PopularMenu extends Component {
                   staggerFrom={{
                     opacity: 0,
                     cycle: {
-                      x: 500
-                    }
+                      x: 500,
+                    },
                   }}
                   stagger={0.5}
                 >

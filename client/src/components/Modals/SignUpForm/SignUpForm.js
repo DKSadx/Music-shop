@@ -5,6 +5,7 @@ import axios from 'axios';
 import './SignUpForm.scss';
 import Spinner from '../../Spinner/Spinner';
 import { delay, validation } from '../../../utils/functions';
+import { baseIp } from '../../../utils/consts';
 
 export default class SignUpForm extends Component {
   constructor(props) {
@@ -12,22 +13,22 @@ export default class SignUpForm extends Component {
     this.state = {
       username: {
         value: '',
-        errorMessage: ''
+        errorMessage: '',
       },
       email: {
         value: '',
-        errorMessage: ''
+        errorMessage: '',
       },
       password: {
         value: '',
-        errorMessage: ''
+        errorMessage: '',
       },
       repeatedPassword: {
         value: '',
-        errorMessage: ''
+        errorMessage: '',
       },
       isLoading: false,
-      isSignUpSuccessful: false
+      isSignUpSuccessful: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,8 +37,8 @@ export default class SignUpForm extends Component {
     this.setState({
       [e.target.name]: {
         ...this.state[e.target.name],
-        value: e.target.value
-      }
+        value: e.target.value,
+      },
     });
   }
   handleSubmit(e) {
@@ -46,16 +47,16 @@ export default class SignUpForm extends Component {
     const validated = validation(email, password, repeatedPassword);
     if (validated.isValid) {
       this.setState({
-        isLoading: true
+        isLoading: true,
       });
       // Displays spinner for 1.5s
       delay(1500).then(() => {
         const { username, email, password } = this.state;
         axios
-          .post('http://localhost:8080/auth/signup', {
+          .post(`${baseIp}/auth/signup`, {
             username: username.value,
             email: email.value,
-            password: password.value
+            password: password.value,
           })
           .then(res => {
             // Checks if server side validation has errors
@@ -65,27 +66,27 @@ export default class SignUpForm extends Component {
               this.setState({
                 username: {
                   ...this.state.username,
-                  errorMessage: username
+                  errorMessage: username,
                 },
                 email: {
                   ...this.state.email,
-                  errorMessage: email
+                  errorMessage: email,
                 },
                 password: {
                   ...this.state.password,
-                  errorMessage: password
+                  errorMessage: password,
                 },
-                isLoading: false
+                isLoading: false,
               });
             } else if (res.data.isSuccessful) {
               this.setState({
-                isSignUpSuccessful: true
+                isSignUpSuccessful: true,
               });
             }
           })
           .catch(err => {
             this.setState({
-              isLoading: false
+              isLoading: false,
             });
             console.log(err);
           });
@@ -94,16 +95,16 @@ export default class SignUpForm extends Component {
       this.setState({
         email: {
           ...this.state.email,
-          errorMessage: validated.errorMessages.email
+          errorMessage: validated.errorMessages.email,
         },
         password: {
           ...this.state.password,
-          errorMessage: validated.errorMessages.password
+          errorMessage: validated.errorMessages.password,
         },
         repeatedPassword: {
           ...this.state.repeatedPassword,
-          errorMessage: validated.errorMessages.repeatedPassword
-        }
+          errorMessage: validated.errorMessages.repeatedPassword,
+        },
       });
     }
   }
@@ -122,23 +123,14 @@ export default class SignUpForm extends Component {
       password,
       repeatedPassword,
       isLoading,
-      isSignUpSuccessful
+      isSignUpSuccessful,
     } = this.state;
+    const { close, show } = this.props;
     return (
       <div className="sign-up-page">
-        <Tween
-          from={{
-            y: 100,
-            opacity: 0
-          }}
-          to={{
-            y: -350,
-            opacity: 1
-          }}
-          duration={0.5}
-        >
+        <Tween from={{ y: 100, opacity: 0 }} to={{ y: -350, opacity: 1 }} duration={0.5}>
           <form autoComplete="off" className="sign-up-form" onSubmit={this.handleSubmit}>
-            <i className="close-icon far fa-times-circle" onClick={() => this.props.close()} />
+            <i className="close-icon far fa-times-circle" onClick={() => close()} />
             {!isSignUpSuccessful ? (
               <>
                 <h2>Sign Up</h2>
@@ -208,7 +200,7 @@ export default class SignUpForm extends Component {
                 ) : (
                   <p className="input-message-error">{repeatedPassword.errorMessage}</p>
                 )}
-                <p className="a-like" onClick={() => this.props.show('signIn')}>
+                <p className="a-like" onClick={() => show('signIn')}>
                   Already have an account?
                 </p>
                 {isLoading ? (

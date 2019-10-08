@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Tween } from 'react-gsap';
 
 import './Account.scss';
-import emailRegex from '../../../utils/consts';
+import { emailRegex, baseIp } from '../../../utils/consts';
 
 export default class Account extends Component {
   constructor(props) {
@@ -17,16 +17,16 @@ export default class Account extends Component {
       errors: {
         username: '',
         email: '',
-        password: ''
-      }
+        password: '',
+      },
     };
     this.handleChange = this.handleChange.bind(this);
   }
   changeUsername(e) {
     e.preventDefault();
-    const api = 'http://localhost:8080/account/changeUsername';
+    const api = `${baseIp}/account/changeUsername`;
     const data = {
-      newUsername: this.state.username
+      newUsername: this.state.username,
     };
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -37,14 +37,14 @@ export default class Account extends Component {
           ? this.setState({
               errors: {
                 ...this.state.errors,
-                username: res.data.errorMessage
-              }
+                username: res.data.errorMessage,
+              },
             })
           : this.setState({
               errors: {
                 ...this.state.errors,
-                username: 'Changed'
-              }
+                username: 'Changed',
+              },
             });
       })
       .catch(err => console.log(err));
@@ -55,13 +55,13 @@ export default class Account extends Component {
       this.setState({
         errors: {
           ...this.state.errors,
-          email: 'Email is not valid!'
-        }
+          email: 'Email is not valid!',
+        },
       });
     } else {
-      const api = 'http://localhost:8080/account/changeEmail';
+      const api = `${baseIp}/account/changeEmail`;
       const data = {
-        newEmail: this.state.email
+        newEmail: this.state.email,
       };
       const jwtToken = localStorage.getItem('shop-token');
       const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -73,14 +73,14 @@ export default class Account extends Component {
             ? this.setState({
                 errors: {
                   ...this.state.errors,
-                  email: res.data.errorMessage
-                }
+                  email: res.data.errorMessage,
+                },
               })
             : this.setState({
                 errors: {
                   ...this.state.errors,
-                  email: 'Changed'
-                }
+                  email: 'Changed',
+                },
               });
         })
         .catch(err => console.log(err));
@@ -93,14 +93,14 @@ export default class Account extends Component {
       this.setState({
         errors: {
           ...this.state.errors,
-          password: "Passwords don't match!"
-        }
+          password: "Passwords don't match!",
+        },
       });
     } else {
-      const api = 'http://localhost:8080/account/changePassword';
+      const api = `${baseIp}/account/changePassword`;
       const data = {
         oldPassword,
-        newPassword
+        newPassword,
       };
       const jwtToken = localStorage.getItem('shop-token');
       const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -111,14 +111,14 @@ export default class Account extends Component {
             ? this.setState({
                 errors: {
                   ...this.state.errors,
-                  password: res.data.errorMessage
-                }
+                  password: res.data.errorMessage,
+                },
               })
             : this.setState({
                 errors: {
                   ...this.state.errors,
-                  password: 'Changed'
-                }
+                  password: 'Changed',
+                },
               });
         })
         .catch(err => console.log(err));
@@ -126,7 +126,7 @@ export default class Account extends Component {
   }
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
   render() {

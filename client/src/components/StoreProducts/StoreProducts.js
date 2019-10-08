@@ -8,6 +8,7 @@ import { addToCart } from '../../utils/functions';
 import DetailsPage from '../Modals/DetailsPage/DetailsPage';
 import Spinner from '../Spinner/Spinner';
 import CartNotification from '../CartNotification/CartNotification';
+import { baseIp } from '../../utils/consts';
 
 class StoreProducts extends Component {
   constructor(props) {
@@ -19,8 +20,8 @@ class StoreProducts extends Component {
       // Url string query
       query: {
         ...this.props.query,
-        category: this.props.query.category ? this.props.query.category : 'all'
-      }
+        category: this.props.query.category ? this.props.query.category : 'all',
+      },
     };
     this.addItemToCart = this.addItemToCart.bind(this);
     this.showDetailsPage = this.showDetailsPage.bind(this);
@@ -35,12 +36,12 @@ class StoreProducts extends Component {
           className="category-list-items"
           to={{
             pathname: '/store',
-            search: '?category=all&page=1'
+            search: '?category=all&page=1',
           }}
           onClick={async () => {
             await this.setState({
               currentPage: 1,
-              query: { ...this.state.query, category: 'all' }
+              query: { ...this.state.query, category: 'all' },
             });
             this.fetchProducts();
           }}
@@ -128,7 +129,7 @@ class StoreProducts extends Component {
             <Link
               to={{
                 pathname: '/store',
-                search: `?category=${query.category}&page=${currentPage > 1 ? currentPage - 1 : 1}`
+                search: `?category=${query.category}&page=${currentPage > 1 ? currentPage - 1 : 1}`,
               }}
               onClick={async () => {
                 // Prevents setting the current page to less than 1 with left arrow
@@ -148,7 +149,7 @@ class StoreProducts extends Component {
               <Link
                 to={{
                   pathname: '/store',
-                  search: `?category=${query.category}&page=${currentPage - 1}`
+                  search: `?category=${query.category}&page=${currentPage - 1}`,
                 }}
                 onClick={async () => {
                   await this.setState({ currentPage: currentPage - 1 });
@@ -189,7 +190,7 @@ class StoreProducts extends Component {
                 <Link
                   to={{
                     pathname: '/store',
-                    search: `?category=${query.category}&page=2`
+                    search: `?category=${query.category}&page=2`,
                   }}
                   onClick={async () => {
                     await this.setState({ currentPage: 2 });
@@ -206,7 +207,7 @@ class StoreProducts extends Component {
                 <Link
                   to={{
                     pathname: '/store',
-                    search: `?category=${query.category}&page=3`
+                    search: `?category=${query.category}&page=3`,
                   }}
                   onClick={async () => {
                     await this.setState({ currentPage: 3 });
@@ -226,7 +227,7 @@ class StoreProducts extends Component {
             <Link
               to={{
                 pathname: '/store',
-                search: `?category=${query.category}&page=${currentPage + 1}`
+                search: `?category=${query.category}&page=${currentPage + 1}`,
               }}
               onClick={async () => {
                 await this.setState({ currentPage: currentPage + 1 });
@@ -246,20 +247,20 @@ class StoreProducts extends Component {
     if (category && category !== 'all') {
       // Fetch one category of products
       axios
-        .get(`http://localhost:8080/category/${category}?page=${this.state.currentPage}`)
+        .get(`${baseIp}/category/${category}?page=${this.state.currentPage}`)
         .then(result => {
           this.setState({
             products: result.data.products ? result.data.products : [],
-            lastPage: result.data.lastPage
+            lastPage: result.data.lastPage,
           });
         })
         .catch(err => console.log(err));
     } else {
       // Fetch all products if the category isn't set
-      axios.get(`http://localhost:8080/product?page=${this.state.currentPage}`).then(result => {
+      axios.get(`${baseIp}/product?page=${this.state.currentPage}`).then(result => {
         this.setState({
           products: result.data.products,
-          lastPage: result.data.lastPage
+          lastPage: result.data.lastPage,
         });
       });
     }
@@ -268,17 +269,17 @@ class StoreProducts extends Component {
   showDetailsPage(productId) {
     this.props.history.push({
       pathname: '/store',
-      search: `?productId=${productId}`
+      search: `?productId=${productId}`,
     });
     this.setState({
-      query: { productId }
+      query: { productId },
     });
   }
   // Closes product details modal
   closeDetailsPage() {
     this.props.history.push('/store');
     this.setState({
-      query: { productId: null }
+      query: { productId: null },
     });
   }
   // Shows 'Added to cart' notification
@@ -289,10 +290,10 @@ class StoreProducts extends Component {
   componentDidMount() {
     // Get the category names
     axios
-      .get('http://localhost:8080/category')
+      .get(`${baseIp}/category`)
       .then(res => {
         this.setState({
-          categories: res.data
+          categories: res.data,
         });
       })
       .catch(err => console.log(err));

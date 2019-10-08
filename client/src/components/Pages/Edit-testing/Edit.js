@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import './Edit.scss';
+import { baseIp } from '../../../utils/consts';
 
 export default class Edit extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class Edit extends Component {
       category: '',
       objectId: '',
       categoryName: '',
-      isAdmin: false
+      isAdmin: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -27,7 +28,7 @@ export default class Edit extends Component {
       value = e.target.value;
     }
     this.setState({
-      [e.target.name]: value
+      [e.target.name]: value,
     });
   }
   addProduct() {
@@ -38,7 +39,7 @@ export default class Edit extends Component {
     fd.append('description', description);
     fd.append('image', image, image.name);
     fd.append('category', category);
-    const api = 'http://localhost:8080/product';
+    const api = `${baseIp}/product`;
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
@@ -52,17 +53,17 @@ export default class Edit extends Component {
   }
 
   deleteProduct(objectId) {
-    const api = 'http://localhost:8080/product/delete';
+    const api = `${baseIp}/product/delete`;
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     let data;
     if (objectId) {
       data = {
-        objectId: this.state.objectId
+        objectId: this.state.objectId,
       };
     } else {
       data = {
-        name: this.state.name
+        name: this.state.name,
       };
     }
     axios
@@ -81,7 +82,7 @@ export default class Edit extends Component {
       price: '759.99',
       description: "Equipped with Seymour Duncan JB and '59 pickup set",
       imageUrl: '/Cort-z-custom-bs.jpg',
-      category: 'Guitars and Bass'
+      category: 'Guitars and Bass',
     });
   }
   clearProduct() {
@@ -90,12 +91,12 @@ export default class Edit extends Component {
       price: '',
       description: '',
       imageUrl: '',
-      category: ''
+      category: '',
     });
   }
   addCategory() {
     const name = this.state.categoryName;
-    const api = 'http://localhost:8080/category';
+    const api = `${baseIp}/category`;
     const data = { name };
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -110,9 +111,9 @@ export default class Edit extends Component {
   }
 
   deleteCategory() {
-    const api = 'http://localhost:8080/category/delete';
+    const api = `${baseIp}/category/delete`;
     const data = {
-      name: this.state.categoryName
+      name: this.state.categoryName,
     };
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -128,11 +129,11 @@ export default class Edit extends Component {
 
   fillCategory() {
     this.setState({
-      categoryName: 'Other'
+      categoryName: 'Other',
     });
   }
   componentDidMount() {
-    const api = 'http://localhost:8080/auth/isAdmin';
+    const api = `${baseIp}/auth/isAdmin`;
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
@@ -140,7 +141,7 @@ export default class Edit extends Component {
       .then(res => {
         if (res.data.isAdmin)
           this.setState({
-            isAdmin: true
+            isAdmin: true,
           });
       })
       .catch(err => {

@@ -6,6 +6,7 @@ import './DetailsPage.scss';
 import { addToCart, isAuth } from '../../../utils/functions';
 import CartNotification from '../../CartNotification/CartNotification';
 import Spinner from '../../Spinner/Spinner';
+import { baseIp } from '../../../utils/consts';
 
 export default class Details extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class Details extends Component {
       productId: this.props.productId,
       product: null,
       quantity: 1,
-      isLoggedIn: false
+      isLoggedIn: false,
     };
     this.changeQuantity = this.changeQuantity.bind(this);
   }
@@ -24,11 +25,11 @@ export default class Details extends Component {
     let { quantity } = this.state;
     if (sign === '-' && quantity > 1) {
       this.setState({
-        quantity: --quantity
+        quantity: --quantity,
       });
     } else if (sign === '+') {
       this.setState({
-        quantity: ++quantity
+        quantity: ++quantity,
       });
     }
   }
@@ -48,7 +49,7 @@ export default class Details extends Component {
   // Fetches product data
   async componentDidMount() {
     const { productId } = this.state;
-    const api = `http://localhost:8080/product/${productId}`;
+    const api = `${baseIp}/product/${productId}`;
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     const res = await axios.get(api, config);
@@ -61,15 +62,16 @@ export default class Details extends Component {
     }
     this.setState({
       product: res.data.product,
-      isLoggedIn
+      isLoggedIn,
     });
   }
   render() {
     const { productId, product, quantity, isLoggedIn } = this.state;
+    const { close } = this.props;
     return (
       <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} duration={0.8}>
         <div className="details-page">
-          <i className="close-icon far fa-times-circle" onClick={() => this.props.close()} />
+          <i className="close-icon far fa-times-circle" onClick={() => close()} />
           {/* If the this.notification inside this.addToCart() is set to true, show notification */}
           {this.notification && this.showNotification()}
           <div className="dp-container">
@@ -90,7 +92,7 @@ export default class Details extends Component {
                   {isLoggedIn ? (
                     <>
                       <i
-                        className="fas fa-minus noselect"
+                        className="fas fa-minus noselect dp-info-qty-icons"
                         onClick={() => this.changeQuantity('-')}
                       />
                       <input
@@ -100,7 +102,7 @@ export default class Details extends Component {
                         readOnly
                       />
                       <i
-                        className="fas fa-plus noselect"
+                        className="fas fa-plus noselect dp-info-qty-icons"
                         onClick={() => this.changeQuantity('+')}
                       />
                       <button

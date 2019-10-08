@@ -5,6 +5,7 @@ import axios from 'axios';
 import './SignInForm.scss';
 import Spinner from '../../Spinner/Spinner';
 import { delay } from '../../../utils/functions';
+import { baseIp } from '../../../utils/consts';
 
 export default class SignUpForm extends Component {
   constructor(props) {
@@ -13,28 +14,28 @@ export default class SignUpForm extends Component {
       username: '',
       password: '',
       errorMessage: '',
-      isLoading: false
+      isLoading: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
   handleSubmit(e) {
     e.preventDefault();
     this.setState({
-      isLoading: true
+      isLoading: true,
     });
     // Shows spinner for 1.5s -> validates JWT
     delay(1500).then(() => {
       const { username, password } = this.state;
-      const api = 'http://localhost:8080/auth/signin';
+      const api = `${baseIp}/auth/signin`;
       const data = {
         username,
-        password
+        password,
       };
       axios
         .post(api, data)
@@ -46,7 +47,7 @@ export default class SignUpForm extends Component {
           } else {
             this.setState({
               errorMessage: res.data.errorMessage,
-              isLoading: false
+              isLoading: false,
             });
           }
         })
@@ -56,23 +57,16 @@ export default class SignUpForm extends Component {
 
   render() {
     const { username, password, errorMessage, isLoading } = this.state;
+    const { close, show } = this.props;
     return (
       <div className="sign-in-page">
-        <Tween
-          from={{
-            y: 100,
-            opacity: 0
-          }}
-          to={{
-            y: -300,
-            opacity: 1
-          }}
-          duration={0.5}
-        >
+        <Tween from={{ y: 100, opacity: 0 }} to={{ y: -300, opacity: 1 }} duration={0.5}>
           <form autoComplete="off" className="sign-in-form" onSubmit={this.handleSubmit}>
-            <i className="close-icon far fa-times-circle" onClick={() => this.props.close()} />
+            <div className="close-icon" onClick={() => close()}>
+              <i className="far fa-times-circle" />
+            </div>
             <h2>Sign in</h2>
-            {errorMessage && <p className="sign-in-error">{this.state.errorMessage}</p>}
+            {errorMessage && <p className="sign-in-error">{errorMessage}</p>}
             <input
               className={errorMessage === '' ? 'auth-input' : 'auth-input-error'}
               type="text"
@@ -92,7 +86,7 @@ export default class SignUpForm extends Component {
               placeholder="Password"
               required
             />
-            <p className="a-like" onClick={() => this.props.show('signUp')}>
+            <p className="a-like" onClick={() => show('signUp')}>
               Don't have an account?
             </p>
             {isLoading ? (

@@ -4,6 +4,7 @@ import { Tween } from 'react-gsap';
 
 import './Cart.scss';
 import Spinner from '../../Spinner/Spinner';
+import { baseIp } from '../../../utils/consts';
 
 export default class Cart extends Component {
   constructor(props) {
@@ -11,16 +12,16 @@ export default class Cart extends Component {
     this.state = {
       cartItems: null,
       cartSize: 0,
-      totalPrice: 0
+      totalPrice: 0,
     };
     this.generateCartItems = this.generateCartItems.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
     this.changeQty = this.changeQty.bind(this);
   }
   removeFromCart(id) {
-    const api = 'http://localhost:8080/cart/removeFromCart';
+    const api = `${baseIp}/cart/removeFromCart`;
     const data = {
-      productId: id
+      productId: id,
     };
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -32,10 +33,10 @@ export default class Cart extends Component {
           this.setState(
             {
               cartItems: res.data.cart,
-              totalPrice: total
+              totalPrice: total,
             },
             // Sends updated amount to parent component via props function, Store <- NavBar <- Cart
-            () => this.props.updateCartSize(this.state.cartItems.length)
+            () => this.props.updateCartSize(this.state.cartItems.length),
           );
         }
       })
@@ -73,7 +74,7 @@ export default class Cart extends Component {
   }
   changeQty(productId, sign) {
     const value = sign === '-' ? -1 : 1;
-    const api = 'http://localhost:8080/cart/changeQuantity';
+    const api = `${baseIp}/cart/changeQuantity`;
     const data = { productId, value };
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
@@ -82,7 +83,7 @@ export default class Cart extends Component {
         const total = this.calculateTotal(res.data.cart);
         this.setState({
           cartItems: res.data.cart,
-          totalPrice: total
+          totalPrice: total,
         });
       }
     });
@@ -95,7 +96,7 @@ export default class Cart extends Component {
   }
   componentDidMount() {
     // Gets cart items from a db
-    const api = 'http://localhost:8080/cart/getCart';
+    const api = `${baseIp}/cart/getCart`;
     const jwtToken = localStorage.getItem('shop-token');
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios.get(api, config).then(res => {
@@ -103,7 +104,7 @@ export default class Cart extends Component {
         const total = this.calculateTotal(res.data.cart);
         this.setState({
           cartItems: res.data.cart,
-          totalPrice: total
+          totalPrice: total,
         });
       }
     });
@@ -111,10 +112,11 @@ export default class Cart extends Component {
 
   render() {
     const { cartItems, totalPrice } = this.state;
+    const { close } = this.props;
     return (
       <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} duration={0.8}>
         <div className="cart-page">
-          <i className="close-icon far fa-times-circle" onClick={() => this.props.close()} />
+          <i className="close-icon far fa-times-circle" onClick={() => close()} />
           <div className="cart-items-container">
             <h1 className="cart-header">Shopping cart</h1>
             {cartItems ? (
