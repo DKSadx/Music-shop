@@ -19,7 +19,7 @@ const fileStorage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
-  }
+  },
 });
 
 const fileFilter = (req, file, cb) => {
@@ -44,6 +44,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// Prints ip address
+// const os = require('os');
+// const networkInterfaces = os.networkInterfaces();
+// console.log(networkInterfaces.wlo1[0].address);
+
 // Routes
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
@@ -54,7 +59,7 @@ app.use('/account', accountRoutes);
 mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_DATABASE}`,
-    { useNewUrlParser: true }
+    { useNewUrlParser: true },
   )
   .then(result => {
     app.listen(process.env.PORT || 8080);

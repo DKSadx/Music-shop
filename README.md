@@ -10,7 +10,7 @@ Modern e-commerce SPA(single-page app) made with MERN stack.
 
 #### To do:
 
-status codes, error handling, smaller screens design, logo, add more products
+error handling, logo, add more products
 
 #### Video:
 
@@ -37,7 +37,7 @@ status codes, error handling, smaller screens design, logo, add more products
 \***Server:**
 
 - Nginx
-- CentOS/Ubuntu
+- CentOS
 
 \*_Will be added later_
 

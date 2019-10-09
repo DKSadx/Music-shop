@@ -10,62 +10,41 @@ export default class About extends Component {
     document.title = 'Store';
     super(props);
     this.state = {
-      cartSize: 0
+      cartSize: 0,
     };
     this.updateCartSize = this.updateCartSize.bind(this);
   }
   updateCartSize(cartSize) {
     this.setState({
-      cartSize
+      cartSize,
     });
   }
   async componentDidMount() {
     const cartSize = await getCartSize();
     this.setState({
-      cartSize
+      cartSize,
     });
   }
   render() {
+    const { cartSize } = this.state;
     return (
       <div className="about-page">
-        <NavBar cartSize={this.state.cartSize} updateCartSize={this.updateCartSize} />
+        <NavBar cartSize={cartSize} updateCartSize={this.updateCartSize} />
         <section className="about-cover">
-          <Tween
-            from={{
-              y: '50vh',
-              opacity: 0
-            }}
-            to={{
-              y: 0,
-              opacity: 1
-            }}
-            duration={1}
-          >
+          <Tween from={{ y: '50vh', opacity: 0 }} to={{ y: 0, opacity: 1 }} duration={1}>
             <div className="about-cover-image" />
           </Tween>
           <Tween
-            from={{
-              x: -500,
-              opacity: 0
-            }}
-            to={{
-              x: '0',
-              opacity: 1
-            }}
+            from={{ x: -500, opacity: 0 }}
+            to={{ x: '0', opacity: 1 }}
             delay={0.5}
             duration={1}
           >
             <h1>About us</h1>
           </Tween>
           <Tween
-            from={{
-              x: -100,
-              opacity: 0
-            }}
-            to={{
-              x: '0',
-              opacity: 1
-            }}
+            from={{ x: -100, opacity: 0 }}
+            to={{ x: '0', opacity: 1 }}
             delay={1.5}
             duration={1}
           >

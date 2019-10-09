@@ -13,19 +13,19 @@ export default class Home extends Component {
     document.title = 'Home';
     super(props);
     this.state = {
-      cartSize: 0
+      cartSize: 0,
     };
     this.updateCartSize = this.updateCartSize.bind(this);
   }
   updateCartSize(cartSize) {
     this.setState({
-      cartSize
+      cartSize,
     });
   }
   async componentDidMount() {
     const cartSize = await getCartSize();
     this.setState({
-      cartSize
+      cartSize,
     });
   }
   render() {
