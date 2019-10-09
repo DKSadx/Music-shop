@@ -1,5 +1,6 @@
 import axios from 'axios';
-import emailRegex from './consts';
+import { emailRegex } from './consts';
+import { baseIp } from './consts';
 
 // Used for delaying next action for x amount of ms
 export const delay = time => new Promise(resolve => setTimeout(resolve, time));
@@ -10,7 +11,7 @@ export const validation = (email, password, repeatedPassword) => {
   const errorMessages = {
     email: '',
     password: '',
-    repeatedPassword: ''
+    repeatedPassword: '',
   };
   if (password.value !== repeatedPassword.value) {
     isValid = false;
@@ -33,10 +34,10 @@ export const validation = (email, password, repeatedPassword) => {
 
 export const addToCart = async (productId, quantity = 1) => {
   const jwtToken = localStorage.getItem('shop-token');
-  const api = 'http://localhost:8080/cart/addToCart';
+  const api = `${baseIp}/cart/addToCart`;
   const data = {
     productId,
-    quantity
+    quantity,
   };
   const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
   const res = await axios.post(api, data, config);
@@ -45,7 +46,7 @@ export const addToCart = async (productId, quantity = 1) => {
 
 export const getCartSize = async () => {
   const jwtToken = localStorage.getItem('shop-token');
-  const api = 'http://localhost:8080/cart/getCartSize';
+  const api = `${baseIp}/cart/getCartSize`;
   const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
   const res = await axios.get(api, config);
   return res.data.cartSize;
@@ -53,7 +54,7 @@ export const getCartSize = async () => {
 
 export const isAuth = async () => {
   const jwtToken = localStorage.getItem('shop-token');
-  const api = 'http://localhost:8080/auth/isauth';
+  const api = `${baseIp}/auth/isauth`;
   const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
   const res = await axios.get(api, config);
   return res.data.isAuth;
