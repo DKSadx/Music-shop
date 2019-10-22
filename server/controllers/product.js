@@ -5,6 +5,7 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 const PopularMenu = require('../models/popularMenu');
 const ITEMS_PER_PAGE = require('../utils/variables').ITEMS_PER_PAGE;
+const baseIp = require('../utils/variables').baseIp;
 
 // Returns all products
 exports.getAllProducts = async (req, res) => {
@@ -17,7 +18,7 @@ exports.getAllProducts = async (req, res) => {
   res.send({
     products,
     page,
-    lastPage
+    lastPage,
   });
 };
 // Returns single product
@@ -25,7 +26,7 @@ exports.getProduct = async (req, res) => {
   const id = req.params.id;
   const product = await Product.findById(id);
   res.send({
-    product
+    product,
   });
 };
 
@@ -34,13 +35,13 @@ exports.addProduct = async (req, res) => {
   if (!req.file) {
     throw new Error('No image provided.');
   }
-  const imageUrl = `http://localhost:8080/${req.file.path}`;
+  const imageUrl = `${baseIp}/${req.file.path}`;
   const product = new Product({
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
     imageUrl,
-    category: req.body.category
+    category: req.body.category,
   });
   product.save();
   const productCategory = { name: req.body.category };
@@ -69,6 +70,6 @@ exports.deleteProduct = async (req, res) => {
 exports.getPopularMenu = async (req, res) => {
   const products = await PopularMenu.find().populate('product');
   res.send({
-    products
+    products,
   });
 };
