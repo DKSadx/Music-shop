@@ -31,21 +31,19 @@ $main-background-color: #32364a;
   border: 0.1vh $main-text-color solid;
   border-top: 0.7vh $main-text-color solid;
   height: fit-content;
-  left: 55%;
   position: relative;
-  top: 70vh;
-  transform: translate(-55%, -50%);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 30%;
   z-index: 1;
   @media (max-width: 767px) {
     width: 80%;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 60%;
   }
 
   h2 {
     color: $main-text-color;
-    font-family: 'Madeleina-sans', Tahoma, Sans-Serif;
     font-family: Inter, Tahoma, Sans-Serif;
     font-size: 5vmin;
     padding: 10% 5%;

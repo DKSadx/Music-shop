@@ -90,6 +90,7 @@ export default class Cart extends Component {
   }
   calculateTotal(cart) {
     let total = 0;
+    console.log(cart);
     cart.map(item => (total += item.quantity * item.product.price));
     total = Math.round(total * 100) / 100;
     return total;

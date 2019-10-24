@@ -32,33 +32,32 @@ export default function Footer() {
       </ul>
       <ul className="footer-info">
         <li>
-          <a href="http://localhost:3000/">Contact Us</a>
+          <a href="https://projects.darkokojovic.com/music-shop">Contact Us</a>
         </li>
         <li>
-          <a href="http://localhost:3000/">Shipping</a>
+          <a href="https://projects.darkokojovic.com/music-shop">Shipping</a>
         </li>
         <li>
-          <a href="http://localhost:3000/">FAQs</a>
+          <a href="https://projects.darkokojovic.com/music-shop">FAQs</a>
         </li>
         <li>
-          <a href="http://localhost:3000/">Payment methods</a>
+          <a href="https://projects.darkokojovic.com/music-shop">Payment methods</a>
         </li>
         <li>
-          <a href="http://localhost:3000/">Cookies</a>
+          <a href="https://projects.darkokojovic.com/music-shop">Cookies</a>
         </li>
         <li>
-          <a href="http://localhost:3000/">Privacy Policy</a>
+          <a href="https://projects.darkokojovic.com/music-shop">Privacy Policy</a>
         </li>
         <li>
-          <a href="http://localhost:3000/">Terms of Service</a>
+          <a href="https://projects.darkokojovic.com/music-shop">Terms of Service</a>
         </li>
       </ul>
       <div className="footer-important">
-        <h3>Lorem ipsum!</h3>
+        <h3>Important!</h3>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, atque earum quidem
-          mollitia explicabo iure dolore, fuga temporibus quam labore nemo! Sunt officiis cupiditate
-          saepe inventore? Voluptates hic nulla tenetur!
+          If the layout is a bit messed up try disabling adblock because it detects social sites
+          names in classes, ids, alts and removes those elements
         </p>
       </div>
     </footer>

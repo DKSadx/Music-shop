@@ -13,33 +13,40 @@ $main-color: #ff8f27;
     margin-left: 8vw;
   }
 }
-#logo {
-  align-self: center;
-  left: 3vw;
-  list-style: none;
-  position: absolute;
-}
+
 .nav-bar-container {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   z-index: 5;
 }
 .main-nav-bar {
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: 1fr;
+  width: 100vw;
   background-color: #0004;
-  display: flex;
-  font-family: Quarca;
+  font-family: Quarca, sans-serif;
   font-size: 2vmin;
   height: 6vh;
-  overflow: hidden;
-  white-space: nowrap;
+}
+#logo {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  align-self: center;
+  text-align: center;
+  width: 100%;
 }
 .main-nav-bar-center {
+  height: 100%;
+  grid-column: 2/3;
+  grid-row: 1/2;
   align-items: center;
+  justify-content: center;
   display: flex;
-  margin: 0 auto;
+  width: 100%;
   li {
     list-style: none;
-    margin: 0 10%;
+    margin: 0 1%;
     a {
       color: #fff;
       display: block;
@@ -47,10 +54,9 @@ $main-color: #ff8f27;
       width: 100%;
     }
     &:hover {
-      border: 1px solid $main-color;
-      border-left: 0;
-      border-right: 0;
-      border-top: 0;
+      border-bottom: 1px;
+      border-style: solid;
+      border-color: $main-color;
       padding-bottom: 0.8vh;
       transition: all 0.5s;
       a {
@@ -60,21 +66,20 @@ $main-color: #ff8f27;
   }
 }
 .main-nav-bar-end {
+  grid-column: 3/4;
+  grid-row: 1/2;
   align-items: center;
-  align-self: center;
+  justify-content: center;
   display: flex;
-  position: absolute;
-  right: 5vw;
   li {
     color: #fff;
     cursor: pointer;
     display: block;
     font-size: 1.8vmin;
     list-style: none;
-    margin: 0 10%;
+    margin-left: 8%;
     text-decoration: none;
     transition: color 300ms;
-    width: 100%;
     &:hover {
       color: $main-color;
     }
@@ -115,6 +120,8 @@ $main-color: #ff8f27;
 
 .user-icon {
   @include nav-bar-icons();
+  padding-right: 40%;
+  position: relative;
   .user-dropdown-menu {
     display: none;
   }
@@ -122,14 +129,15 @@ $main-color: #ff8f27;
     .user-dropdown-menu {
       background-color: #ddd;
       display: flex;
-      flex-direction: column;
-      height: 15vh;
-      justify-content: space-evenly;
-      left: 10%;
       position: absolute;
-      top: 5vh;
-      width: 100%;
+      top: 200%;
+      left: -155px;
+      flex-direction: column;
+      height: 150px;
+      justify-content: space-evenly;
+      width: 200px;
       z-index: 1;
+      cursor: default;
       &:before {
         background-color: #ddd;
         content: '';
@@ -175,13 +183,12 @@ $main-color: #ff8f27;
     font-size: 1.4vmin !important;
   }
 }
+
 @media (max-width: 767px) {
+  .main-nav-bar {
+    grid-template-columns: 15% 50% 35%;
+  }
   .main-nav-bar-end {
-    display: flex;
-    position: absolute;
-    right: 8vw;
-    top: 50%;
-    transform: translateY(-50%);
     li {
       font-size: 2.5vmin;
     }
@@ -197,9 +204,19 @@ $main-color: #ff8f27;
     width: 2.5vmin;
   }
   .dropdown-text {
-    font-size: 2.3vmin !important;
+    font-size: 2.5vmin !important;
     i {
       padding-left: 10%;
+    }
+  }
+  .user-icon {
+    padding-right: 10%;
+    &:hover {
+      .user-dropdown-menu {
+        left: -75px;
+        height: 100px;
+        width: 100px;
+      }
     }
   }
 }

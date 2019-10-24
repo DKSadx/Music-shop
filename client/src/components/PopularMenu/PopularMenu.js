@@ -79,18 +79,14 @@ class PopularMenu extends Component {
   }
   render() {
     const { products, query } = this.state;
+    const { className, updateCartSize } = this.props;
     return (
-      <div className={this.props.className}>
+      <div className={className}>
         <h3 className="popular-menu-title">Popular products:</h3>
         {products ? (
           <>
             <Controller>
-              <Scene
-                duration={1400}
-                offset={-150}
-                triggerElement={`.${this.props.className}`}
-                reverse={true}
-              >
+              <Scene duration={1400} offset={-150} triggerElement={`.${className}`} reverse={true}>
                 <Tween
                   // Wraps all <li> tags that are dynamically created
                   wrapper={<ul className="product-grid" />}
@@ -102,7 +98,7 @@ class PopularMenu extends Component {
                   }}
                   stagger={0.5}
                 >
-                  {products && this.createItems()}
+                  <>{products && this.createItems()}</>
                 </Tween>
               </Scene>
             </Controller>
@@ -110,7 +106,7 @@ class PopularMenu extends Component {
               <DetailsPage
                 productId={query.productId}
                 close={this.closeDetailsPage}
-                updateCartSize={this.props.updateCartSize}
+                updateCartSize={updateCartSize}
               />
             )}
           </>
