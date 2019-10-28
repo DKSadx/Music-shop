@@ -1,6 +1,10 @@
 import React from 'react';
 
 import './Footer.scss';
+import fbIcon from '../../assets/icons/facebook.png';
+import instaIcon from '../../assets/icons/instagram.png';
+import twitterIcon from '../../assets/icons/twitter.png';
+import ytIcon from '../../assets/icons/youtube.png';
 
 export default function Footer() {
   return (
@@ -10,22 +14,22 @@ export default function Footer() {
         <div className="footer-icons">
           <li>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <img src="/icons/facebook.png" alt="facebook icon" />
+              <img src={fbIcon} alt="facebook icon" />
             </a>
           </li>
           <li>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <img src="/icons/instagram.png" alt="instagram icon" />
+              <img src={instaIcon} alt="instagram icon" />
             </a>
           </li>
           <li>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <img src="/icons/twitter.png" alt="twitter icon" />
+              <img src={twitterIcon} alt="twitter icon" />
             </a>
           </li>
           <li>
             <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-              <img src="/icons/youtube.png" alt="youtube icon" />
+              <img src={ytIcon} alt="youtube icon" />
             </a>
           </li>
         </div>
