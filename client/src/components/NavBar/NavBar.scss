@@ -220,3 +220,19 @@ $main-color: #ff8f27;
     }
   }
 }
+
+@media (min-width: 2000px) {
+  .user-icon {
+    padding-right: 10%;
+    &:hover {
+      .user-dropdown-menu {
+        left: -7.6vw;
+        height: 10vh;
+        width: 10vw;
+        &:after {
+          top: -25%;
+        }
+      }
+    }
+  }
+}
