@@ -40,10 +40,13 @@ export default class NavBar extends Component {
             cartSize: res.data.cartSize,
             isLoggedIn: true,
           });
+        } else {
+          this.setState({
+            isJWTValid: false,
+          });
         }
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           isJWTValid: false,
         });

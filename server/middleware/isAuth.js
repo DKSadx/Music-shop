@@ -8,8 +8,8 @@ module.exports = (req, res, next) => {
   const jwtToken = req.get('Authorization').split(' ')[1];
   jwt.verify(jwtToken, 'yxnPAu3Prq93LtiFYVQk9', (err, decodedToken) => {
     if (err) {
-      throw new Error('Invalid token');
-      res.send(401);
+      // throw new Error('Invalid token');
+      res.sendStatus(200);
     } else {
       req.userId = decodedToken.userId;
       req.isAuth = true;
