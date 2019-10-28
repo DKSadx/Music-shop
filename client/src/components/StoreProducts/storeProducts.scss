@@ -184,7 +184,9 @@ $hover-color: #c06b1b;
   .products-info {
     &-text {
       button {
-        font-size: 1.2vmin;
+        font-size: 1vmin;
+        border-radius: 2px;
+        padding: 10%;
       }
     }
     &-image {

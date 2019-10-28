@@ -1,6 +1,6 @@
 .about-page {
   height: 100vh;
-  background-color: #141027;
+  background-color: #000;
 }
 .about-cover {
   height: 100%;
@@ -32,6 +32,10 @@
 }
 
 @media (max-width: 450px) {
+  .about-page {
+    height: 100vh;
+    background-color: #141027;
+  }
   .about-cover {
     height: 50%;
     &-image {
