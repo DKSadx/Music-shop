@@ -25,3 +25,15 @@
   font-size: 1.8vmin;
   text-align: center;
 }
+
+#test-account {
+  color: #fab677;
+  padding-left: 5%;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  #test-account {
+    font-size: 3vmin;
+  }
+}

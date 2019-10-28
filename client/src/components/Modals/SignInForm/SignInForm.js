@@ -89,6 +89,7 @@ export default class SignUpForm extends Component {
             <p className="a-like" onClick={() => show('signUp')}>
               Don't have an account?
             </p>
+            <span id="test-account">Test account (username: test, password: test12)</span>
             {isLoading ? (
               <div className="auth-loading">
                 <Spinner />
