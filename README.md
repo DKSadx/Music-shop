@@ -1,23 +1,16 @@
 ## Music shop e-commerce web app [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<span style="color:red">This is an early stage of the app, it's <strong style="color:red">NOT</strong> ready for production and currently not hosted anywhere. If you want to test it follow the installation instructions below.</span>
-
 NOTE: This app is made for educational purposes. Nothing is being sold on there and checkout doesn't work.
 
 #### Description:
 
-Modern e-commerce SPA(single-page app) made with MERN stack.
+Modern e-commerce music shop app made with MERN stack. React was used for the front-end together with GSAP and Scrollmagic NPM packages for creating better animations and react-router for routing and keeping the URL synced with the page. NodeJS was used for the back-end together with expressJS for creating REST APIs that perform CRUD operations on the NoSQL database. For the NoSQL database, MongoDB together with mongoose was used.
 
-#### To do:
-
-error handling, logo, add more products
-
-#### Video:
+#### Video <a href="https://player.vimeo.com/video/370718718" target="_blank">here</a>:
 
 <hr/>
 
-<a href="https://player.vimeo.com/video/352587088" target="_blank"><img src="video-thumbnail.png"
- width="800" height="455"/></a>
+<img src="./video-thumbnail.png" width="800" height="455"/>
 
 <hr/>
 
@@ -34,12 +27,10 @@ error handling, logo, add more products
 - NodeJS with expressJS
 - MongoDB with mongoose
 
-\***Server:**
+**Server:**
 
 - Nginx
 - CentOS
-
-\*_Will be added later_
 
 #### Installation (for testing)
 
