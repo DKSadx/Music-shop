@@ -13,7 +13,7 @@ export default class Edit extends Component {
       price: '',
       description: '',
       image: '',
-      category: '',
+      category: 'Choose category:',
       objectId: '',
       categoryName: '',
       isAdmin: false,
@@ -31,6 +31,19 @@ export default class Edit extends Component {
       [e.target.name]: value,
     });
   }
+
+  getCategories() {
+    const api = `${baseIp}/category`;
+    axios
+      .get(api)
+      .then(response => {
+        this.setState({ categories: response.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   addProduct() {
     const { name, price, description, image, category } = this.state;
     const fd = new FormData();
@@ -147,41 +160,40 @@ export default class Edit extends Component {
       .catch(err => {
         console.log(err);
       });
+    this.getCategories();
   }
 
   render() {
-    const { isAdmin } = this.state;
+    const {
+      isAdmin,
+      name,
+      price,
+      description,
+      category,
+      categories,
+      objectId,
+      categoryName,
+    } = this.state;
     return isAdmin ? (
       <form className="edit-form">
         <div className="product-edit">
           <h1>Product:</h1>
           <h4>Name:</h4>
-          <input type="text" name="name" onChange={this.handleChange} value={this.state.name} />
+          <input type="text" name="name" onChange={this.handleChange} value={name} />
           <h4>Price:</h4>
-          <input type="text" name="price" onChange={this.handleChange} value={this.state.price} />
+          <input type="text" name="price" onChange={this.handleChange} value={price} />
           <h4>Description:</h4>
-          <input
-            type="text"
-            name="description"
-            onChange={this.handleChange}
-            value={this.state.description}
-          />
+          <input type="text" name="description" onChange={this.handleChange} value={description} />
           <h4>Image:</h4>
           <input type="file" name="image" onChange={this.handleChange} />
           <h4>Category:</h4>
-          <input
-            type="text"
-            name="category"
-            onChange={this.handleChange}
-            value={this.state.category}
-          />
+          <select name="category" value={category} onChange={this.handleChange}>
+            <option>Choose category:</option>
+            {categories &&
+              categories.map((category, i) => <option key={i}>{category.name}</option>)}
+          </select>
           <h4>ObjectId:</h4>
-          <input
-            type="text"
-            name="objectId"
-            onChange={this.handleChange}
-            value={this.state.objectId}
-          />
+          <input type="text" name="objectId" onChange={this.handleChange} value={objectId} />
           <button type="button" onClick={() => this.addProduct()}>
             Add
           </button>
@@ -210,7 +222,7 @@ export default class Edit extends Component {
             type="text"
             name="categoryName"
             onChange={this.handleChange}
-            value={this.state.categoryName}
+            value={categoryName}
           />
           <button type="button" onClick={() => this.addCategory()}>
             Add
