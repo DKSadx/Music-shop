@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Tween } from 'react-gsap';
+import React, { Component } from "react";
+import axios from "axios";
+import { Tween } from "react-gsap";
 
-import './Account.scss';
-import { emailRegex, baseIp } from '../../../utils/consts';
+import "./Account.scss";
+import { emailRegex, baseIp } from "../../../utils/consts";
 
 export default class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      email: '',
-      oldPassword: '',
-      newPassword: '',
-      rNewPassword: '',
+      username: "",
+      email: "",
+      oldPassword: "",
+      newPassword: "",
+      rNewPassword: "",
       errors: {
-        username: '',
-        email: '',
-        password: '',
-      },
+        username: "",
+        email: "",
+        password: ""
+      }
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -26,9 +26,9 @@ export default class Account extends Component {
     e.preventDefault();
     const api = `${baseIp}/account/changeUsername`;
     const data = {
-      newUsername: this.state.username,
+      newUsername: this.state.username
     };
-    const jwtToken = localStorage.getItem('shop-token');
+    const jwtToken = localStorage.getItem("shop-token");
     const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
     axios
       .post(api, data, config)
@@ -37,14 +37,14 @@ export default class Account extends Component {
           ? this.setState({
               errors: {
                 ...this.state.errors,
-                username: res.data.errorMessage,
-              },
+                username: res.data.errorMessage
+              }
             })
           : this.setState({
               errors: {
                 ...this.state.errors,
-                username: 'Changed',
-              },
+                username: "Changed"
+              }
             });
       })
       .catch(err => console.log(err));
@@ -55,15 +55,15 @@ export default class Account extends Component {
       this.setState({
         errors: {
           ...this.state.errors,
-          email: 'Email is not valid!',
-        },
+          email: "Email is not valid!"
+        }
       });
     } else {
       const api = `${baseIp}/account/changeEmail`;
       const data = {
-        newEmail: this.state.email,
+        newEmail: this.state.email
       };
-      const jwtToken = localStorage.getItem('shop-token');
+      const jwtToken = localStorage.getItem("shop-token");
       const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
       axios
         .post(api, data, config)
@@ -73,14 +73,14 @@ export default class Account extends Component {
             ? this.setState({
                 errors: {
                   ...this.state.errors,
-                  email: res.data.errorMessage,
-                },
+                  email: res.data.errorMessage
+                }
               })
             : this.setState({
                 errors: {
                   ...this.state.errors,
-                  email: 'Changed',
-                },
+                  email: "Changed"
+                }
               });
         })
         .catch(err => console.log(err));
@@ -93,16 +93,16 @@ export default class Account extends Component {
       this.setState({
         errors: {
           ...this.state.errors,
-          password: "Passwords don't match!",
-        },
+          password: "Passwords don't match!"
+        }
       });
     } else {
       const api = `${baseIp}/account/changePassword`;
       const data = {
         oldPassword,
-        newPassword,
+        newPassword
       };
-      const jwtToken = localStorage.getItem('shop-token');
+      const jwtToken = localStorage.getItem("shop-token");
       const config = { headers: { Authorization: `Bearer ${jwtToken}` } };
       axios
         .post(api, data, config)
@@ -111,14 +111,14 @@ export default class Account extends Component {
             ? this.setState({
                 errors: {
                   ...this.state.errors,
-                  password: res.data.errorMessage,
-                },
+                  password: res.data.errorMessage
+                }
               })
             : this.setState({
                 errors: {
                   ...this.state.errors,
-                  password: 'Changed',
-                },
+                  password: "Changed"
+                }
               });
         })
         .catch(err => console.log(err));
@@ -126,15 +126,25 @@ export default class Account extends Component {
   }
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   }
   render() {
-    const { username, email, oldPassword, newPassword, rNewPassword, errors } = this.state;
+    const {
+      username,
+      email,
+      oldPassword,
+      newPassword,
+      rNewPassword,
+      errors
+    } = this.state;
     return (
       <Tween from={{ opacity: 0 }} to={{ opacity: 1 }}>
         <div className="account-page">
-          <section className="account-page-icons" onClick={this.props.history.goBack}>
+          <section
+            className="account-page-icons"
+            onClick={this.props.history.goBack}
+          >
             <i className="fas fa-arrow-left" />
             <i className="fas fa-home" />
           </section>
@@ -149,12 +159,16 @@ export default class Account extends Component {
                 onChange={this.handleChange}
                 value={username}
               />
-              <button onClick={this.changeUsername.bind(this)}>Change username</button>
+              <button onClick={this.changeUsername.bind(this)}>
+                Change username
+              </button>
             </div>
-            {errors.username === '' ? (
+            {errors.username === "" ? (
               <p>Please enter new username.</p>
-            ) : errors.username === 'Changed' ? (
-              <p className="account-changed-success">Username has been changed.</p>
+            ) : errors.username === "Changed" ? (
+              <p className="account-changed-success">
+                Username has been changed.
+              </p>
             ) : (
               <p className="account-changed-error">{errors.username}</p>
             )}
@@ -167,11 +181,13 @@ export default class Account extends Component {
                 onChange={this.handleChange}
                 value={email}
               />
-              <button onClick={this.changeEmail.bind(this)}>Change email</button>
+              <button onClick={this.changeEmail.bind(this)}>
+                Change email
+              </button>
             </div>
-            {errors.email === '' ? (
+            {errors.email === "" ? (
               <p>Please enter a new email.</p>
-            ) : errors.email === 'Changed' ? (
+            ) : errors.email === "Changed" ? (
               <p className="account-changed-success">Email has been changed.</p>
             ) : (
               <p className="account-changed-error">{errors.email}</p>
@@ -199,15 +215,23 @@ export default class Account extends Component {
                 onChange={this.handleChange}
                 value={rNewPassword}
               />
-              <button onClick={this.changePassword.bind(this)}>Change password</button>
+              <button onClick={this.changePassword.bind(this)}>
+                Change password
+              </button>
             </div>
-            {errors.password === '' ? (
+            {errors.password === "" ? (
               <p>Please enter your current password.</p>
-            ) : errors.password === 'Changed' ? (
-              <p className="account-changed-success">Password has been changed.</p>
+            ) : errors.password === "Changed" ? (
+              <p className="account-changed-success">
+                Password has been changed.
+              </p>
             ) : (
               <p className="account-changed-error">{errors.password}</p>
             )}
+
+            <span style={{ color: "#f00", fontSize: "1.5vmin" }}>
+              *Username and password can't be changed on test account
+            </span>
           </form>
         </div>
       </Tween>

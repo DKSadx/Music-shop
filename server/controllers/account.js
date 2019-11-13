@@ -1,5 +1,5 @@
-const { validationResult } = require('express-validator');
-const User = require('../models/user');
+const { validationResult } = require("express-validator");
+const User = require("../models/user");
 
 exports.changeUsername = async (req, res, next) => {
   // If validator found errors send response with error message
@@ -10,12 +10,17 @@ exports.changeUsername = async (req, res, next) => {
     // Else change the username in the database
     const userId = { _id: req.userId };
     const newUsername = { $set: { username: req.body.newUsername } };
-    try {
-      await User.findOneAndUpdate(userId, newUsername, { useFindAndModify: false });
-    } catch (error) {
-      console.log(error);
+    const currentUsername = await User.find(userId);
+    if (currentUsername[0].username !== "test") {
+      try {
+        await User.findOneAndUpdate(userId, newUsername, {
+          useFindAndModify: false
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      res.status(200).send();
     }
-    res.status(200).send();
   }
   next();
 };
@@ -29,12 +34,17 @@ exports.changePassword = async (req, res, next) => {
     // Else change the password in the database
     const userId = { _id: req.userId };
     const newPassword = { $set: { password: req.body.newPassword } };
-    try {
-      await User.findOneAndUpdate(userId, newPassword, { useFindAndModify: false });
-    } catch (error) {
-      console.log(error);
+    const currentUsername = await User.find(userId);
+    if (currentUsername[0].username !== "test") {
+      try {
+        await User.findOneAndUpdate(userId, newPassword, {
+          useFindAndModify: false
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      res.status(200).send();
     }
-    res.status(200).send();
   }
   next();
 };
@@ -49,7 +59,9 @@ exports.changeEmail = async (req, res, next) => {
     const userId = { _id: req.userId };
     const newEmail = { $set: { email: req.body.newEmail } };
     try {
-      await User.findOneAndUpdate(userId, newEmail, { useFindAndModify: false });
+      await User.findOneAndUpdate(userId, newEmail, {
+        useFindAndModify: false
+      });
     } catch (error) {
       console.log(error);
     }
