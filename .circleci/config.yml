@@ -8,7 +8,6 @@ jobs:
 
     steps:
       - checkout
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -22,3 +21,19 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Deploy to server
+          command: |
+            ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "~/build_server.sh"
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          # Only runs for Production branch
+          filters:
+            branches:
+              only:
+                - Production
