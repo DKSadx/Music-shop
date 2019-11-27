@@ -1,6 +1,28 @@
 version: 2
 jobs:
-  build:
+  build-frontend:
+    docker:
+      - image: node:13
+
+    working_directory: ~/Music-shop/client
+
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+  build-backend:
     docker:
       - image: node:13
 
@@ -22,26 +44,53 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-  deploy:
+  deploy-frontend:
     docker:
       - image: node:13
     steps:
       - checkout
       - run:
-          name: Deploy to server
+          name: Deploy to server(frontend)
           command: |
-            ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "~/build_server.sh"
+            ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "~/build_frontend.sh"
+
+  deploy-backend:
+    docker:
+      - image: node:13
+    steps:
+      - checkout
+      - run:
+          name: Deploy to server(backend)
+          command: |
+            ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP "~/build_backend.sh"
 
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
-      - deploy:
-          # Only runs for Production branch
+      - build-frontend:
           filters:
             branches:
               only:
-                - Production
+                - Production-frontend
+      - build-backend:
+          filters:
+            branches:
+              only:
+                - Production-backend
+      - deploy-frontend:
+          # Only runs for Production-frontend branch
+          filters:
+            branches:
+              only:
+                - Production-frontend
           requires:
-            - build
+            - build-frontend
+      - deploy-backend:
+          # Only runs for Production-backend branch
+          filters:
+            branches:
+              only:
+                - Production-backend
+          requires:
+            - build-backend
