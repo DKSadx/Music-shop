@@ -27,11 +27,6 @@ Modern e-commerce music shop app made with MERN stack. React was used for the fr
 - NodeJS with expressJS
 - MongoDB with mongoose
 
-**Server:**
-
-- Nginx
-- CentOS
-
 #### Installation (for testing)
 
 ```sh
