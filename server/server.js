@@ -34,12 +34,17 @@ const fileFilter = (req, file, cb) => {
   }
 };
 app.use(bodyParser.json());
-app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'),
+);
 app.use('/images', express.static(path.join(__dirname, '/images')));
 // Headers for allowing request, client<->server
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'OPTIONS, GET, POST, PUT, PATCH, DELETE',
+  );
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
@@ -48,6 +53,8 @@ app.use((req, res, next) => {
 // const os = require('os');
 // const networkInterfaces = os.networkInterfaces();
 // console.log(networkInterfaces.wlo1[0].address);
+
+app.get('/test', (req, res) => res.send(':)'));
 
 // Routes
 app.use('/category', categoryRoutes);
